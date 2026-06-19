@@ -1,0 +1,88 @@
+{
+  "repository": "ai-cyber-defense-os",
+  "organization": "Bridge-Node-7",
+  "target_url": "https://github.com/Bridge-Node-7/ai-cyber-defense-os",
+  "version": "v0.1.3",
+  "generated_date": "2026-06-19",
+  "public_safety_status": "GREEN_WITH_RELEASE_REVIEW",
+  "review_artifact": "RELEASE_REVIEW.md",
+  "decision_rubric": "DECISION_RUBRIC.md",
+  "maturity_scope": "Documentation and workflow foundation; no certification, authorization, endorsement, or operational maturity claim",
+  "file_count": 22,
+  "module_map": {
+    "01-ai-agent-security": {
+      "purpose": "Review tool-using AI agents, copilots, and workflow automations.",
+      "when_to_use": "Use when an AI system can access tools, APIs, files, code, email, cloud, data, or operational workflows.",
+      "primary_decision": "Green / Amber / Red / More evidence required"
+    },
+    "02-evidence-manifests": {
+      "purpose": "Create a traceable evidence package for a system or review.",
+      "when_to_use": "Use at the start of any system, asset, readiness, audit, or public-release review.",
+      "primary_decision": "Approved / Approved with conditions / Not approved / More evidence required"
+    },
+    "03-zero-trust": {
+      "purpose": "Map identity, access, data, visibility, and automation assumptions.",
+      "when_to_use": "Use when trust boundaries, access paths, or continuous verification need review.",
+      "primary_decision": "Green / Amber / Red / More evidence required"
+    },
+    "04-llm-risk": {
+      "purpose": "Track OWASP-aligned LLM and generative AI risks.",
+      "when_to_use": "Use when an LLM, RAG system, agent, copilot, model provider, or AI tool is in scope.",
+      "primary_decision": "Accept / Mitigate / Transfer / Reject / More evidence required"
+    },
+    "05-secure-by-design": {
+      "purpose": "Review secure defaults, transparency, vulnerability handling, and AI-specific design.",
+      "when_to_use": "Use before release, launch, publication, demo, pilot, or partner review.",
+      "primary_decision": "Ready / Ready with conditions / Not ready / More evidence required"
+    },
+    "06-software-supply-chain": {
+      "purpose": "Review dependencies, SBOM readiness, provenance, and release hygiene.",
+      "when_to_use": "Use before publishing code, tools, templates, software, or AI-enabled workflows.",
+      "primary_decision": "Green / Amber / Red / More evidence required"
+    },
+    "07-cyber-survivability": {
+      "purpose": "Review prevent, mitigate, and recover posture for high-impact cyber disruption.",
+      "when_to_use": "Use for operational, sensitive, high-impact, or resilience-critical systems.",
+      "primary_decision": "Green / Amber / Red / More evidence required"
+    },
+    "08-high-impact-systems": {
+      "purpose": "Organize public-safe readiness evidence for sensitive or operational workflows.",
+      "when_to_use": "Use when reliability, access control, data integrity, rollback, recovery, and human approval gates matter.",
+      "primary_decision": "Green / Amber / Red / More evidence required"
+    },
+    "09-incident-review": {
+      "purpose": "Document incidents, near misses, response, recovery, and lessons learned.",
+      "when_to_use": "Use after a security, privacy, availability, integrity, AI, automation, or supply-chain incident.",
+      "primary_decision": "Review complete / Follow-up required / More evidence required"
+    },
+    "10-examples": {
+      "purpose": "Provide synthetic, public-safe examples of the review method.",
+      "when_to_use": "Use for onboarding, demos, documentation, and agent training without exposing real sensitive data.",
+      "primary_decision": "Example only"
+    }
+  },
+  "files": [
+    ".gitignore",
+    "01-ai-agent-security/ai-agent-security-checklist.md",
+    "01-ai-agent-security/human-approval-gates.md",
+    "02-evidence-manifests/evidence-manifest-template.md",
+    "02-evidence-manifests/review-decision-template.md",
+    "03-zero-trust/zero-trust-readiness-map.md",
+    "04-llm-risk/llm-risk-register.md",
+    "05-secure-by-design/secure-by-design-product-review.md",
+    "06-software-supply-chain/sbom-readiness.md",
+    "07-cyber-survivability/cyber-survivability-review.md",
+    "08-high-impact-systems/high-impact-system-readiness.md",
+    "09-incident-review/incident-review-template.md",
+    "10-examples/example-ai-workflow-cyber-review.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "DECISION_RUBRIC.md",
+    "LICENSE",
+    "README.md",
+    "REFERENCES.md",
+    "RELEASE_REVIEW.md",
+    "REPO_MANIFEST.json",
+    "SECURITY.md"
+  ]
+}
