@@ -1,67 +1,132 @@
-# SBOM Readiness and Software Supply Chain Review
+# Software and AI Supply Chain Readiness
+> **Artifact type:** TEMPLATE  
+> **Completion status:** Blank for reuse  
+> **Required for:** Conditional: third-party code, models, data, or services
 
-## Purpose
+## What this document is
 
-Review whether a software system has enough dependency, provenance, and release information to support security review.
+A public-safe review record for software dependencies, build provenance, external services, AI models, retrieval sources, and release integrity.
 
-## System
+## Who should complete it
 
-## Version
+Product owners, security reviewers, software maintainers, AI-system owners, and release managers.
+
+## When to use it
+
+Use before a release, supplier decision, major dependency change, model/provider change, or high-impact deployment.
+
+## Decision supported
+
+Whether the reviewed software or AI supply chain has enough evidence to proceed, proceed with conditions, stop, or require more evidence.
+
+## System / Product
+
+## Version or Release
 
 ## Owner
 
-## Dependency Inventory
+## Review Date
 
-- [ ] Direct dependencies are listed.
-- [ ] Transitive dependencies are reviewed where feasible.
-- [ ] Package sources are documented.
-- [ ] Unsupported dependencies are identified.
-- [ ] High-risk dependencies are documented.
+## 1. Dependency Inventory
 
-## SBOM Status
+| Dependency ID | Name | Version | Direct or Transitive | Source | Purpose | Owner | Support Status | Evidence ID |
+|---|---|---|---|---|---|---|---|---|
 
-- [ ] SBOM exists.
-- [ ] SBOM format is documented.
-- [ ] SBOM generation process is repeatable.
-- [ ] SBOM is updated for each release.
-- [ ] SBOM is stored with release artifacts.
+Review:
 
-## Provenance
+- [ ] Direct dependencies are identified.
+- [ ] Transitive dependencies are identified where feasible.
+- [ ] Unsupported or unmaintained dependencies are flagged.
+- [ ] High-impact dependencies have named owners.
+- [ ] Dependency sources and expected integrity mechanisms are documented.
 
-- [ ] Source repository is documented.
-- [ ] Build process is documented.
-- [ ] Release process is documented.
-- [ ] Maintainer access is reviewed.
-- [ ] Signing or attestation pathway is considered.
-- [ ] Third-party components are reviewed.
+## 2. SBOM Status
 
-## AI / Model Supply Chain
+| Question | Answer | Evidence ID | Gap / Action |
+|---|---|---|---|
+| Does an SBOM exist? | | | |
+| What format is used? | | | |
+| How is it generated? | | | |
+| Is generation repeatable? | | | |
+| Is it updated for each release? | | | |
+| Is it retained with release evidence? | | | |
 
-- [ ] Models used are documented.
-- [ ] Model providers are documented.
-- [ ] Datasets or retrieval sources are documented where applicable.
-- [ ] Plugins/tools are reviewed.
-- [ ] External APIs are reviewed.
-- [ ] Model and tool changes are change-controlled.
+## 3. Source and Build Provenance
 
-## Release Security Checklist
+| Control Area | Expected State | Observed State | Evidence ID | Decision |
+|---|---|---|---|---|
+| Authoritative source repository | | | | |
+| Maintainer access | | | | |
+| Build environment | | | | |
+| Dependency resolution | | | | |
+| Review and approval | | | | |
+| Artifact signing or attestation | | | | |
+| Release archive | | | | |
+| Rollback artifact | | | | |
 
-- [ ] No secrets are committed.
-- [ ] No private data is included.
-- [ ] Dependencies are scanned.
-- [ ] Licenses are reviewed.
-- [ ] Security notes are included in release documentation.
-- [ ] Rollback path is documented.
+## 4. AI and Model Supply Chain
 
-## Decision
+| Item | Provider / Source | Version | Data or Tool Access | Change Detection | Exit / Replacement Path | Evidence ID |
+|---|---|---|---|---|---|---|
+| Model | | | | | | |
+| Embedding model | | | | | | |
+| Retrieval source | | | | | | |
+| Dataset | | | | | | |
+| Plugin / tool | | | | | | |
+| External API | | | | | | |
+| Hosted platform | | | | | | |
 
-- [ ] Green
-- [ ] Amber
-- [ ] Red
+Review:
+
+- [ ] Model and provider changes are detectable.
+- [ ] Retrieval and dataset provenance is documented where applicable.
+- [ ] Tool and plugin permissions are bounded.
+- [ ] External API dependencies have fallback or exit considerations.
+- [ ] Untrusted third-party content is treated as data, not authority.
+- [ ] Human approval remains required for consequential release decisions.
+
+## 5. Vulnerability and Change Handling
+
+| Event | Detection Source | Owner | Required Action | Time Expectation | Evidence ID |
+|---|---|---|---|---|---|
+| Critical dependency vulnerability | | | | | |
+| Malicious package or source compromise | | | | | |
+| Model/provider change | | | | | |
+| Build-system compromise | | | | | |
+| Signing-key concern | | | | | |
+| Unsupported dependency | | | | | |
+
+## 6. Release Integrity
+
+- [ ] Release-controlled files are enumerated.
+- [ ] Release hashes are generated after content freeze.
+- [ ] The manifest can be verified from a clean checkout.
+- [ ] Release notes distinguish implemented, tested, and unproven claims.
+- [ ] Rollback artifacts and ownership are documented.
+- [ ] No private keys, credentials, or sensitive operational details are included.
+
+## 7. Findings and Corrective Actions
+
+| Finding ID | Finding | Severity | Evidence ID | Owner | Due Date | Retest Required? | Status |
+|---|---|---|---|---|---|---:|---|
+
+## 8. Decision
+
+- [ ] Green — sufficient evidence for the current stage
+- [ ] Amber — proceed only with documented conditions
+- [ ] Red — do not proceed
 - [ ] More evidence required
+
+Decision owner:
 
 Reviewer:
 
-Date:
+Conditions:
 
-Notes:
+Residual risk:
+
+Next review date:
+
+## Limitations
+
+Completion of this template does not certify a product, prove that a dependency is trustworthy, authorize deployment, or replace system-specific engineering, legal, contractual, or compliance review.

@@ -22,6 +22,10 @@ Unacceptable behavior includes:
 - Encouraging unauthorized activity
 - Misrepresenting unsupported claims as proven capability
 
+## Reporting Conduct Concerns
+
+Use the official organizational contact method published at <https://bridgenode7.com/> to report a conduct concern privately. Do not place sensitive personal information in a public issue, discussion, pull request, or commit comment. Security vulnerabilities must be reported through GitHub private vulnerability reporting as described in [`SECURITY.md`](SECURITY.md).
+
 ## Enforcement
 
 Maintainers may remove comments, issues, pull requests, or contributors that violate this code of conduct.

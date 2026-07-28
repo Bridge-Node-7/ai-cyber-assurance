@@ -1,69 +1,92 @@
 # Secure-by-Design Product Review
+> **Artifact type:** TEMPLATE  
+> **Completion status:** Blank for reuse  
+> **Required for:** Conditional: product design or release review
 
-## Product / System
+## Purpose
 
-## Version
+Review whether a product or system makes safe and secure operation the default, keeps limitations visible, supports vulnerability handling, and preserves human authority over consequential actions.
 
-## Review Date
+## Use with
 
-## Security Owner
+- [Evidence Manifest](../02-evidence-manifests/evidence-manifest-template.md)
+- [Security Policy and Target](../11-assurance-lifecycle/security-policy-and-target-template.md)
+- [Control Validation Record](../11-assurance-lifecycle/control-validation-record.md)
+- [Supply Chain Review](../06-software-supply-chain/sbom-readiness.md)
 
-Who owns security outcomes for this product?
+## Product identity
 
-## Product Purpose
+- **Product / system:**
+- **Version / configuration:**
+- **Review date:**
+- **Security owner:**
+- **Release owner:**
+- **Intended users and outcome:**
 
-What does this system do, who uses it, and what outcome does it support?
+## Default security posture
 
-## Default Security Posture
+| Check | Status | Evidence ID | Gap / condition | Owner |
+|---|---|---|---|---|
+| Secure defaults are enabled | | | | |
+| Weak or dangerous settings are not the default | | | | |
+| Logging needed for review is enabled | | | | |
+| Sensitive and privileged features require explicit authorization | | | | |
+| Administrative functions are protected and separated | | | | |
+| Unnecessary services, tools, and access are disabled | | | | |
+| Default credentials and shared privileged identities are not used | | | | |
+| Access is least privilege and time-bounded where feasible | | | | |
+| Safe failure, rollback, and recovery are supported | | | | |
 
-- [ ] Secure defaults are enabled.
-- [ ] Weak settings are not the default.
-- [ ] Logging is enabled.
-- [ ] Sensitive features require explicit approval.
-- [ ] Admin functions are protected.
-- [ ] Unnecessary services are disabled.
-- [ ] Default credentials are not used.
-- [ ] Access is least privilege by default.
+## Transparency and responsibility
 
-## Transparency
+- [ ] Intended use and prohibited use are documented.
+- [ ] Known limitations, assumptions, and unresolved risks are visible.
+- [ ] Security and data responsibilities are allocated between producer, operator, supplier, and user.
+- [ ] Dependencies, models, providers, tools, and external services are listed.
+- [ ] AI limitations, evidence expectations, and human authority are disclosed.
+- [ ] Risk acceptance decisions identify the authorized owner and expiration.
+- [ ] Public claims do not exceed the available evidence.
 
-- [ ] Known limitations are documented.
-- [ ] Security assumptions are documented.
-- [ ] Dependencies are listed.
-- [ ] AI limitations are disclosed.
-- [ ] Customer/operator responsibilities are clear.
-- [ ] Risk acceptance decisions are documented.
+## Vulnerability handling
 
-## Vulnerability Handling
+- [ ] A private vulnerability-reporting path exists and is verified.
+- [ ] Triage, severity, ownership, and response-time expectations are documented.
+- [ ] Patch, mitigation, rollback, and communication paths exist.
+- [ ] Release notes include relevant security changes and limitations.
+- [ ] Vulnerability fixes are prioritized by risk and mission impact.
+- [ ] Corrective action and retest evidence are retained.
 
-- [ ] Vulnerability intake process exists.
-- [ ] Patch process exists.
-- [ ] Security contact exists.
-- [ ] Release notes include security-relevant changes.
-- [ ] Lessons learned are captured.
-- [ ] Vulnerability fixes are prioritized by impact.
+## AI-specific secure design
 
-## AI-Specific Secure Design
+- [ ] Agent identity and permissions are bounded.
+- [ ] Prompt injection, data poisoning, disclosure, excessive agency, and output handling are addressed.
+- [ ] Tools and APIs are allowlisted and policy-controlled.
+- [ ] Sensitive data exposure is minimized and monitored.
+- [ ] Human approval gates exist for consequential actions.
+- [ ] Models, prompts, retrieval sources, policies, and tools are change-controlled.
+- [ ] Outputs are validated before high-impact use.
+- [ ] Disable, revoke, rollback, and manual fallback paths are tested.
 
-- [ ] Agent permissions are bounded.
-- [ ] Prompt-injection risks are documented.
-- [ ] Tool use is controlled.
-- [ ] Sensitive data exposure is minimized.
-- [ ] Human approval gates exist.
-- [ ] Model/tool changes are reviewed.
-- [ ] Outputs are checked before high-impact use.
+## Validation summary
 
-## Release Decision
+| Control / requirement | Expected result | Observed result | Evidence ID | Status | Corrective action |
+|---|---|---|---|---|---|
 
-- [ ] Ready
+## Release decision
+
+- [ ] Ready for stated scope and stage
 - [ ] Ready with conditions
 - [ ] Not ready
 - [ ] More evidence required
 
 Reviewer:
 
+Decision maker:
+
 Date:
 
 Conditions:
+
+Next review:
 
 Notes:

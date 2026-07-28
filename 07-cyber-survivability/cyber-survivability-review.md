@@ -1,61 +1,105 @@
 # Cyber Survivability Review
+> **Artifact type:** TEMPLATE  
+> **Completion status:** Blank for reuse  
+> **Required for:** Conditional: material disruption or recovery risk
 
-## Purpose
+## What this document is
 
-Review whether a system can prevent, mitigate, and recover from cyber disruption in a mission-aware way.
+A mission-aware review of whether a system can anticipate, withstand, recover from, and adapt to cyber disruption.
+
+## Who should complete it
+
+System owners, operators, security engineers, continuity leads, incident responders, and recovery owners.
+
+## When to use it
+
+Use for high-impact systems, material dependencies, AI-enabled workflows, critical releases, major architectural changes, and post-incident improvement.
+
+## Decision supported
+
+Whether survivability evidence is sufficient for the current stage and whether recovery claims have been demonstrated or remain untested.
 
 ## System / Mission
 
 ## Version
 
+## Owner
+
 ## Review Date
 
-## Mission Impact
+## 1. Mission Consequence
 
-What mission or business function is affected if this system is degraded, denied, manipulated, or compromised?
+What mission, service, safety, business, or public-interest outcome is affected if the system is degraded, denied, manipulated, or compromised?
 
-## Prevent
+## 2. Critical Functions and Dependencies
 
-| Area | Current Evidence | Gap | Owner |
-|---|---|---|---|
-| Identity and access control | | | |
-| Secure configuration | | | |
-| Software supply chain | | | |
-| Data integrity | | | |
-| Monitoring and detection | | | |
-| Human approval gates | | | |
+| Function | Maximum Acceptable Disruption | Dependency | Failure Mode | Owner | Evidence ID |
+|---|---|---|---|---|---|
 
-## Mitigate
+## 3. Anticipate
 
-| Degradation Scenario | Expected System Behavior | Operator Action | Evidence |
-|---|---|---|---|
-| Loss of connectivity | | | |
-| Compromised account | | | |
-| Suspicious command path | | | |
-| Data integrity concern | | | |
-| Tool or agent malfunction | | | |
-| Vendor or dependency issue | | | |
+| Area | Expected Capability | Evidence ID | Gap | Owner |
+|---|---|---|---|---|
+| Asset and dependency awareness | | | | |
+| Threat and failure-mode analysis | | | | |
+| Identity and privilege review | | | | |
+| Supplier and third-party awareness | | | | |
+| Detection requirements | | | | |
+| Recovery planning | | | | |
 
-## Recover
+## 4. Withstand
 
-| Recovery Need | Recovery Path | Owner | Evidence |
-|---|---|---|---|
-| Restore configuration | | | |
-| Restore data | | | |
-| Disable automation | | | |
-| Revoke access | | | |
-| Roll back release | | | |
-| Resume mission operations | | | |
+| Scenario | Expected Degraded Behavior | Preventive / Protective Control | Human Authority | Evidence ID |
+|---|---|---|---|---|
+| Loss of connectivity | | | | |
+| Compromised identity | | | | |
+| Data-integrity concern | | | | |
+| AI-agent or tool malfunction | | | | |
+| Supplier or provider failure | | | | |
+| Ransomware or destructive event | | | | |
 
-## Survivability Decision
+## 5. Recover
 
-- [ ] Green — survivability evidence is sufficient for current stage
-- [ ] Amber — proceed with constraints
+| Recovery Objective | Recovery Path | Responsible Owner | Required Approval | Expected Time | Evidence ID |
+|---|---|---|---|---|---|
+| Restore configuration | | | | | |
+| Restore data | | | | | |
+| Disable automation | | | | | |
+| Revoke access | | | | | |
+| Roll back release | | | | | |
+| Resume critical operations | | | | | |
+
+## 6. Adapt
+
+| Lesson / Changed Condition | Required Design or Process Change | Owner | Due Date | Validation Method | Status |
+|---|---|---|---|---|---|
+
+## 7. Executed Recovery Evidence
+
+Do not mark recovery as demonstrated based only on a plan or backup.
+
+| Test ID | Test Condition | Expected Result | Observed Result | Elapsed Time | Evidence ID | Mismatch | Corrective Action | Retest Result |
+|---|---|---|---|---|---|---|---|---|
+
+## 8. Survivability Decision
+
+- [ ] Green — sufficient evidence for the current stage
+- [ ] Amber — proceed only with documented conditions
 - [ ] Red — do not proceed
 - [ ] More evidence required
 
 Reviewer:
 
-Date:
+Decision owner:
 
-Notes:
+Conditions:
+
+Untested assumptions:
+
+Residual risk:
+
+Next test date:
+
+## Limitations
+
+A completed review is not proof that the system will survive every event. Claims should distinguish planned, implemented, observed, tested, and independently validated capabilities.

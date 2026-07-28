@@ -1,199 +1,207 @@
-# AI Cyber Defense OS
+# AI Cyber Assurance
 
-**Open-source cyber governance, verification, and secure-by-design templates for AI-enabled systems, agentic workflows, emerging technology, and high-impact environments.**
+**Public-safe assurance templates and validation workflows for AI-enabled systems, agentic operations, emerging technology, and high-impact environments.**
 
-**Bridge Node 7 — Verification & Validation Layer for AI-Era Cyber Governance**
+## What this is
 
-## Mission
+AI Cyber Assurance is a defensive documentation and workflow toolkit for builders, operators, security reviewers, governance teams, auditors, founders, and system owners.
 
-AI and autonomous systems are becoming operational infrastructure. Cybersecurity must now govern not only networks and applications, but also agents, prompts, tools, models, data flows, software supply chains, identity systems, and human decision loops.
-
-**AI Cyber Defense OS** provides public-safe, defensive templates and workflows that help teams:
-
-- Map cybersecurity controls to real operational decisions
-- Review AI-agent and LLM risks before deployment
-- Document verifiable evidence for review and audit
-- Verify secure-by-design practices
-- Prepare Zero Trust readiness packages
-- Reduce unsafe automation and excessive agency
-- Keep humans accountable for high-impact decisions
-- Support trustworthy AI and emerging-technology governance
-
-**Tagline:** Cybersecurity for the age of AI automation: verified, explainable, human-governed.
-
-## What This Is
-
-A defensive cybersecurity and governance toolkit for builders, operators, founders, students, auditors, product teams, and reviewers who need practical, auditable cyber documentation for AI-enabled and emerging-technology systems.
-
-This repository focuses on **verification, validation, evidence, and governance**. It helps teams move from static security language to operationally usable cyber readiness.
-
-## What This Is Not
-
-This repository does **not** provide offensive exploit instructions, malware, credential theft methods, unauthorized access techniques, or sensitive operational procedures. Everything here is public-safe and focused on defensive cybersecurity, secure design, review workflows, and accountable deployment.
-
-This repository does **not** claim certification, formal authorization, production deployment maturity, or endorsement by any external organization.
-
-## How to Use This Repository
-
-Start with the system, asset, or workflow you want to review. The numbered folders are **not** a mandatory sequence; they are independent modules you can use as needed.
-
-**First action for most users:** open `02-evidence-manifests/evidence-manifest-template.md` and fill it out for your system. Then use the other modules as needed.
-
-1. **Define the asset.** Name the system, owner, purpose, boundary, connected systems, and data handled.
-2. **Choose the relevant modules.** Use AI Agent Security for tool-using agents, Evidence Manifests for review packages, Zero Trust for access assumptions, LLM Risk for model-enabled workflows, and High-Impact Systems for sensitive or operational workflows.
-3. **Apply the shared decision rubric.** Use [`DECISION_RUBRIC.md`](DECISION_RUBRIC.md) to keep Green, Amber, Red, and More Evidence Required decisions consistent.
-4. **Capture evidence.** Record what was reviewed, what is known, what is assumed, what remains open, and who owns each action.
-5. **Make the smallest defensible decision.** Proceed, proceed with constraints, stop, or request more evidence.
-
-Recommended first three modules for any new AI-enabled system or workflow:
+It helps teams connect:
 
 ```text
-02-evidence-manifests/evidence-manifest-template.md
-01-ai-agent-security/ai-agent-security-checklist.md
-04-llm-risk/llm-risk-register.md
+Mission
+→ Boundary
+→ Assets and Dependencies
+→ Identities and Authority
+→ Threats and Failure Modes
+→ Risk
+→ Security Requirements
+→ Controls
+→ Evidence
+→ Validation
+→ Human Decision
+→ Monitoring and Incident Response
+→ Recovery
+→ Corrective Action
+→ Retest
+→ Assurance
 ```
 
-Recommended starter path for a fuller review:
+The result is a traceable review package with named owners, bounded claims, visible evidence gaps, accountable decisions, and next actions.
+
+## What this produces
+
+A completed review can include:
+
+- A defined system boundary
+- An identity and authority record
+- A threat-control-evidence map
+- Control validation results
+- Human approval gates
+- Recovery evidence
+- A bounded review decision
+- Corrective actions and retest status
+
+## What this does not do
+
+This repository does **not**:
+
+- Certify a system
+- Authorize deployment or operation
+- Replace legal, compliance, privacy, safety, or engineering review
+- Prove that a control is effective without supporting evidence
+- Provide offensive exploit instructions, malware code, credential-theft workflows, or unauthorized-access procedures
+- Claim production maturity, independent validation, or external endorsement
+
+## Five-minute orientation
+
+This is an orientation, not a completion-time estimate.
+
+1. Copy the [Evidence Manifest](02-evidence-manifests/evidence-manifest-template.md).
+2. Define the system, scope, owner, and decision to be made.
+3. Select one or more [specialist modules](#specialist-modules).
+4. Record the evidence supporting each material control.
+5. Apply the [Decision Rubric](DECISION_RUBRIC.md) and complete the [Review Decision](02-evidence-manifests/review-decision-template.md).
+
+## Choose your path
+
+### Quick Review
+
+Use this path for one workflow, product, pilot, or release:
 
 ```text
-02-evidence-manifests/evidence-manifest-template.md
-01-ai-agent-security/ai-agent-security-checklist.md
-04-llm-risk/llm-risk-register.md
-03-zero-trust/zero-trust-readiness-map.md
-05-secure-by-design/secure-by-design-product-review.md
+Evidence Manifest
+→ Relevant Specialist Module
+→ Decision Rubric
+→ Review Decision
 ```
 
-For public release, also review:
+Start here:
+
+1. [Evidence Manifest](02-evidence-manifests/evidence-manifest-template.md)
+2. [Decision Rubric](DECISION_RUBRIC.md)
+3. [Review Decision](02-evidence-manifests/review-decision-template.md)
+
+### Full Assurance Lifecycle
+
+Use this path for high-impact, operational, multi-party, or deeply integrated systems:
+
+1. Open the [Assurance Lifecycle](ASSURANCE_LIFECYCLE.md).
+2. Define mission, boundary, assets, dependencies, and evidence.
+3. Record identities and authority.
+4. Identify threats, failure modes, risk, and uncertainty.
+5. Establish the security policy, target, and requirements.
+6. Map controls to evidence.
+7. Validate controls, monitoring, response, and recovery.
+8. Make an accountable human decision.
+9. Track corrective action and retest.
+
+## Which artifacts apply?
 
 ```text
-06-software-supply-chain/sbom-readiness.md
-07-cyber-survivability/cyber-survivability-review.md
-09-incident-review/incident-review-template.md
-RELEASE_REVIEW.md
+Does the system use tool-performing AI or automation?
+→ Use AI Agent Security and Human Approval Gates.
+
+Does it use an LLM, retrieval, model, or generated output?
+→ Use the LLM and Generative AI Risk Register.
+
+Does it depend on third-party code, models, data, or services?
+→ Use Software and AI Supply Chain Readiness.
+
+Could loss, corruption, or interruption create material harm?
+→ Use Cyber Survivability and Recovery Assurance.
+
+Is the system high-impact, multi-party, operational, or deeply integrated?
+→ Use the Full Assurance Lifecycle.
 ```
 
-## Core Philosophy
+## Expected effort
 
-- Judgment stays human.
-- Evidence leads.
-- Security becomes understandable.
-- AI becomes governable.
-- Trust becomes verifiable.
+Effort depends on scope and evidence availability:
 
-## Framework Alignment
+- **Quick Review:** one bounded workflow, product change, pilot, or release.
+- **Specialist Module:** one control family or risk area.
+- **Full Assurance Lifecycle:** a multi-stakeholder review across the system lifecycle.
 
-This toolkit is designed to support mapping and readiness work related to:
+These are relative effort bands, not measured completion-time promises.
+
+## Core doctrine
+
+- **Judgment stays human.** AI may assist analysis, drafting, mapping, and evidence review. Accountable people retain authority over consequential decisions.
+- **Evidence leads.** A policy statement is not operating evidence. A configuration is not test evidence. An alert is not an incident determination.
+- **Boundaries are explicit.** Systems include people, identities, data, tools, suppliers, infrastructure, facilities, and dependencies.
+- **Controls are traceable.** Requirements connect to controls, evidence, validation, decisions, and corrective action.
+- **Recovery is engineered.** A backup, rollback path, or disable mechanism is not trusted until it is tested and reviewed.
+- **Claims remain bounded.** Templates support assurance work; they do not establish certification or operational effectiveness by themselves.
+
+## Specialist modules
+
+| Module | Use it to | Primary output |
+|---|---|---|
+| [AI Agent Security](01-ai-agent-security/ai-agent-security-checklist.md) | Review tool-using agents and human approval boundaries | Agent checklist and approval gates |
+| [Evidence Manifests](02-evidence-manifests/evidence-manifest-template.md) | Define the system, evidence, gaps, and decision | Evidence manifest and review decision |
+| [Zero Trust](03-zero-trust/zero-trust-readiness-map.md) | Review identity, access, trust assumptions, and visibility | Zero Trust readiness map |
+| [LLM Risk](04-llm-risk/llm-risk-register.md) | Track LLM and generative AI security risks | LLM risk register |
+| [Secure by Design](05-secure-by-design/secure-by-design-product-review.md) | Review secure defaults and release design | Secure-by-design review |
+| [Software Supply Chain](06-software-supply-chain/sbom-readiness.md) | Review dependencies, provenance, models, and release integrity | Supply-chain readiness review |
+| [Cyber Survivability](07-cyber-survivability/cyber-survivability-review.md) | Review prevention, degradation, recovery, and adaptation | Survivability review |
+| [High-Impact Systems](08-high-impact-systems/high-impact-system-readiness.md) | Organize deeper evidence for sensitive systems | High-impact readiness package |
+| [Incident Review](09-incident-review/incident-review-template.md) | Document incidents, near misses, response, and lessons | Incident review |
+| [Examples](10-examples/) | Learn from completed synthetic examples | Example review packages |
+| [Assurance Lifecycle Records](11-assurance-lifecycle/) | Complete an end-to-end assurance package | Policy, authority, mapping, validation, and recovery records |
+
+## Examples
+
+- [Synthetic AI Workflow Cyber Review](10-examples/example-ai-workflow-cyber-review.md) demonstrates a completed Quick Review.
+- [Synthetic Supplier Assurance](10-examples/synthetic-supplier-assurance/) is a concise partial profile demonstrating AI-assisted evidence review, integrity checking, corrective action, and a human Amber decision. It is not a completed Full Assurance Lifecycle package.
+
+## Framework alignment
+
+The toolkit can support mapping and readiness work informed by:
 
 - NIST Cybersecurity Framework 2.0
-- NIST Secure Software Development Framework (SSDF)
-- CISA Secure by Design guidance
+- NIST systems security engineering and cyber-resilience guidance
+- NIST Zero Trust Architecture
+- NIST incident-response guidance
+- NIST Secure Software Development Framework and AI profile
+- NIST AI Risk Management Framework and Generative AI Profile
+- CISA Secure by Design
 - OWASP Top 10 for LLM Applications and Generative AI
-- Zero Trust principles: continuous verification, least privilege, assume breach
-- Cyber survivability and resilience concepts
-- Evidence-based readiness workflows for AI-enabled and high-impact systems
 
-See [`REFERENCES.md`](REFERENCES.md) for public framework references.
+See [REFERENCES.md](REFERENCES.md) for exact publication titles, versions, statuses, and relevance.
 
-## Repository Structure
+## Repository validation
 
-```text
-ai-cyber-defense-os/
-├── README.md
-├── LICENSE
-├── CONTRIBUTING.md
-├── SECURITY.md
-├── CODE_OF_CONDUCT.md
-├── DECISION_RUBRIC.md
-├── RELEASE_REVIEW.md
-├── REFERENCES.md
-├── REPO_MANIFEST.json
-│
-├── 01-ai-agent-security/
-│   ├── ai-agent-security-checklist.md
-│   └── human-approval-gates.md
-├── 02-evidence-manifests/
-│   ├── evidence-manifest-template.md
-│   └── review-decision-template.md
-├── 03-zero-trust/
-│   └── zero-trust-readiness-map.md
-├── 04-llm-risk/
-│   └── llm-risk-register.md
-├── 05-secure-by-design/
-│   └── secure-by-design-product-review.md
-├── 06-software-supply-chain/
-│   └── sbom-readiness.md
-├── 07-cyber-survivability/
-│   └── cyber-survivability-review.md
-├── 08-high-impact-systems/
-│   └── high-impact-system-readiness.md
-├── 09-incident-review/
-│   └── incident-review-template.md
-└── 10-examples/
-    └── example-ai-workflow-cyber-review.md
+The repository includes a standard-library-only validator and a GitHub Actions workflow.
+
+Run locally:
+
+```bash
+python scripts/validate_repo.py --root .
 ```
 
-## Core Modules
+The validator checks the structural manifest, hashes, internal links, current identity, required template fields, synthetic-example labels, common secret patterns, and public-safety declarations.
 
-### 1. AI Agent Security
+## Scope and limitations
 
-Checklist-based review for agents, copilots, workflow automations, and tool-using AI systems. Covers identity, tool permissions, prompt-injection risk, sensitive data exposure, human approval gates, logging, and deployment decision status.
+The repository provides reusable documentation, examples, and validation tooling. It does not demonstrate control effectiveness in a real system, production deployment, certification, formal authorization, or independent assessment.
 
-### 2. Evidence Manifests
+See [RELEASE_REVIEW.md](RELEASE_REVIEW.md) for release-specific validation scope and remaining conditions.
 
-Structured evidence packages that define system boundaries, connected systems, data handled, control status, risks, assumptions, and decision gates. Useful for audits, readiness reviews, internal governance, release preparation, and product reviews.
+## Public-safety boundary
 
-### 3. Zero Trust Readiness
+Contributions must not include malware code, weaponization instructions, harmful deployment procedures, persistence or evasion guidance, credential-theft workflows, exploit-enabling operational details, secrets, private keys, customer data, proprietary material, or sensitive infrastructure information.
 
-A practical mapping template for identity, devices/workloads, applications, tools, data, visibility, and automation governance. Designed to help teams identify where trust is assumed and where continuous verification is needed. Use the scoring anchors in `DECISION_RUBRIC.md` for repeatable 0–5 scoring.
+High-level defensive analysis may be included when necessary for prevention, detection, investigation, response, recovery, or assurance.
 
-### 4. LLM Risk Register
+## Contributing and security
 
-A public-safe risk register for LLM-enabled systems. Tracks OWASP-aligned risks such as prompt injection, sensitive information disclosure, supply-chain exposure, data/model poisoning, improper output handling, excessive agency, system prompt leakage, vector/embedding weakness, misinformation, and unbounded consumption.
-
-### 5. Secure-by-Design Product Review
-
-A review workflow for product teams to document secure defaults, transparency, vulnerability handling, AI-specific design constraints, and release-readiness decisions.
-
-### 6. Software Supply Chain Review
-
-Templates for dependency review, SBOM readiness, release security, provenance checks, and open-source hygiene.
-
-### 7. Cyber Survivability Review
-
-A resilience-oriented review template for preventing, mitigating, and recovering from cyber disruption without exposing sensitive implementation details.
-
-### 8. High-Impact Systems Readiness
-
-A starter template for sensitive or operational workflows where reliability, access control, data integrity, rollback, recovery, and human approval gates matter.
-
-### 9. Incident Review
-
-A structured incident and near-miss review template for documenting impact, timeline, contributing factors, response, recovery, lessons learned, and control improvements.
-
-### 10. Examples
-
-Synthetic, public-safe examples showing how the templates can be applied without exposing real customer, employer, proprietary, or operational data.
-
-## Technology Readiness
-
-This repository is a documentation and workflow foundation. It is not a validated operational system, a certified control set, or a production security product.
-
-Before making stronger maturity claims, create a validation artifact with reviewer, date, environment, scope, test method, findings, and evidence trail.
-
-## Release Evidence
-
-This release includes [`RELEASE_REVIEW.md`](RELEASE_REVIEW.md), a self-review using the repository's public-safety, secure-by-design, and release-readiness criteria.
-
-The review is a self-assessment, not an independent audit. It exists to make the release decision traceable.
-
-## Contributing
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md). Contributions should improve clarity, evidence quality, public safety, repeatability, and defensive value. Contributions must not add offensive exploit content, credential theft workflows, malware behavior, or sensitive operational procedures.
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes.
+- Report vulnerabilities through the private reporting process in [SECURITY.md](SECURITY.md).
+- Use [DECISION_RUBRIC.md](DECISION_RUBRIC.md) for consistent Green, Amber, Red, and More Evidence Required decisions.
 
 ## License
 
-MIT License — use, fork, adapt, and deploy these templates responsibly.
+MIT License. Use, adapt, and improve the templates responsibly.
 
----
-
-**Bridge Node 7 — a verification layer for AI-era cyber governance.**
+Maintained by Bridge Node 7.

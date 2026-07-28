@@ -1,93 +1,109 @@
 # Zero Trust Readiness Map
+> **Artifact type:** TEMPLATE  
+> **Completion status:** Blank for reuse  
+> **Required for:** Conditional: identity, access, or trust-boundary review
 
 ## Purpose
 
-This template helps teams review whether an AI-enabled, mission-critical, or emerging-technology system is moving toward Zero Trust principles.
+Review whether access to an AI-enabled, mission-critical, or emerging-technology system is explicitly verified, least-privileged, observable, and continuously reassessed instead of assumed trustworthy.
 
-## Core Question
+## Use with
 
-Does the system continuously verify access instead of assuming trust?
+- [Evidence Manifest](../02-evidence-manifests/evidence-manifest-template.md)
+- [Identity and Authority Register](../11-assurance-lifecycle/identity-and-authority-register.md)
+- [Human Approval Gates](../01-ai-agent-security/human-approval-gates.md)
+
+## Review identity
+
+- **System:**
+- **Owner:**
+- **Reviewer:**
+- **Date:**
+- **Scope:**
+
+## Core question
+
+Does every request for access or action have a known identity, authorized purpose, bounded scope, relevant context, evidence, and revocation path?
 
 ## Identity
 
-- [ ] Every user has a unique identity.
-- [ ] Every service or workload has a unique identity where applicable.
-- [ ] Privileged access is separated.
-- [ ] MFA is enforced where appropriate.
-- [ ] Access is reviewed regularly.
-- [ ] Break-glass access is documented and monitored.
+- [ ] Every human has a unique identity.
+- [ ] Every service, workload, supplier integration, and AI agent has a unique identity where applicable.
+- [ ] Identity proofing and authoritative sources are documented.
+- [ ] Privileged access is separated from routine access.
+- [ ] MFA or phishing-resistant authentication is used where appropriate.
+- [ ] Access is reviewed on a defined schedule.
+- [ ] Joiner, mover, leaver, expiration, and revocation processes are documented.
+- [ ] Break-glass access is time-limited, monitored, and reviewed.
 
-## Device / Workload
+## Device and workload
 
-- [ ] Devices are inventoried.
-- [ ] Workloads are inventoried.
-- [ ] Unknown devices are blocked or limited.
-- [ ] Workload permissions are documented.
-- [ ] Configuration state is monitored.
+- [ ] Devices and workloads are inventoried and owned.
+- [ ] Unknown or noncompliant devices are blocked or constrained.
+- [ ] Workload permissions and service identities are documented.
+- [ ] Configuration, software, and integrity state influence access decisions where relevant.
 - [ ] Unsupported systems are tracked as risk.
 
-## Network / Environment
+## Network and environment
 
-- [ ] Network access is segmented.
+- [ ] Access paths and trust boundaries are documented.
 - [ ] Sensitive services are not broadly reachable.
-- [ ] Access paths are documented.
-- [ ] Remote access is monitored.
+- [ ] Segmentation limits lateral movement and blast radius.
+- [ ] Remote and third-party access is monitored.
 - [ ] High-risk paths are approval-gated.
-- [ ] External connections are reviewed.
+- [ ] External connections have owners, purpose, evidence, and termination paths.
 
-## Application / Tool Access
+## Application, API, and tool access
 
-- [ ] Tools are approved.
-- [ ] Tool permissions are scoped.
-- [ ] APIs are authenticated.
-- [ ] Destructive actions require approval.
-- [ ] Tool outputs are validated.
-- [ ] AI agents cannot call arbitrary tools.
+- [ ] Applications, APIs, and tools authenticate the calling identity.
+- [ ] Permissions are scoped to purpose and resource.
+- [ ] Destructive or consequential actions require approval.
+- [ ] AI agents cannot call arbitrary or unapproved tools.
+- [ ] Tool outputs and external results are treated as untrusted until validated.
+- [ ] Tokens and sessions have appropriate audience, scope, lifetime, and revocation.
 
 ## Data
 
-- [ ] Sensitive data is identified.
-- [ ] Data access is logged.
-- [ ] Data sharing is controlled.
-- [ ] AI systems are restricted from unnecessary sensitive data.
-- [ ] Data retention expectations are documented.
-- [ ] Data release decisions are approval-gated.
+- [ ] Sensitive data is identified and owned.
+- [ ] Data access is authorized, logged, and reviewable.
+- [ ] Data sharing and export are controlled.
+- [ ] AI systems are restricted from unnecessary data.
+- [ ] Retention, deletion, correction, and release expectations are documented.
+- [ ] Data provenance and integrity are evaluated where decisions depend on content.
 
-## Visibility
+## Visibility and policy enforcement
 
-- [ ] Security logs exist.
-- [ ] Logs are reviewed.
-- [ ] Anomalies are escalated.
-- [ ] Evidence is preserved.
-- [ ] Automated actions are traceable.
-- [ ] Operators can understand system state.
+- [ ] Security and access logs exist.
+- [ ] Time, identity, action, resource, result, and policy decision are traceable.
+- [ ] Logs are reviewed and protected from unauthorized alteration.
+- [ ] Anomalies and policy violations have escalation thresholds.
+- [ ] Automated actions are attributable and explainable enough for review.
+- [ ] Operators can understand current state and safely terminate access.
 
-## Automation Governance
+## Automation governance
 
-- [ ] Automated actions are bounded.
-- [ ] AI agent actions are logged.
-- [ ] Human approval gates exist.
-- [ ] A disable path or kill switch exists.
-- [ ] High-impact decisions remain human-accountable.
-- [ ] Model and tool changes are reviewed.
+- [ ] Automated actions are bounded by policy.
+- [ ] Human approval gates exist for high-impact actions.
+- [ ] The system prevents self-approval by the requesting agent or operator.
+- [ ] A disable, revoke, or containment path exists and is tested.
+- [ ] Model, tool, policy, and identity changes are reviewed.
+- [ ] Decisions can fail closed when identity, policy, or evidence is unknown.
 
-## Readiness Score
+## Readiness score
 
-Use the 0–5 scoring anchors in [`../DECISION_RUBRIC.md`](../DECISION_RUBRIC.md).
+Use the 0–5 anchors in [DECISION_RUBRIC.md](../DECISION_RUBRIC.md).
 
-| Domain | Score 0-5 | Notes |
-|---|---:|---|
-| Identity | | |
-| Device / workload | | |
-| Network / environment | | |
-| Application / tools | | |
-| Data | | |
-| Visibility | | |
-| Automation governance | | |
+| Domain | Score 0–5 | Evidence ID | Gap | Owner |
+|---|---:|---|---|---|
+| Identity | | | | |
+| Device / workload | | | | |
+| Network / environment | | | | |
+| Application / API / tools | | | | |
+| Data | | | | |
+| Visibility / policy enforcement | | | | |
+| Automation governance | | | | |
 
-## Overall Status
-
-Use [`../DECISION_RUBRIC.md`](../DECISION_RUBRIC.md) to keep decision thresholds consistent.
+## Overall status
 
 - [ ] Green
 - [ ] Amber
@@ -97,5 +113,9 @@ Use [`../DECISION_RUBRIC.md`](../DECISION_RUBRIC.md) to keep decision thresholds
 Reviewer:
 
 Date:
+
+Conditions:
+
+Next review:
 
 Notes:

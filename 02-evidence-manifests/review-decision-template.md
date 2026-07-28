@@ -1,52 +1,74 @@
 # Review Decision Template
+> **Artifact type:** TEMPLATE  
+> **Completion status:** Blank for reuse  
+> **Required for:** Quick Review and Full Assurance Lifecycle
 
-## Review Name
+## Review identity
 
-## System / Asset
+- **Review name:**
+- **System / asset:**
+- **Version / configuration:**
+- **Reviewer:**
+- **Decision maker:**
+- **Authority basis:**
+- **Decision date:**
+- **Expiration / revisit date:**
 
-## Reviewer
+## Decision summary
 
-## Date
+Use [DECISION_RUBRIC.md](../DECISION_RUBRIC.md).
 
-## Decision Summary
-
-- [ ] Green — proceed
-- [ ] Amber — proceed with constraints
-- [ ] Red — stop / do not deploy
+- [ ] Green — proceed for the stated scope and stage
+- [ ] Amber — proceed only with documented constraints
+- [ ] Red — stop / do not deploy or release
 - [ ] More evidence required
 
-## Evidence Reviewed
+## Scope of this decision
 
-| Evidence | Source | Result |
-|---|---|---|
+State exactly what is and is not being approved, reviewed, released, or deferred.
 
-## Key Findings
+## Evidence reviewed
 
-1. 
-2. 
-3. 
+| Evidence ID | Evidence | Source | Review result | Confidence | Limitation |
+|---|---|---|---|---|---|
 
-## Conditions / Constraints
+## Key findings
 
-| Condition | Owner | Deadline |
-|---|---|---|
+| Finding ID | Finding | Severity / importance | Supporting evidence | Owner | Status |
+|---|---|---|---|---|---|
 
-## Risks Accepted
+## Evidence gaps
 
-| Risk | Accepted By | Rationale | Expiration / Revisit Date |
-|---|---|---|---|
+| Gap ID | Missing evidence | Decision impact | Interim constraint | Owner | Due date |
+|---|---|---|---|---|---|
 
-## Required Follow-Up
+## Conditions and constraints
 
-| Action | Owner | Due Date |
-|---|---|---|
+| Condition ID | Condition | Owner | Deadline | Evidence required | Consequence if missed |
+|---|---|---|---|---|---|
 
-## Final Decision
+## Residual risks accepted
+
+| Risk ID | Risk | Accepted by | Authority | Rationale | Expiration / revisit date |
+|---|---|---|---|---|---|
+
+## Corrective actions and retest
+
+| Action ID | Finding / gap | Corrective action | Owner | Due date | Retest method | Retest result | Reviewer disposition |
+|---|---|---|---|---|---|---|---|
+
+## Final decision statement
 
 Decision:
+
+Authorized scope:
+
+Conditions:
 
 Decision maker:
 
 Date:
+
+Next review:
 
 Notes:
