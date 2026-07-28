@@ -1,105 +1,140 @@
-# High-Impact System Readiness Starter Template
+# High-Impact System Readiness
+> **Artifact type:** TEMPLATE  
+> **Completion status:** Blank for reuse  
+> **Required for:** Full Assurance Lifecycle or high-impact review
 
-## Purpose
+## What this document is
 
-A public-safe starter template for reviewing cyber readiness of sensitive, operational, AI-enabled, or high-impact workflows.
+A coordinating review for sensitive, operational, AI-enabled, or high-impact systems. It routes users through the full assurance lifecycle without duplicating the underlying records.
 
-This template is not a substitute for formal security authorization, legal review, compliance review, or engineering validation. It is designed to help teams organize evidence and identify gaps.
+## Who should complete it
+
+System owners, engineering leads, security reviewers, governance teams, operators, and accountable decision owners.
+
+## When to use it
+
+Use before piloting, deploying, materially changing, or reauthorizing a system whose failure could create significant security, privacy, safety, financial, legal, mission, or public-trust consequences.
+
+## Decision supported
+
+Whether the system has a sufficiently bounded, evidenced, validated, recoverable, and human-governed posture for the current stage.
 
 ## System / Workflow
 
+## Version
+
 ## Owner
+
+## Decision Owner
 
 ## Review Date
 
-## System Boundary
+## 1. Lifecycle Record Map
+
+| Required Record | Location / Evidence ID | Owner | Status | Gap |
+|---|---|---|---|---|
+| Evidence Manifest | | | | |
+| Security Policy and Target | | | | |
+| Identity and Authority Register | | | | |
+| Threat-Control-Evidence Map | | | | |
+| Human Approval Gates | | | | |
+| Control Validation Record | | | | |
+| Recovery Assurance Record | | | | |
+| Review Decision | | | | |
+
+## 2. System Boundary
+
+Reference the boundary in the Evidence Manifest.
 
 ### In Scope
 
-- 
-
 ### Out of Scope
 
-- 
+### Critical Functions
 
-## Critical Functions
-
-| Function | Why It Matters | Owner | Evidence |
+| Function | Mission or Business Consequence | Owner | Evidence ID |
 |---|---|---|---|
 
-## Constraints
+### External Dependencies
 
-| Constraint | Notes |
-|---|---|
-| Limited ability to patch quickly | |
-| Sensitive data handled | |
-| High-impact decisions supported | |
-| External dependencies | |
-| Automation or AI tool use | |
-| Recovery time expectations | |
-| Human approval required | |
+| Dependency | Purpose | Failure Consequence | Replacement / Fallback | Owner | Evidence ID |
+|---|---|---|---|---|---|
 
-## Access Path Review
+## 3. Identity and Authority
 
-| Access Path | Authorized Source | Verification Method | Human Approval? | Evidence |
-|---|---|---|---:|---|
+- [ ] Human, service, workload, supplier, and AI-agent identities are uniquely identified.
+- [ ] Privileged authority is bounded and time-limited where feasible.
+- [ ] High-impact actions have human approval gates.
+- [ ] Self-approval and conflicting duties are prohibited where required.
+- [ ] Revocation and session termination paths are documented and tested where material.
+- [ ] Evidence references the Identity and Authority Register.
 
-## Data Flow Review
+Key identity gaps:
 
-| Data Flow | Source | Destination | Integrity Need | Evidence |
-|---|---|---|---|---|
+## 4. Data, Tools, and AI Use
 
-## Identity and Access
+| Element | Classification / Sensitivity | Permitted Use | Prohibited Use | Human Review | Evidence ID |
+|---|---|---|---|---|---|
+| Data | | | | | |
+| Model | | | | | |
+| Retrieval source | | | | | |
+| Memory | | | | | |
+| Tool / API | | | | | |
+| Output | | | | | |
 
-- [ ] Users are uniquely identified.
-- [ ] Privileged access is controlled.
-- [ ] Service identities are documented where applicable.
-- [ ] Access review process exists.
-- [ ] Emergency access is documented.
-- [ ] High-impact actions require approval.
+## 5. Threats, Controls, and Evidence
 
-## Software / Configuration Updates
+Reference the Threat-Control-Evidence Map.
 
-- [ ] Update path is documented.
-- [ ] Approval gate exists.
-- [ ] Rollback assumptions are documented.
-- [ ] Test evidence is captured.
-- [ ] Version history is preserved.
-- [ ] Configuration changes are reviewed.
+Critical unresolved threats or failure modes:
 
-## AI / Automation Use
+| ID | Threat / Failure Mode | Consequence | Control Gap | Owner | Decision Effect |
+|---|---|---|---|---|---|
 
-- [ ] AI or automation components are documented.
-- [ ] Human oversight is defined.
-- [ ] Tool permissions are scoped.
-- [ ] Anomaly triage process exists.
-- [ ] Automated actions are bounded.
-- [ ] Disable path exists.
+## 6. Monitoring and Incident Readiness
 
-## Control Evidence
+- [ ] Required telemetry is identified.
+- [ ] Critical events are detectable.
+- [ ] Time sources and evidence retention are defined.
+- [ ] Investigation ownership is assigned.
+- [ ] Containment actions requiring human approval are identified.
+- [ ] Incident and near-miss review paths are documented.
 
-| Control Area | Applicable? | Evidence Needed | Current Status |
-|---|---:|---|---|
-| Identity and authentication | | | |
-| Access control | | | |
-| Audit and accountability | | | |
-| Configuration management | | | |
-| Data protection | | | |
-| System integrity | | | |
-| Recovery | | | |
-| Supply chain risk | | | |
+## 7. Recovery and Continuity
 
-## Readiness Decision
+- [ ] Safe degraded operation is defined where applicable.
+- [ ] Manual fallback exists where required.
+- [ ] Rollback ownership is assigned.
+- [ ] Recovery objectives are documented.
+- [ ] Recovery evidence distinguishes planned from tested capabilities.
+- [ ] Corrective actions and retests are tracked.
 
-Use [`../DECISION_RUBRIC.md`](../DECISION_RUBRIC.md) to keep decision thresholds consistent.
+## 8. Constraints and Assumptions
 
-- [ ] Green — evidence sufficient for current review stage
-- [ ] Amber — proceed with constraints
+| ID | Constraint / Assumption | Evidence | Risk if False | Owner | Review Date |
+|---|---|---|---|---|---|
+
+## 9. Readiness Decision
+
+- [ ] Green — sufficient evidence for the current stage
+- [ ] Amber — proceed only with documented conditions
 - [ ] Red — do not proceed
 - [ ] More evidence required
 
+Decision owner:
+
 Reviewer:
 
-Date:
+Permitted stage or use:
 
-Notes:
+Conditions:
+
+Residual risk:
+
+Unproven claims:
+
+Next review date:
+
+## Limitations
+
+This record does not certify a system, authorize deployment by itself, replace legal or compliance review, or prove that listed controls are effective without supporting evidence and validation.

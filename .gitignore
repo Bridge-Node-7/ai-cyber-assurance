@@ -1,4 +1,5 @@
-# OS / editor
+
+# OS and editors
 .DS_Store
 Thumbs.db
 .vscode/
@@ -11,7 +12,8 @@ __pycache__/
 venv/
 .env
 
-# Logs / local outputs
+# Local validation and build outputs
+validation-report.json
 *.log
 dist/
 build/
