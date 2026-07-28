@@ -6,11 +6,11 @@
   "version": "v0.2.0",
   "release_title": "AI Cyber Assurance Baseline",
   "generated_date": "2026-07-27",
-  "release_status": "AMBER_RC2",
+  "release_status": "GREEN_PUBLIC_RELEASE",
   "maturity_scope": {
     "implemented": "Documentation templates, synthetic examples, a standard-library repository validator, and a GitHub Actions workflow are present.",
     "tested": "Local structural, link, identity, separation, content-minimization, public-safety, manifest, hash, syntax, and mutation tests are recorded for RC2.",
-    "usability_reviewed": "Two maintainer usability walkthroughs were completed. Uninvolved external usability testing remains pending.",
+    "usability_reviewed": "Two maintainer usability walkthroughs and one uninvolved first-time reviewer Quick Review UAT were completed. The uninvolved reviewer required no undocumented assistance and reported no navigation blocker.",
     "independently_validated": false,
     "operationally_validated": false,
     "certified": false,

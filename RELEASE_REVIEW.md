@@ -1,8 +1,8 @@
 # Release Review: AI Cyber Assurance v0.2.0
 
 > **Artifact type:** RELEASE ASSURANCE RECORD  
-> **Decision status:** AMBER, private release candidate  
-> **Public release authority:** Not granted
+> **Decision status:** GREEN, approved for public release  
+> **Public release authority:** Granted subject to final PR-head validation, merged-main validation, release-asset checksum verification, and logged-out review
 
 ## Scope
 
@@ -12,15 +12,15 @@ It does not evaluate a production deployment, a real system, control effectivene
 
 ## Release outcome
 
-The candidate is suitable for controlled branch and pull-request validation.
+The pre-merge release gates are complete:
 
-A public tag and release remain blocked until:
+- Private vulnerability reporting is enabled and verified.
+- GitHub Actions passed from the approved RC2 pull-request head.
+- The reviewed tree matches the repository manifest and hashes.
+- One uninvolved first-time reviewer completed the Quick Review path without undocumented assistance or a navigation blocker.
+- An authorized human granted conditional public-release approval.
 
-- Private vulnerability reporting is verified from an authorized repository account.
-- GitHub Actions passes from a clean checkout.
-- The final public tree matches the reviewed manifest and hashes.
-- One uninvolved first-time user completes the onboarding path without undocumented assistance.
-- An authorized human records release approval.
+Final publication remains subject to a successful final PR-head Actions run, squash-merge tree reconciliation, a successful merged-main Actions run, reviewed release-asset checksums, and logged-out verification.
 
 ## Validation evidence
 
@@ -39,6 +39,9 @@ A public tag and release remain blocked until:
 | Secret-pattern scan | Pass | No configured pattern detected |
 | Public-safety language | Pass | Required boundaries present |
 | Negative tests | Pass | Hash, extra-file, link, identity, and credential mutations rejected |
+| Initial PR-head GitHub Actions | Pass | Push and pull-request events on `af32d3bd63d8db2fe8c1648f3fef149041cd0bbe` |
+| Private vulnerability reporting | Pass | Enabled through the authorized repository account |
+| Uninvolved Quick Review UAT | Pass | Reviewer completed the path without undocumented assistance or a blocker |
 
 ## Integrity Scope
 
@@ -46,29 +49,23 @@ A public tag and release remain blocked until:
 
 ## Internal usability walkthroughs
 
-These are maintainer usability walkthroughs, not independent validation.
+### Maintainer walkthroughs
 
-### First-time reviewer walkthrough
+Two maintainer walkthroughs passed: the Quick Review path and the Full Assurance Lifecycle traceability path.
 
-| Field | Result |
-|---|---|
-| Starting point | README |
-| Selected path | Quick Review |
-| User goal | Identify where to start, which artifacts apply, what evidence is missing, and who decides |
-| Outcome | Pass |
-| Evidence | Five-minute orientation, artifact selector, Quick Review path, Decision Rubric, and completed synthetic example |
-| Remaining limitation | Uninvolved external first-time-user UAT is pending |
-
-### Practitioner traceability walkthrough
+### Uninvolved first-time reviewer UAT
 
 | Field | Result |
 |---|---|
-| Starting point | Assurance Lifecycle |
-| Selected path | Full Assurance Lifecycle |
-| User goal | Trace threat to requirement, control, evidence, validation, correction, retest, residual risk, and decision |
+| Tester role | Reviewer |
+| Test date | 2026-07-27 |
+| Independent of construction and prior V&V | Yes |
+| Starting point obvious | Yes |
+| Undocumented assistance required | No |
+| Templates distinguishable from examples | Yes |
+| Human decision authority understandable | Yes |
+| Navigation blocker | None |
 | Outcome | Pass |
-| Evidence | Lifecycle navigator, lifecycle records, and synthetic supplier profile |
-| Remaining limitation | The supplier profile is intentionally partial and remains clearly labeled |
 
 ## Public-content review
 
@@ -87,17 +84,18 @@ The controlled tree contains:
 |---|---|
 | Version | 0.2.0 |
 | Candidate | RC2 |
-| Controlled file count | 39 |
-| Commit SHA | Not yet available |
-| Pull request | Not yet available |
-| GitHub Actions run | Not yet available |
-| Human release approver | Not yet approved |
-| Approval date | Not yet approved |
+| Approved RC2 commit SHA | `af32d3bd63d8db2fe8c1648f3fef149041cd0bbe` |
+| Pull request | https://github.com/Bridge-Node-7/ai-cyber-assurance/pull/1 |
+| Initial push Actions run | https://github.com/Bridge-Node-7/ai-cyber-assurance/actions/runs/30323770313 |
+| Initial pull-request Actions run | https://github.com/Bridge-Node-7/ai-cyber-assurance/actions/runs/30323865156 |
+| Private vulnerability reporting | Enabled and verified |
+| Human release approver | Bridge Node 7 repository administrator |
+| Approval date | 2026-07-27 |
 
 ## Final decision
 
-**AMBER.**
+**GREEN, conditionally approved for public release.**
 
-Proceed with controlled branch publication, pull-request review, clean-checkout GitHub Actions validation, external first-time-user UAT, public-tree reconciliation, and authorized human approval.
+Proceed only through the locked final sequence: regenerate hashes, pass final PR-head GitHub Actions, squash merge, reconcile the merged tree, pass merged-main GitHub Actions, create and checksum the release archive, tag `v0.2.0`, publish the release assets, complete logged-out verification, and stop v0.2.0 work.
 
-Do not publish the final tag or claim independent validation, production authorization, certification, compliance, or real-system control effectiveness until the remaining gates pass.
+This decision does not claim independent validation, operational validation, production authorization, certification, compliance, or real-system control effectiveness.
