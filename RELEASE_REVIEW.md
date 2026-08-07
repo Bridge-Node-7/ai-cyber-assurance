@@ -1,101 +1,52 @@
-# Release Review: AI Cyber Assurance v0.2.0
+# Release Review: AI Cyber Assurance v0.2.1
 
-> **Artifact type:** RELEASE ASSURANCE RECORD  
-> **Decision status:** GREEN, approved for public release  
-> **Public release authority:** Granted subject to final PR-head validation, merged-main validation, release-asset checksum verification, and logged-out review
+> **Artifact type:** RELEASE ASSURANCE RECORD
+> **Decision status:** GREEN, conditionally approved for public release
+> **Public release authority:** Granted only after PR-head validation, merged-main validation, release-asset checksum verification, and logged-out review
 
 ## Scope
 
-This review covers the release-controlled files in the `ai-cyber-assurance` package. It evaluates structure, integrity, navigation, public-safety boundaries, template completeness, synthetic examples, and repository validation.
+This maintenance review covers checksum-manifest portability only. The v0.2.0 assurance content, user paths, synthetic examples, public-safety boundaries, and limitations remain unchanged.
 
-It does not evaluate a production deployment, a real system, control effectiveness, certification, legal sufficiency, or compliance.
+It does not evaluate a production deployment, real-system control effectiveness, certification, legal sufficiency, compliance, or independent validation.
 
-## Release outcome
+## Defect and correction
 
-The pre-merge release gates are complete:
+A Windows Git Bash fresh clone showed two portability hazards: `MANIFEST.sha256` could retain CRLF line endings, and `core.autocrlf=true` could change the checked-out bytes of other hashed text files. Either condition prevents portable byte-for-byte checksum verification even when the source content is logically unchanged.
 
-- Private vulnerability reporting is enabled and verified.
-- GitHub Actions passed from the approved RC2 pull-request head.
-- The reviewed tree matches the repository manifest and hashes.
-- One uninvolved first-time reviewer completed the Quick Review path without undocumented assistance or a navigation blocker.
-- An authorized human granted conditional public-release approval.
+The v0.2.1 candidate:
 
-Final publication remains subject to a successful final PR-head Actions run, squash-merge tree reconciliation, a successful merged-main Actions run, reviewed release-asset checksums, and logged-out verification.
+- enforces LF checkout for checksum files and every hashed text format;
+- writes generated checksum manifests with explicit LF newlines;
+- adds direct GNU `sha256sum -c` verification to GitHub Actions;
+- updates version and release-control records without changing product content.
 
-## Validation evidence
+## Validation evidence required
 
-| Check | Result | Scope |
-|---|---|---|
-| ZIP extraction | Pass | Clean extraction and root inspection |
-| Repository validator | Pass | All configured checks |
-| Manifest parity | Pass | Controlled files equal the repository manifest |
-| SHA-256 verification | Pass | Controlled files match `MANIFEST.sha256` |
-| Python syntax | Pass | Validator compiles |
-| JSON syntax | Pass | Repository manifest and validation output |
-| YAML syntax | Pass | GitHub Actions workflow parses |
-| Relative Markdown links | Pass | All local targets resolve |
-| Identity consistency | Pass | Current repository identity only |
-| Synthetic labeling | Pass | Every example file is explicit |
-| Secret-pattern scan | Pass | No configured pattern detected |
-| Public-safety language | Pass | Required boundaries present |
-| Negative tests | Pass | Hash, extra-file, link, identity, and credential mutations rejected |
-| Initial PR-head GitHub Actions | Pass | Push and pull-request events on `af32d3bd63d8db2fe8c1648f3fef149041cd0bbe` |
-| Private vulnerability reporting | Pass | Enabled through the authorized repository account |
-| Uninvolved Quick Review UAT | Pass | Reviewer completed the path without undocumented assistance or a blocker |
-
-## Integrity Scope
-
-`MANIFEST.sha256` supports deterministic file-change detection and reviewed-tree reconciliation. Because the manifest is stored in the same repository as the files it hashes, it is not an independent tamper-evident attestation. Public-release integrity depends on the approved commit, tag, release record, externally recorded archive checksum, and authorized human approval. A signed tag or release attestation may be claimed only when it was actually produced and verified.
+| Check | Required result |
+|---|---|
+| Repository validator | Pass |
+| Manifest parity | Pass |
+| SHA-256 verification | Pass in Git Bash and GitHub Actions |
+| Python syntax | Pass |
+| JSON syntax | Pass |
+| Relative Markdown links | Pass through repository validator |
+| Secret and personal-information scans | Pass through repository validator |
+| Fresh Windows-style clone | Pass with LF checksum manifest |
+| GitHub Actions | Pass on PR head and merged main |
+| Private vulnerability reporting | Remains enabled |
+| Human release approver | Required before publication |
 
 ## Internal usability walkthroughs
 
-### Maintainer walkthroughs
+The maintenance patch does not change navigation, templates, examples, or user-facing assurance content. The completed v0.2.0 walkthrough evidence remains applicable to the unchanged experience.
 
-Two maintainer walkthroughs passed: the Quick Review path and the Full Assurance Lifecycle traceability path.
+## Integrity scope
 
-### Uninvolved first-time reviewer UAT
-
-| Field | Result |
-|---|---|
-| Tester role | Reviewer |
-| Test date | 2026-07-27 |
-| Independent of construction and prior V&V | Yes |
-| Starting point obvious | Yes |
-| Undocumented assistance required | No |
-| Templates distinguishable from examples | Yes |
-| Human decision authority understandable | Yes |
-| Navigation blocker | None |
-| Outcome | Pass |
-
-## Public-content review
-
-The controlled tree contains:
-
-- No personal contact information
-- No real supplier, customer, system, material, or security finding
-- No content copied from unrelated repositories
-- No restricted or unauthorized third-party materials
-- No live credentials, private keys, tokens, or private infrastructure details
-- No claim of independent validation, certification, authorization, compliance, production maturity, or real-system effectiveness
-
-## Release artifact record
-
-| Field | Value |
-|---|---|
-| Version | 0.2.0 |
-| Candidate | RC2 |
-| Approved RC2 commit SHA | `af32d3bd63d8db2fe8c1648f3fef149041cd0bbe` |
-| Pull request | https://github.com/Bridge-Node-7/ai-cyber-assurance/pull/1 |
-| Initial push Actions run | https://github.com/Bridge-Node-7/ai-cyber-assurance/actions/runs/30323770313 |
-| Initial pull-request Actions run | https://github.com/Bridge-Node-7/ai-cyber-assurance/actions/runs/30323865156 |
-| Private vulnerability reporting | Enabled and verified |
-| Human release approver | Bridge Node 7 repository administrator |
-| Approval date | 2026-07-27 |
+`MANIFEST.sha256` provides deterministic file-change detection but is not an independent attestation. Public-release integrity depends on the approved commit, tag, GitHub release record, externally recorded archive checksum, and human approval.
 
 ## Final decision
 
-**GREEN, conditionally approved for public release.**
+**GREEN, conditionally approved for v0.2.1 public release after all listed gates pass.**
 
-Proceed only through the locked final sequence: regenerate hashes, pass final PR-head GitHub Actions, squash merge, reconcile the merged tree, pass merged-main GitHub Actions, create and checksum the release archive, tag `v0.2.0`, publish the release assets, complete logged-out verification, and stop v0.2.0 work.
-
-This decision does not claim independent validation, operational validation, production authorization, certification, compliance, or real-system control effectiveness.
+Proceed through one reviewed pull request. Stop before merge, tag, release, deployment, or settings changes unless separately authorized. This decision does not claim independent validation, operational validation, production authorization, certification, compliance, or real-system effectiveness.

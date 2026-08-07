@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1] - 2026-08-06
+
+### Fixed
+
+- Enforced LF checkout for checksum files and all hashed text formats across operating systems.
+- Added GNU `sha256sum -c` to hosted validation so checksum portability is tested directly.
+- Preserved the v0.2.0 assurance content and evidence boundaries without product-scope changes.
+
 ## [0.2.0] - 2026-07-27
 
 ### Added

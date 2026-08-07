@@ -31,6 +31,7 @@ jobs:
           python scripts/validate_repo.py \
             --root . \
             --json-output "$RUNNER_TEMP/validation-report.json"
+          sha256sum -c MANIFEST.sha256
 
       - name: Upload validation report
         if: always()
