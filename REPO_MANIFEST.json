@@ -3,14 +3,14 @@
   "repository": "ai-cyber-assurance",
   "organization": "Bridge-Node-7",
   "target_url": "https://github.com/Bridge-Node-7/ai-cyber-assurance",
-  "version": "v0.2.1",
-  "release_title": "AI Cyber Assurance Checksum Portability Maintenance",
+  "version": "v0.2.2",
+  "release_title": "AI Cyber Assurance Guided Start and AI Review Clarity",
   "generated_date": "2026-08-06",
-  "release_status": "GREEN_PUBLIC_RELEASE_PENDING_PUBLICATION",
+  "release_status": "GREEN_RELEASE_BASELINE",
   "maturity_scope": {
-    "implemented": "The v0.2.0 documentation templates, synthetic examples, standard-library validator, and GitHub Actions workflow remain intact; v0.2.1 adds portable checksum-manifest handling.",
-    "tested": "Repository validation, manifest parity, SHA-256 integrity, and direct GNU sha256sum verification are required for the v0.2.1 maintenance release.",
-    "usability_reviewed": "Two maintainer usability walkthroughs and one uninvolved first-time reviewer Quick Review UAT were completed. The uninvolved reviewer required no undocumented assistance and reported no navigation blocker.",
+    "implemented": "The documentation templates, synthetic examples, guided start, review package index, AI-assistance contract, standard-library validator, regression suite, and GitHub Actions workflow are present.",
+    "tested": "Repository validation, manifest parity, SHA-256 integrity, regression tests, Ubuntu validation, Windows validation, and release-asset verification are required release gates.",
+    "usability_reviewed": "The release defines an uninvolved human walkthrough and an AI-assistant walkthrough. The public source does not by itself establish broad usability, accessibility, independent validation, or operational outcomes.",
     "independently_validated": false,
     "operationally_validated": false,
     "certified": false,
@@ -18,12 +18,15 @@
   },
   "user_paths": {
     "quick_review": {
-      "start": "02-evidence-manifests/evidence-manifest-template.md",
+      "start": "START_HERE.md",
+      "package_index": "02-evidence-manifests/review-package-index-template.md",
       "select": "one or more specialist modules as applicable",
       "decide": "02-evidence-manifests/review-decision-template.md"
     },
     "full_assurance_lifecycle": {
-      "start": "ASSURANCE_LIFECYCLE.md",
+      "start": "START_HERE.md",
+      "navigator": "ASSURANCE_LIFECYCLE.md",
+      "package_index": "02-evidence-manifests/review-package-index-template.md",
       "records": "11-assurance-lifecycle/",
       "decide": "02-evidence-manifests/review-decision-template.md"
     }
@@ -41,7 +44,7 @@
     "10": "Synthetic examples",
     "11": "Assurance lifecycle records"
   },
-  "file_count": 40,
+  "file_count": 44,
   "files": [
     ".gitattributes",
     ".github/workflows/validate.yml",
@@ -50,6 +53,7 @@
     "01-ai-agent-security/human-approval-gates.md",
     "02-evidence-manifests/evidence-manifest-template.md",
     "02-evidence-manifests/review-decision-template.md",
+    "02-evidence-manifests/review-package-index-template.md",
     "03-zero-trust/zero-trust-readiness-map.md",
     "04-llm-risk/llm-risk-register.md",
     "05-secure-by-design/secure-by-design-product-review.md",
@@ -69,6 +73,7 @@
     "11-assurance-lifecycle/recovery-assurance-record.md",
     "11-assurance-lifecycle/security-policy-and-target-template.md",
     "11-assurance-lifecycle/threat-control-evidence-map.md",
+    "AGENTS.md",
     "ASSURANCE_LIFECYCLE.md",
     "CHANGELOG.md",
     "CODE_OF_CONDUCT.md",
@@ -81,7 +86,9 @@
     "RELEASE_REVIEW.md",
     "REPO_MANIFEST.json",
     "SECURITY.md",
+    "START_HERE.md",
     "VERSION",
-    "scripts/validate_repo.py"
+    "scripts/validate_repo.py",
+    "tests/test_validate_repo.py"
   ]
 }

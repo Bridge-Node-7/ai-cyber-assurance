@@ -1,6 +1,17 @@
 # AI Cyber Assurance
 
-**Public-safe assurance templates and validation workflows for AI-enabled systems, agentic operations, emerging technology, and high-impact environments.**
+**AI Cyber Assurance helps teams organize evidence and make accountable human decisions about AI-enabled and high-impact systems.**
+
+[Start here](START_HERE.md) to choose a review path, create a safe working package, and identify the records that apply.
+
+- **Use it when:** reviewing a workflow, pilot, release, supplier, incident, AI agent, or high-impact system.
+- **Use it with:** system owners, engineers, security reviewers, operators, governance teams, auditors, and authorized decision owners.
+- **AI may help with:** organizing, drafting, mapping, questioning, summarizing, and checking.
+- **Humans remain responsible for:** evidence access, fact validation, consequential actions, risk acceptance, and the final assurance decision.
+
+> **Start safely:** Create a private or access-controlled working package outside this public repository before adding real evidence. Do not place secrets, customer information, private infrastructure, vulnerabilities, regulated data, proprietary material, or sensitive operational evidence in this repository or a public fork.
+
+AI assistants and coding agents should read [`AGENTS.md`](AGENTS.md) before applying or modifying this repository.
 
 ## What this is
 
@@ -34,6 +45,7 @@ The result is a traceable review package with named owners, bounded claims, visi
 A completed review can include:
 
 - A defined system boundary
+- A review package index
 - An identity and authority record
 - A threat-control-evidence map
 - Control validation results
@@ -57,11 +69,13 @@ This repository does **not**:
 
 This is an orientation, not a completion-time estimate.
 
-1. Copy the [Evidence Manifest](02-evidence-manifests/evidence-manifest-template.md).
-2. Define the system, scope, owner, and decision to be made.
-3. Select one or more [specialist modules](#specialist-modules).
-4. Record the evidence supporting each material control.
-5. Apply the [Decision Rubric](DECISION_RUBRIC.md) and complete the [Review Decision](02-evidence-manifests/review-decision-template.md).
+1. Open [`START_HERE.md`](START_HERE.md).
+2. Create a private or access-controlled working package.
+3. Copy the [Review Package Index](02-evidence-manifests/review-package-index-template.md).
+4. Choose Quick Review or Full Assurance Lifecycle.
+5. Copy only the applicable records.
+6. Record evidence, gaps, owners, limitations, and required human decisions.
+7. Apply the [Decision Rubric](DECISION_RUBRIC.md) and complete the [Review Decision](02-evidence-manifests/review-decision-template.md).
 
 ## Choose your path
 
@@ -70,7 +84,8 @@ This is an orientation, not a completion-time estimate.
 Use this path for one workflow, product, pilot, or release:
 
 ```text
-Evidence Manifest
+Review Package Index
+→ Evidence Manifest
 → Relevant Specialist Module
 → Decision Rubric
 → Review Decision
@@ -78,23 +93,26 @@ Evidence Manifest
 
 Start here:
 
-1. [Evidence Manifest](02-evidence-manifests/evidence-manifest-template.md)
-2. [Decision Rubric](DECISION_RUBRIC.md)
-3. [Review Decision](02-evidence-manifests/review-decision-template.md)
+1. [Start Here](START_HERE.md)
+2. [Review Package Index](02-evidence-manifests/review-package-index-template.md)
+3. [Evidence Manifest](02-evidence-manifests/evidence-manifest-template.md)
+4. [Decision Rubric](DECISION_RUBRIC.md)
+5. [Review Decision](02-evidence-manifests/review-decision-template.md)
 
 ### Full Assurance Lifecycle
 
 Use this path for high-impact, operational, multi-party, or deeply integrated systems:
 
-1. Open the [Assurance Lifecycle](ASSURANCE_LIFECYCLE.md).
-2. Define mission, boundary, assets, dependencies, and evidence.
-3. Record identities and authority.
-4. Identify threats, failure modes, risk, and uncertainty.
-5. Establish the security policy, target, and requirements.
-6. Map controls to evidence.
-7. Validate controls, monitoring, response, and recovery.
-8. Make an accountable human decision.
-9. Track corrective action and retest.
+1. Open [Start Here](START_HERE.md) and create the [Review Package Index](02-evidence-manifests/review-package-index-template.md).
+2. Follow the [Assurance Lifecycle](ASSURANCE_LIFECYCLE.md).
+3. Define mission, boundary, assets, dependencies, and evidence.
+4. Record identities and authority.
+5. Identify threats, failure modes, risk, and uncertainty.
+6. Establish the security policy, target, and requirements.
+7. Map controls to evidence.
+8. Validate controls, monitoring, response, and recovery.
+9. Make an accountable human decision.
+10. Track corrective action and retest.
 
 ## Which artifacts apply?
 
@@ -139,7 +157,7 @@ These are relative effort bands, not measured completion-time promises.
 | Module | Use it to | Primary output |
 |---|---|---|
 | [AI Agent Security](01-ai-agent-security/ai-agent-security-checklist.md) | Review tool-using agents and human approval boundaries | Agent checklist and approval gates |
-| [Evidence Manifests](02-evidence-manifests/evidence-manifest-template.md) | Define the system, evidence, gaps, and decision | Evidence manifest and review decision |
+| [Evidence Manifests](02-evidence-manifests/evidence-manifest-template.md) | Define the system, evidence, gaps, package status, and decision | Package index, evidence manifest, and review decision |
 | [Zero Trust](03-zero-trust/zero-trust-readiness-map.md) | Review identity, access, trust assumptions, and visibility | Zero Trust readiness map |
 | [LLM Risk](04-llm-risk/llm-risk-register.md) | Track LLM and generative AI security risks | LLM risk register |
 | [Secure by Design](05-secure-by-design/secure-by-design-product-review.md) | Review secure defaults and release design | Secure-by-design review |
@@ -172,19 +190,25 @@ See [REFERENCES.md](REFERENCES.md) for exact publication titles, versions, statu
 
 ## Repository validation
 
-The repository includes a standard-library-only validator and a GitHub Actions workflow.
+The repository includes a standard-library-only validator, a small regression suite, and a GitHub Actions workflow.
 
 Run locally:
 
 ```bash
+python -m unittest discover -s tests -p "test_*.py"
 python scripts/validate_repo.py --root .
+sha256sum -c MANIFEST.sha256
 ```
 
-The validator checks the structural manifest, hashes, internal links, current identity, required template fields, synthetic-example labels, common secret patterns, and public-safety declarations.
+The validator checks the structural manifest, hashes, internal links, current identity, required template fields, onboarding and AI-assistance guidance, synthetic-example labels, common secret patterns, and public-safety declarations.
+
+Validation confirms the controlled public toolkit structure. It does **not** prove that a private completed review is factually correct, that evidence is sufficient, that a control works in a real environment, or that a system is authorized.
 
 ## Scope and limitations
 
 The repository provides reusable documentation, examples, and validation tooling. It does not demonstrate control effectiveness in a real system, production deployment, certification, formal authorization, or independent assessment.
+
+Quick Review is designed for self-guided use. Full Assurance Lifecycle remains expert-led.
 
 See [RELEASE_REVIEW.md](RELEASE_REVIEW.md) for release-specific validation scope and remaining conditions.
 
@@ -197,6 +221,7 @@ High-level defensive analysis may be included when necessary for prevention, det
 ## Contributing and security
 
 - Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes.
+- Read [AGENTS.md](AGENTS.md) before using an AI assistant or coding agent.
 - Report vulnerabilities through the private reporting process in [SECURITY.md](SECURITY.md).
 - Use [DECISION_RUBRIC.md](DECISION_RUBRIC.md) for consistent Green, Amber, Red, and More Evidence Required decisions.
 

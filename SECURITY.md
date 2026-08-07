@@ -11,7 +11,7 @@ Do not disclose a suspected vulnerability or sensitive exposure in a public issu
 
 Use the repository's private **Security → Report a vulnerability** workflow.
 
-**Maintainer release condition:** Public release is prohibited until GitHub private vulnerability reporting is verified as enabled from an authorized repository account. Version 0.2.0 does not provide an alternate public vulnerability-reporting channel.
+**Maintainer release condition:** Public release is prohibited until GitHub private vulnerability reporting is verified as enabled from an authorized repository account. No alternate public vulnerability-reporting channel is provided.
 
 ## Report Content
 

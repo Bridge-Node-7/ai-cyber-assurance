@@ -10,7 +10,7 @@ This file is the navigator for a full AI Cyber Assurance review. It explains the
 
 Use the full lifecycle when a system is high-impact, operational, multi-party, dependent on external services, able to change external state, or expected to support consequential decisions.
 
-For a focused review, start with the [Evidence Manifest](02-evidence-manifests/evidence-manifest-template.md) instead.
+Begin with [Start Here](START_HERE.md) and create the [Review Package Index](02-evidence-manifests/review-package-index-template.md). For a focused review, use the Quick Review path. AI assistants should also follow [AGENTS.md](AGENTS.md).
 
 ## Lifecycle
 
@@ -85,7 +85,19 @@ Authorized humans retain decision authority for:
 
 Use [Human Approval Gates](01-ai-agent-security/human-approval-gates.md) to define each boundary.
 
+## Decision hierarchy
+
+Use one decision hierarchy across the package:
+
+1. **Module assessment:** a local conclusion within a specialist record.
+2. **Assurance recommendation:** the package-level recommendation prepared by the review team, with AI assistance where appropriate.
+3. **Final assurance decision:** the bounded decision made by the authorized human decision owner.
+
+A module assessment or assurance recommendation does not replace the final assurance decision.
+
 ## Minimum completion package
+
+Track completion in the [Review Package Index](02-evidence-manifests/review-package-index-template.md).
 
 A full lifecycle review is not complete until it has:
 

@@ -87,6 +87,16 @@ def read_text(root: Path, rel: Path) -> str:
     return (root / rel).read_text(encoding="utf-8")
 
 
+def read_version(root: Path) -> str:
+    path = root / "VERSION"
+    if not path.exists():
+        raise ValueError("VERSION is missing.")
+    version = path.read_text(encoding="utf-8").strip()
+    if not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][A-Za-z0-9.-]+)?", version):
+        raise ValueError(f"VERSION has an invalid value: {version!r}")
+    return version
+
+
 def text_files(files: Iterable[Path]) -> list[Path]:
     return [
         rel
@@ -149,8 +159,15 @@ def check_manifest(root: Path, files: list[Path]) -> CheckResult:
     expected_url = "https://github.com/Bridge-Node-7/ai-cyber-assurance"
     if data.get("target_url") != expected_url:
         details.append("Manifest target_url is not the canonical repository URL.")
-    if data.get("version") != "v0.2.1":
-        details.append("Manifest version is not v0.2.1.")
+    try:
+        expected_version = f"v{read_version(root)}"
+    except ValueError as exc:
+        details.append(str(exc))
+    else:
+        if data.get("version") != expected_version:
+            details.append(
+                f"Manifest version is {data.get('version')!r}; expected {expected_version!r} from VERSION."
+            )
 
     return CheckResult(
         "manifest",
@@ -297,6 +314,7 @@ def check_artifact_labels(root: Path) -> CheckResult:
         "01-ai-agent-security/ai-agent-security-checklist.md",
         "01-ai-agent-security/human-approval-gates.md",
         "02-evidence-manifests/evidence-manifest-template.md",
+        "02-evidence-manifests/review-package-index-template.md",
         "02-evidence-manifests/review-decision-template.md",
         "03-zero-trust/zero-trust-readiness-map.md",
         "04-llm-risk/llm-risk-register.md",
@@ -321,7 +339,11 @@ def check_artifact_labels(root: Path) -> CheckResult:
     findings: list[str] = []
 
     for rel in template_files:
-        text = (root / rel).read_text(encoding="utf-8")
+        path = root / rel
+        if not path.exists():
+            findings.append(f"{rel}: missing template file")
+            continue
+        text = path.read_text(encoding="utf-8")
         for phrase in ("Artifact type:** TEMPLATE", "Completion status:** Blank for reuse", "Required for:"):
             if phrase.lower() not in text.lower():
                 findings.append(f"{rel}: missing artifact-label phrase {phrase!r}")
@@ -429,6 +451,76 @@ def check_required_content(root: Path) -> CheckResult:
         "required_content",
         not findings,
         findings or ["Required assurance and release content is present."],
+    )
+
+
+
+def check_onboarding_and_agent_guidance(root: Path) -> CheckResult:
+    requirements: dict[str, list[str]] = {
+        "README.md": [
+            "(START_HERE.md)",
+            "(AGENTS.md)",
+            "private or access-controlled working package",
+            "final assurance decision",
+        ],
+        "START_HERE.md": [
+            "(AGENTS.md)",
+            "review-package-index-template.md",
+            "evidence-manifest-template.md",
+            "(ASSURANCE_LIFECYCLE.md)",
+            "(DECISION_RUBRIC.md)",
+            "review-decision-template.md",
+            "public repository",
+            "Quick Review",
+            "Full Assurance Lifecycle",
+            "Module assessment",
+            "Assurance recommendation",
+            "Final assurance decision",
+            "does not prove",
+        ],
+        "AGENTS.md": [
+            "## Scope",
+            "## Human Authority",
+            "## Evidence Classes",
+            "## Agent May",
+            "## Agent Must",
+            "## Agent Must Not",
+            "## Required Output",
+            "## Stop Conditions",
+            "## Validation Boundary",
+        ],
+        "02-evidence-manifests/review-package-index-template.md": [
+            "Artifact type:** TEMPLATE",
+            "Completion status:** Blank for reuse",
+            "Required",
+            "Conditional",
+            "Not Applicable",
+            "Not Started",
+            "Draft",
+            "Blocked",
+            "Ready for Review",
+            "Complete",
+            "Module assessment",
+            "Assurance recommendation",
+            "Final assurance decision",
+            "Package Completion Rule",
+        ],
+    }
+    findings: list[str] = []
+    for rel, phrases in requirements.items():
+        path = root / rel
+        if not path.exists():
+            findings.append(f"Missing UX guidance file: {rel}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        lower = text.lower()
+        for phrase in phrases:
+            if phrase.lower() not in lower:
+                findings.append(f"{rel}: missing UX guidance phrase {phrase!r}")
+    return CheckResult(
+        "onboarding_and_agent_guidance",
+        not findings,
+        findings or ["Onboarding, package control, and AI-assistance guidance are present."],
     )
 
 
@@ -545,6 +637,12 @@ def check_workflow_safety(root: Path) -> CheckResult:
         findings.append("Workflow does not run the repository validator.")
     if "pull_request:" not in text or "push:" not in text:
         findings.append("Workflow must run on pull requests and pushes.")
+    if "python -m unittest discover" not in text:
+        findings.append("Workflow must run the standard-library regression suite.")
+    if "ubuntu-latest" not in text or "windows-latest" not in text:
+        findings.append("Workflow must validate on Ubuntu and Windows.")
+    if "sha256sum -c MANIFEST.sha256" not in text:
+        findings.append("Workflow must run direct GNU checksum verification.")
     return CheckResult(
         "workflow_safety",
         not findings,
@@ -565,6 +663,7 @@ def run_checks(root: Path) -> list[CheckResult]:
         check_content_minimization(root, files),
         check_artifact_labels(root),
         check_required_content(root),
+        check_onboarding_and_agent_guidance(root),
         check_secrets_and_placeholders(root, files),
         check_personal_information(root, files),
         check_example_traceability(root),
@@ -588,6 +687,17 @@ def generate_hashes(root: Path) -> None:
     )
 
 
+
+def build_report(root: Path, results: list[CheckResult]) -> dict[str, object]:
+    passed = all(result.passed for result in results)
+    return {
+        "repository": "ai-cyber-assurance",
+        "version": f"v{read_version(root)}",
+        "status": "PASS" if passed else "FAIL",
+        "checks": [asdict(result) for result in results],
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))
@@ -601,12 +711,7 @@ def main() -> int:
 
     results = run_checks(root)
     passed = all(result.passed for result in results)
-    report = {
-        "repository": "ai-cyber-assurance",
-        "version": "v0.2.1",
-        "status": "PASS" if passed else "FAIL",
-        "checks": [asdict(result) for result in results],
-    }
+    report = build_report(root, results)
 
     for result in results:
         mark = "PASS" if result.passed else "FAIL"
