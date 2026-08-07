@@ -31,7 +31,7 @@ EXCLUDED_DIRS = {
 }
 EXCLUDED_FILES = {"validation-report.json", "VALIDATION_REPORT.json"}
 ALLOWED_SUFFIXES = {".md", ".json", ".yml", ".yaml", ".py", ".sha256"}
-ALLOWED_EXTENSIONLESS = {"LICENSE", "VERSION", ".gitignore"}
+ALLOWED_EXTENSIONLESS = {"LICENSE", "VERSION", ".gitignore", ".gitattributes"}
 VALIDATOR_EXEMPT_FILES = {"scripts/validate_repo.py"}
 
 SECRET_PATTERNS = {
@@ -149,8 +149,8 @@ def check_manifest(root: Path, files: list[Path]) -> CheckResult:
     expected_url = "https://github.com/Bridge-Node-7/ai-cyber-assurance"
     if data.get("target_url") != expected_url:
         details.append("Manifest target_url is not the canonical repository URL.")
-    if data.get("version") != "v0.2.0":
-        details.append("Manifest version is not v0.2.0.")
+    if data.get("version") != "v0.2.1":
+        details.append("Manifest version is not v0.2.1.")
 
     return CheckResult(
         "manifest",
@@ -581,7 +581,11 @@ def generate_hashes(root: Path) -> None:
             continue
         digest = hashlib.sha256((root / rel).read_bytes()).hexdigest()
         lines.append(f"{digest}  {rel.as_posix()}")
-    (root / "MANIFEST.sha256").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (root / "MANIFEST.sha256").write_text(
+        "\n".join(lines) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
 
 def main() -> int:
@@ -599,7 +603,7 @@ def main() -> int:
     passed = all(result.passed for result in results)
     report = {
         "repository": "ai-cyber-assurance",
-        "version": "v0.2.0",
+        "version": "v0.2.1",
         "status": "PASS" if passed else "FAIL",
         "checks": [asdict(result) for result in results],
     }
