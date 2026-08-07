@@ -77,7 +77,13 @@ A pull request should include:
 - Known limitations
 - Screenshots only when they contain no sensitive information
 
-Contributors should use focused changes and preserve the repository's Quick Review and Full Assurance Lifecycle paths.
+Contributors should use focused changes and preserve:
+
+- The `START_HERE.md` navigation path
+- The `AGENTS.md` evidence classes and authority boundaries
+- The Review Package Index applicability and status values
+- The distinction between module assessment, assurance recommendation, and final assurance decision
+- The repository's Quick Review and Full Assurance Lifecycle paths
 
 ## Repository Integrity Workflow
 
@@ -85,11 +91,13 @@ The repository uses both `REPO_MANIFEST.json` and `MANIFEST.sha256` to detect un
 
 ### Editing an Existing Controlled File
 
-Regenerate the hash manifest, then run the full validator:
+Run the regression suite, regenerate the hash manifest, then run the full validator:
 
 ```bash
+python -m unittest discover -s tests -p "test_*.py"
 python scripts/validate_repo.py --root . --generate-hashes
 python scripts/validate_repo.py --root .
+sha256sum -c MANIFEST.sha256
 ```
 
 ### Adding, Renaming, or Removing a Controlled File
@@ -100,8 +108,10 @@ python scripts/validate_repo.py --root .
 4. Run the full validator.
 
 ```bash
+python -m unittest discover -s tests -p "test_*.py"
 python scripts/validate_repo.py --root . --generate-hashes
 python scripts/validate_repo.py --root .
+sha256sum -c MANIFEST.sha256
 ```
 
 `--generate-hashes` updates `MANIFEST.sha256` only. It does not update `REPO_MANIFEST.json`. Do not hand-edit individual hash lines. Do not commit generated validation reports. A change is not ready for review until manifest parity, hashes, links, safety checks, and all configured validator checks pass.
