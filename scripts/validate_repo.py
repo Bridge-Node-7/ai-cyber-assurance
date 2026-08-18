@@ -431,10 +431,10 @@ def check_required_content(root: Path) -> CheckResult:
             "Next test date",
         ],
         "RELEASE_REVIEW.md": [
-            "Internal usability walkthroughs",
+            "Repository validation",
             "GitHub Actions",
-            "Private vulnerability reporting",
-            "Human release approver",
+            "Security reports",
+            "Limitations",
         ],
     }
     findings: list[str] = []
