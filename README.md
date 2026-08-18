@@ -9,7 +9,7 @@
 - **AI may help with:** organizing, drafting, mapping, questioning, summarizing, and checking.
 - **Humans remain responsible for:** evidence access, fact validation, consequential actions, risk acceptance, and the final assurance decision.
 
-> **Start safely:** Create a private or access-controlled working package outside this public repository before adding real evidence. Do not place secrets, customer information, private infrastructure, vulnerabilities, regulated data, proprietary material, or sensitive operational evidence in this repository or a public fork.
+> **Start safely:** Create a private or access-controlled working package outside this public repository before adding real evidence. Publish only material deliberately approved for unrestricted release.
 
 AI assistants and coding agents should read [`AGENTS.md`](AGENTS.md) before applying or modifying this repository.
 
@@ -221,7 +221,7 @@ See [RELEASE_REVIEW.md](RELEASE_REVIEW.md) for release-specific validation scope
 
 ## Public-safety boundary
 
-Contributions must not include malware code, weaponization instructions, harmful deployment procedures, persistence or evasion guidance, credential-theft workflows, exploit-enabling operational details, secrets, private keys, customer data, proprietary material, or sensitive infrastructure information.
+Contributions must be appropriate for public defensive use. Do not post sensitive security details publicly.
 
 High-level defensive analysis may be included when necessary for prevention, detection, investigation, response, recovery, or assurance.
 

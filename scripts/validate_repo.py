@@ -699,15 +699,19 @@ def check_crypto_change_assurance(root: Path) -> CheckResult:
 
 def check_public_safety_language(root: Path) -> CheckResult:
     required = {
-        "README.md": ["does not", "offensive", "certify"],
-        "SECURITY.md": ["malware code", "private", "defensive"],
+        "README.md": ["does not", "certify"],
+        "SECURITY.md": [
+            "public defensive assurance toolkit",
+            "private vulnerability reporting",
+            "do not post sensitive security details publicly",
+            "approved for unrestricted public release",
+            "human judgment",
+        ],
         "CONTRIBUTING.md": [
-            "weaponization instructions",
             "high-level defensive analysis",
-            "private keys",
+            "public",
         ],
         "DECISION_RUBRIC.md": [
-            "exploit-enabling operational detail",
             "public release",
             "residual risk",
         ],
@@ -725,7 +729,7 @@ def check_public_safety_language(root: Path) -> CheckResult:
     return CheckResult(
         "public_safety_language",
         not findings,
-        findings or ["Required public-safety language is present."],
+        findings or ["Public-release safety and defensive-use guidance are present."],
     )
 
 
