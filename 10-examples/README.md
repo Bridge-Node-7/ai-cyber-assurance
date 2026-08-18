@@ -20,6 +20,12 @@ Demonstrates AI-assisted evidence comparison, an integrity discrepancy, correcti
 
 This is a concise partial profile. It is not a completed Full Assurance Lifecycle package.
 
+## Completed Specialist Review
+
+[**Synthetic Cryptographic Withdrawal**](synthetic-cryptographic-withdrawal/)
+
+Demonstrates a fictional cryptographic withdrawal review with an evidence gate, dependency map, state-mobility classification, fail-closed Unknown handling, corrective action, substitution readiness, Time to Safe Substitution, and a bounded module assessment.
+
 ## How to use the examples
 
 - Follow the structure, not the fictional conclusions.

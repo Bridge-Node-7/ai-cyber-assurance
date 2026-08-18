@@ -89,32 +89,22 @@ Contributors should use focused changes and preserve:
 
 The repository uses both `REPO_MANIFEST.json` and `MANIFEST.sha256` to detect uncontrolled tree changes. Complete the applicable steps before opening a pull request.
 
-### Editing an Existing Controlled File
+### Controlled Change Sequence
 
-Run the regression suite, regenerate the hash manifest, then run the full validator:
-
-```bash
-python -m unittest discover -s tests -p "test_*.py"
-python scripts/validate_repo.py --root . --generate-hashes
-python scripts/validate_repo.py --root .
-sha256sum -c MANIFEST.sha256
-```
-
-### Adding, Renaming, or Removing a Controlled File
-
-1. Update the sorted `files` array in `REPO_MANIFEST.json`.
-2. Update `file_count` so it equals the number of controlled files.
-3. Regenerate `MANIFEST.sha256`.
-4. Run the full validator.
+Use the same deterministic sequence for edits, additions, renames, and removals:
 
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
-python scripts/validate_repo.py --root . --generate-hashes
+python scripts/refresh_release_metadata.py --root . --write
+python scripts/refresh_release_metadata.py --root . --check
 python scripts/validate_repo.py --root .
 sha256sum -c MANIFEST.sha256
+git diff --check
 ```
 
-`--generate-hashes` updates `MANIFEST.sha256` only. It does not update `REPO_MANIFEST.json`. Do not hand-edit individual hash lines. Do not commit generated validation reports. A change is not ready for review until manifest parity, hashes, links, safety checks, and all configured validator checks pass.
+`--write` refreshes only deterministic release metadata: the version derived from `VERSION`, controlled-file inventory, file count, and SHA-256 manifest. Human-reviewed release title, status, maturity statements, limitations, and decisions remain explicit review inputs.
+
+Do not hand-edit individual checksum lines or commit generated validation reports. A change is not ready for review until metadata parity, hashes, links, safety checks, regression tests, and all configured validator checks pass.
 
 ## Changes Requiring Extra Review
 

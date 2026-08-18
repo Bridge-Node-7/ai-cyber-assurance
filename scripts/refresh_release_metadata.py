@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+"""Refresh or verify deterministic AI Cyber Assurance release metadata."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+from validate_repo import check_hashes, generate_hashes, read_version, release_files
+
+
+def load_manifest(root: Path) -> dict[str, object]:
+    path = root / "REPO_MANIFEST.json"
+    if not path.exists():
+        raise ValueError("REPO_MANIFEST.json is missing.")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError("REPO_MANIFEST.json must contain a JSON object.")
+    return data
+
+
+def expected_fields(root: Path) -> dict[str, object]:
+    files = [rel.as_posix() for rel in release_files(root)]
+    return {
+        "version": f"v{read_version(root)}",
+        "file_count": len(files),
+        "files": files,
+    }
+
+
+def check_metadata(root: Path) -> list[str]:
+    findings: list[str] = []
+    try:
+        manifest = load_manifest(root)
+        expected = expected_fields(root)
+    except (ValueError, json.JSONDecodeError, OSError) as exc:
+        return [str(exc)]
+
+    for key, value in expected.items():
+        if manifest.get(key) != value:
+            findings.append(f"REPO_MANIFEST.json field {key!r} is out of date.")
+
+    hash_result = check_hashes(root, release_files(root))
+    if not hash_result.passed:
+        findings.extend(hash_result.details)
+
+    return findings
+
+
+def write_metadata(root: Path) -> None:
+    manifest = load_manifest(root)
+    manifest.update(expected_fields(root))
+    (root / "REPO_MANIFEST.json").write_text(
+        json.dumps(manifest, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    generate_hashes(root)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=Path("."))
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--write", action="store_true")
+    args = parser.parse_args()
+
+    root = args.root.resolve()
+
+    if args.write:
+        write_metadata(root)
+
+    findings = check_metadata(root)
+    if findings:
+        print("FAIL - release metadata")
+        for finding in findings:
+            print(f"  - {finding}")
+        return 1
+
+    print("PASS - release metadata")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - main
-      - "release/**"
   pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   validate:
@@ -35,6 +38,10 @@ jobs:
       - name: Run validator regression tests
         shell: bash
         run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Check deterministic release metadata
+        shell: bash
+        run: python scripts/refresh_release_metadata.py --root . --check
 
       - name: Validate release package
         shell: bash

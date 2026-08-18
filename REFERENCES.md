@@ -39,6 +39,23 @@ Publication status should be rechecked before each major release.
 - Source: https://csrc.nist.gov/pubs/sp/1308/final
 - Relevance: Connecting cybersecurity outcomes to enterprise risk decisions.
 
+## Cryptographic Agility and Post-Quantum Migration
+
+### NIST CSWP 39upd1
+
+- *Considerations for Achieving Crypto Agility: Strategies and Practices*
+- Status: Final
+- Published: December 2025; updated June 2026
+- Source: https://csrc.nist.gov/pubs/cswp/39/upd1/considerations-for-achieving-crypto-agility/final
+- Relevance: Cryptographic agility, transition planning, governance, inventory, testing, and operational change.
+
+### NIST NCCoE Migration to Post-Quantum Cryptography
+
+- Project: *Migration to Post-Quantum Cryptography*
+- Status: Active NCCoE project
+- Source: https://www.nccoe.nist.gov/applied-cryptography/migration-to-pqc
+- Relevance: Cryptographic discovery, migration planning, interoperability, and controlled nonproduction transition testing.
+
 ## Identity and Zero Trust
 
 ### NIST SP 800-207

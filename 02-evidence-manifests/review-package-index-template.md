@@ -58,6 +58,7 @@ Applicability and status are separate. Document the reason for every **Not Appli
 | Secure-by-Design Review | Conditional | Not Started | | | |
 | Software and AI Supply Chain Readiness | Conditional | Not Started | | | |
 | Cyber Survivability Review | Conditional | Not Started | | | |
+| Cryptographic Change Assurance | Conditional | Not Started | | | |
 | High-Impact System Readiness | Conditional | Not Started | | | |
 | Incident Review | Conditional | Not Started | | | |
 | Security Policy and Target | Conditional | Not Started | | | |
