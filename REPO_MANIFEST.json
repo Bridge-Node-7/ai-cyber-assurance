@@ -52,9 +52,10 @@
     "11": "Assurance lifecycle records",
     "12": "Cryptographic Change Assurance"
   },
-  "file_count": 53,
+  "file_count": 54,
   "files": [
     ".gitattributes",
+    ".github/dependabot.yml",
     ".github/workflows/validate.yml",
     ".gitignore",
     "01-ai-agent-security/ai-agent-security-checklist.md",
