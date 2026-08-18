@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.3.0] - 2026-08-17
+
+### Added
+
+- Cryptographic Change Assurance as a bounded specialist review for cryptographic replacement, withdrawal, and revalidation.
+- A cryptographic evidence gate with explicit progression from Quarantined through Actionable.
+- Dependency, state-mobility, blast-radius, substitution-readiness, and Time to Safe Substitution review.
+- A bounded withdrawal-exercise template and Cryptographic Change Decision Pack.
+- A completed synthetic cryptographic-withdrawal example.
+- Deterministic release-metadata refresh and drift checking.
+
+### Improved
+
+- Added cryptographic-change routing to the repository onboarding and assurance lifecycle.
+- Extended validation and regression coverage for the new specialist module.
+- Added current public references for cryptographic agility and post-quantum migration.
+
+### Limitations
+
+- This release does not implement cryptography, authorize live changes, establish certification or compliance, or prove that a real system can complete a cryptographic transition.
+
 ## [0.2.2] - 2026-08-06
 
 ### Added

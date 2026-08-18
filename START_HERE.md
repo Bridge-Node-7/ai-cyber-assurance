@@ -42,6 +42,10 @@ Minimum path:
 
 Use the [Full Assurance Lifecycle](ASSURANCE_LIFECYCLE.md) when the system is high-impact, operational, multi-party, dependent on external services, able to change external state, or expected to support consequential decisions.
 
+### Cryptographic Change Assurance
+
+Use [Cryptographic Change Assurance](12-cryptographic-change-assurance/README.md) when approved cryptography may need to be replaced, withdrawn, or revalidated. Keep the change trigger, affected dependencies, persistent state, Unknowns, substitution evidence, verification, and final human authority explicit.
+
 ## 2. Create the Private Package
 
 1. Create a private or access-controlled folder outside this repository.

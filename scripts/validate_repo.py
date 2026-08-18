@@ -593,6 +593,110 @@ def check_example_traceability(root: Path) -> CheckResult:
     )
 
 
+def check_crypto_change_assurance(root: Path) -> CheckResult:
+    requirements: dict[str, list[str]] = {
+        "02-evidence-manifests/review-package-index-template.md": [
+            "Cryptographic Change Assurance",
+        ],
+        "12-cryptographic-change-assurance/README.md": [
+            "Artifact type:** NAVIGATOR",
+            "Cryptographic Change Assurance",
+            "Time to Safe Substitution",
+            "No aggregate blast-radius score",
+            "does not authorize",
+        ],
+        "12-cryptographic-change-assurance/cryptographic-change-review.md": [
+            "Artifact type:** TEMPLATE",
+            "Completion status:** Blank for reuse",
+            "SM-0",
+            "SM-1",
+            "SM-2",
+            "SM-3",
+            "SM-4",
+            "No aggregate blast-radius score",
+            "Time to Safe Substitution",
+            "Green is unavailable",
+            "final assurance decision",
+        ],
+        "12-cryptographic-change-assurance/cryptographic-evidence-gate.md": [
+            "Artifact type:** TEMPLATE",
+            "Completion status:** Blank for reuse",
+            "QUARANTINED",
+            "REPRODUCED",
+            "CORROBORATED",
+            "IMPACT-MAPPED",
+            "HUMAN-AUTHORIZED",
+            "ACTIONABLE",
+            "AI-generated conclusion alone cannot advance",
+        ],
+        "12-cryptographic-change-assurance/withdrawal-exercise.md": [
+            "Artifact type:** TEMPLATE",
+            "Completion status:** Blank for reuse",
+            "tabletop",
+            "nonproduction",
+            "persistent state",
+            "no silent fallback",
+            "Time to Safe Substitution",
+            "does not authorize production",
+        ],
+        "12-cryptographic-change-assurance/cryptographic-change-decision-pack.md": [
+            "Artifact type:** TEMPLATE",
+            "Completion status:** Blank for reuse",
+            "Cryptographic Change Decision Pack",
+            "More Evidence Required",
+            "final assurance decision",
+            "Do not claim certification",
+        ],
+        "10-examples/synthetic-cryptographic-withdrawal/README.md": [
+            "Artifact type:** COMPLETED SYNTHETIC EXAMPLE",
+            "Operational authority:** None",
+            "synthetic",
+            "fictional",
+            "SYN-CR-E-001",
+            "SYN-ALG-A",
+            "SYN-ALG-B",
+            "More Evidence Required",
+            "Corrective Action",
+            "SM-4",
+            "No aggregate blast-radius score",
+            "TSS",
+            "Amber",
+        ],
+    }
+    findings: list[str] = []
+
+    for rel, phrases in requirements.items():
+        path = root / rel
+        if not path.exists():
+            findings.append(f"Missing Cryptographic Change Assurance file: {rel}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        lower = text.lower()
+        for phrase in phrases:
+            if phrase.lower() not in lower:
+                findings.append(f"{rel}: missing required phrase {phrase!r}")
+
+    gate_path = root / "12-cryptographic-change-assurance/cryptographic-evidence-gate.md"
+    if gate_path.exists():
+        gate_text = gate_path.read_text(encoding="utf-8")
+        states = [
+            "QUARANTINED",
+            "REPRODUCED",
+            "CORROBORATED",
+            "IMPACT-MAPPED",
+            "HUMAN-AUTHORIZED",
+            "ACTIONABLE",
+        ]
+        positions = [gate_text.find(state) for state in states]
+        if any(position < 0 for position in positions) or positions != sorted(positions):
+            findings.append("Cryptographic evidence gate states are missing or out of order.")
+
+    return CheckResult(
+        "cryptographic_change_assurance",
+        not findings,
+        findings or ["Cryptographic Change Assurance structure and invariants are present."],
+    )
+
 def check_public_safety_language(root: Path) -> CheckResult:
     required = {
         "README.md": ["does not", "offensive", "certify"],
@@ -643,6 +747,10 @@ def check_workflow_safety(root: Path) -> CheckResult:
         findings.append("Workflow must validate on Ubuntu and Windows.")
     if "sha256sum -c MANIFEST.sha256" not in text:
         findings.append("Workflow must run direct GNU checksum verification.")
+    if "python scripts/refresh_release_metadata.py" not in text or "--check" not in text:
+        findings.append("Workflow must check deterministic release metadata.")
+    if "cancel-in-progress: true" not in text or "github.workflow }}-${{ github.head_ref || github.ref_name" not in text:
+        findings.append("Workflow must cancel superseded validation for the same branch.")
     return CheckResult(
         "workflow_safety",
         not findings,
@@ -664,6 +772,7 @@ def run_checks(root: Path) -> list[CheckResult]:
         check_artifact_labels(root),
         check_required_content(root),
         check_onboarding_and_agent_guidance(root),
+        check_crypto_change_assurance(root),
         check_secrets_and_placeholders(root, files),
         check_personal_information(root, files),
         check_example_traceability(root),

@@ -129,6 +129,9 @@ Does it depend on third-party code, models, data, or services?
 Could loss, corruption, or interruption create material harm?
 → Use Cyber Survivability and Recovery Assurance.
 
+Does approved cryptography need to be replaced, withdrawn, or revalidated?
+→ Use Cryptographic Change Assurance.
+
 Is the system high-impact, multi-party, operational, or deeply integrated?
 → Use the Full Assurance Lifecycle.
 ```
@@ -163,6 +166,7 @@ These are relative effort bands, not measured completion-time promises.
 | [Secure by Design](05-secure-by-design/secure-by-design-product-review.md) | Review secure defaults and release design | Secure-by-design review |
 | [Software Supply Chain](06-software-supply-chain/sbom-readiness.md) | Review dependencies, provenance, models, and release integrity | Supply-chain readiness review |
 | [Cyber Survivability](07-cyber-survivability/cyber-survivability-review.md) | Review prevention, degradation, recovery, and adaptation | Survivability review |
+| [Cryptographic Change Assurance](12-cryptographic-change-assurance/README.md) | Review bounded cryptographic replacement, withdrawal, and revalidation | Cryptographic Change Decision Pack |
 | [High-Impact Systems](08-high-impact-systems/high-impact-system-readiness.md) | Organize deeper evidence for sensitive systems | High-impact readiness package |
 | [Incident Review](09-incident-review/incident-review-template.md) | Document incidents, near misses, response, and lessons | Incident review |
 | [Examples](10-examples/) | Learn from completed synthetic examples | Example review packages |
@@ -172,6 +176,7 @@ These are relative effort bands, not measured completion-time promises.
 
 - [Synthetic AI Workflow Cyber Review](10-examples/example-ai-workflow-cyber-review.md) demonstrates a completed Quick Review.
 - [Synthetic Supplier Assurance](10-examples/synthetic-supplier-assurance/) is a concise partial profile demonstrating AI-assisted evidence review, integrity checking, corrective action, and a human Amber decision. It is not a completed Full Assurance Lifecycle package.
+- [Synthetic Cryptographic Withdrawal](10-examples/synthetic-cryptographic-withdrawal/) demonstrates evidence gating, dependency mapping, persistent-state classification, fail-closed Unknown handling, substitution readiness, and a bounded withdrawal exercise.
 
 ## Framework alignment
 
@@ -179,6 +184,7 @@ The toolkit can support mapping and readiness work informed by:
 
 - NIST Cybersecurity Framework 2.0
 - NIST systems security engineering and cyber-resilience guidance
+- NIST cryptographic agility and post-quantum migration guidance
 - NIST Zero Trust Architecture
 - NIST incident-response guidance
 - NIST Secure Software Development Framework and AI profile
@@ -196,6 +202,7 @@ Run locally:
 
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
+python scripts/refresh_release_metadata.py --root . --check
 python scripts/validate_repo.py --root .
 sha256sum -c MANIFEST.sha256
 ```
