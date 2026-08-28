@@ -1,0 +1,375 @@
+{
+  "case_version": "0.1",
+  "case": {
+    "id": "CASE-AI-001",
+    "title": "Synthetic Supplier Research AI Agent",
+    "scope": "Fictional AI agent access to synthetic supplier-information records and associated authority controls.",
+    "decision_question": "May the synthetic AI agent continue operating with bounded supplier-information access after remediation and retest?",
+    "review_path": "Quick Review",
+    "public_synthetic": true,
+    "reviewed_at": "2026-08-28",
+    "expires_at": "2026-11-26",
+    "limitations": [
+      "All entities, systems, evidence, findings, and outcomes are fictional.",
+      "The case demonstrates structural assurance behavior rather than real-world control effectiveness."
+    ]
+  },
+  "identities": [
+    {
+      "id": "ID-AI-001",
+      "type": "AI agent",
+      "owner": "Fictional Security Owner",
+      "purpose": "Read and summarize synthetic supplier-information records.",
+      "permitted_actions": [
+        "read supplier-information records",
+        "generate summaries"
+      ],
+      "prohibited_actions": [
+        "modify supplier-information records",
+        "approve suppliers",
+        "publish externally"
+      ],
+      "credential_lifetime": "24 hours",
+      "revocation_mechanism": "Synthetic identity control plane",
+      "monitoring": "Synthetic audit log",
+      "status": "active"
+    },
+    {
+      "id": "ID-HUM-001",
+      "type": "human",
+      "owner": "Fictional Organization",
+      "purpose": "Accountable security decision owner.",
+      "status": "active"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLAIM-001",
+      "statement": "The AI agent's effective authority is bounded to its approved read-only purpose.",
+      "subject_refs": [
+        "ID-AI-001"
+      ],
+      "evidence_refs": [
+        "EVID-001",
+        "EVID-004",
+        "EVID-005"
+      ],
+      "finding_refs": [
+        "FIND-001",
+        "FIND-002",
+        "FIND-003"
+      ],
+      "control_refs": [
+        "CTRL-001",
+        "CTRL-002",
+        "CTRL-003"
+      ],
+      "status": "supported",
+      "confidence": "high",
+      "confidence_basis": "Observed configuration plus Tested post-remediation permission and logging behavior."
+    }
+  ],
+  "risks": [
+    {
+      "id": "RISK-001",
+      "statement": "Excessive or persistent AI-agent authority could enable unauthorized modification or access outside the approved purpose.",
+      "subject_refs": [
+        "ID-AI-001"
+      ],
+      "control_refs": [
+        "CTRL-001",
+        "CTRL-002",
+        "CTRL-003"
+      ],
+      "evidence_refs": [
+        "EVID-001",
+        "EVID-002",
+        "EVID-003"
+      ],
+      "status": "treated"
+    }
+  ],
+  "controls": [
+    {
+      "id": "CTRL-001",
+      "statement": "Least-privilege read-only access is enforced for the AI agent.",
+      "owner_identity_ref": "ID-HUM-001",
+      "status": "implemented"
+    },
+    {
+      "id": "CTRL-002",
+      "statement": "The AI-agent credential expires after a bounded lifetime and can be revoked.",
+      "owner_identity_ref": "ID-HUM-001",
+      "status": "implemented"
+    },
+    {
+      "id": "CTRL-003",
+      "statement": "Relevant agent actions are recorded in synthetic audit logging.",
+      "owner_identity_ref": "ID-HUM-001",
+      "status": "implemented"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVID-001",
+      "evidence_class": "Observed",
+      "source": "Synthetic authorization-policy record",
+      "owner": "Fictional Security Owner",
+      "collected_at": "2026-08-28",
+      "limitations": [
+        "Synthetic configuration record; no real system observed."
+      ],
+      "confidence": "high",
+      "confidence_basis": "Directly represented configuration in the fictional case."
+    },
+    {
+      "id": "EVID-002",
+      "evidence_class": "Reported",
+      "source": "Synthetic owner statement",
+      "owner": "Fictional Security Owner",
+      "collected_at": "2026-08-28",
+      "limitations": [
+        "Reported information only; used to establish intended purpose."
+      ],
+      "confidence": "medium",
+      "confidence_basis": "Identified fictional owner statement, not an executed test."
+    },
+    {
+      "id": "EVID-003",
+      "evidence_class": "Unknown",
+      "source": "Synthetic pre-remediation logging gap",
+      "owner": "Fictional Security Owner",
+      "collected_at": "2026-08-28",
+      "limitations": [
+        "Pre-remediation logging completeness could not be established."
+      ],
+      "confidence": "low",
+      "confidence_basis": "The case intentionally preserves missing pre-remediation evidence as Unknown."
+    },
+    {
+      "id": "EVID-004",
+      "evidence_class": "Tested",
+      "source": "Synthetic permission-boundary retest",
+      "owner": "Fictional Independent Tester",
+      "collected_at": "2026-08-28",
+      "limitations": [
+        "Synthetic test result; no production environment exercised."
+      ],
+      "confidence": "high",
+      "confidence_basis": "Documented fictional test demonstrates allowed read and denied write behavior."
+    },
+    {
+      "id": "EVID-005",
+      "evidence_class": "Tested",
+      "source": "Synthetic credential-expiration and audit-log retest",
+      "owner": "Fictional Independent Tester",
+      "collected_at": "2026-08-28",
+      "limitations": [
+        "Synthetic test result; no production environment exercised."
+      ],
+      "confidence": "high",
+      "confidence_basis": "Documented fictional test demonstrates bounded credential lifetime, revocation, and audit-event generation."
+    }
+  ],
+  "findings": [
+    {
+      "id": "FIND-001",
+      "statement": "The initial synthetic agent permission set included write authority beyond the documented read-only purpose.",
+      "owner": "Fictional Security Owner",
+      "subject_refs": [
+        "ID-AI-001"
+      ],
+      "evidence_refs": [
+        "EVID-001",
+        "EVID-002"
+      ],
+      "control_refs": [
+        "CTRL-001"
+      ],
+      "corrective_action_refs": [
+        "CA-001"
+      ],
+      "retest_ref": "RETEST-001",
+      "closure_evidence_refs": [
+        "EVID-004"
+      ],
+      "status": "closed"
+    },
+    {
+      "id": "FIND-002",
+      "statement": "The initial synthetic agent credential had no bounded expiration.",
+      "owner": "Fictional Security Owner",
+      "subject_refs": [
+        "ID-AI-001"
+      ],
+      "evidence_refs": [
+        "EVID-002"
+      ],
+      "control_refs": [
+        "CTRL-002"
+      ],
+      "corrective_action_refs": [
+        "CA-002"
+      ],
+      "retest_ref": "RETEST-002",
+      "closure_evidence_refs": [
+        "EVID-005"
+      ],
+      "status": "closed"
+    },
+    {
+      "id": "FIND-003",
+      "statement": "Pre-remediation logging completeness was Unknown.",
+      "owner": "Fictional Security Owner",
+      "subject_refs": [
+        "ID-AI-001"
+      ],
+      "evidence_refs": [
+        "EVID-003"
+      ],
+      "control_refs": [
+        "CTRL-003"
+      ],
+      "corrective_action_refs": [
+        "CA-003"
+      ],
+      "retest_ref": "RETEST-003",
+      "closure_evidence_refs": [
+        "EVID-005"
+      ],
+      "status": "closed"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-001",
+      "question": "May the synthetic AI agent continue operating after bounded remediation and retest?",
+      "consequential": true,
+      "authority": {
+        "type": "human",
+        "name": "Fictional Security Owner",
+        "role": "Authorized Human Decision Owner"
+      },
+      "claim_refs": [
+        "CLAIM-001"
+      ],
+      "evidence_refs": [
+        "EVID-001",
+        "EVID-002",
+        "EVID-003",
+        "EVID-004",
+        "EVID-005"
+      ],
+      "finding_refs": [
+        "FIND-001",
+        "FIND-002",
+        "FIND-003"
+      ],
+      "corrective_action_refs": [
+        "CA-001",
+        "CA-002",
+        "CA-003"
+      ],
+      "missing_evidence": [
+        "No production evidence exists because the example is entirely synthetic."
+      ],
+      "options": [
+        "Do not proceed",
+        "Proceed with original authority",
+        "Proceed with bounded authority after successful retest"
+      ],
+      "disposition": "Proceed with bounded authority after successful retest",
+      "conditions": [
+        "Read-only scope",
+        "Bounded credential lifetime",
+        "Revocation path",
+        "Audit logging",
+        "Successful retest"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Synthetic Observed and Tested records support the bounded fictional disposition while limitations remain explicit.",
+      "reversal_trigger": "Unauthorized action, material scope change, failed future retest, or loss of required logging."
+    }
+  ],
+  "corrective_actions": [
+    {
+      "id": "CA-001",
+      "finding_ref": "FIND-001",
+      "decision_ref": "DEC-001",
+      "action": "Remove write authority and retain only read access required by the stated purpose.",
+      "owner": "Fictional Identity Administrator",
+      "status": "complete",
+      "evidence_refs": [
+        "EVID-004"
+      ]
+    },
+    {
+      "id": "CA-002",
+      "finding_ref": "FIND-002",
+      "decision_ref": "DEC-001",
+      "action": "Replace the persistent credential with a bounded-lifetime credential and preserve revocation capability.",
+      "owner": "Fictional Identity Administrator",
+      "status": "complete",
+      "evidence_refs": [
+        "EVID-005"
+      ]
+    },
+    {
+      "id": "CA-003",
+      "finding_ref": "FIND-003",
+      "decision_ref": "DEC-001",
+      "action": "Enable required synthetic audit events and verify their generation.",
+      "owner": "Fictional Security Engineer",
+      "status": "complete",
+      "evidence_refs": [
+        "EVID-005"
+      ]
+    }
+  ],
+  "retests": [
+    {
+      "id": "RETEST-001",
+      "finding_ref": "FIND-001",
+      "corrective_action_ref": "CA-001",
+      "tester": "Fictional Independent Tester",
+      "method": "Attempt an allowed read action and a denied write action in the synthetic fixture.",
+      "result": "pass",
+      "evidence_refs": [
+        "EVID-004"
+      ],
+      "tested_at": "2026-08-28"
+    },
+    {
+      "id": "RETEST-002",
+      "finding_ref": "FIND-002",
+      "corrective_action_ref": "CA-002",
+      "tester": "Fictional Independent Tester",
+      "method": "Verify bounded credential lifetime, revocation behavior, and required audit-event generation in the synthetic fixture.",
+      "result": "pass",
+      "evidence_refs": [
+        "EVID-005"
+      ],
+      "tested_at": "2026-08-28"
+    },
+    {
+      "id": "RETEST-003",
+      "finding_ref": "FIND-003",
+      "corrective_action_ref": "CA-003",
+      "tester": "Fictional Independent Tester",
+      "method": "Verify required synthetic audit events are generated for the bounded agent actions.",
+      "result": "pass",
+      "evidence_refs": [
+        "EVID-005"
+      ],
+      "tested_at": "2026-08-28"
+    }
+  ],
+  "review_history": [
+    {
+      "id": "REV-001",
+      "date": "2026-08-28",
+      "actor": "Fictional Review Team",
+      "summary": "Synthetic case completed after remediation and successful retest."
+    }
+  ]
+}

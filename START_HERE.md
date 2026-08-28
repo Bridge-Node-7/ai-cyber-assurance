@@ -46,6 +46,12 @@ Use the [Full Assurance Lifecycle](ASSURANCE_LIFECYCLE.md) when the system is hi
 
 Use [Cryptographic Change Assurance](12-cryptographic-change-assurance/README.md) when approved cryptography may need to be replaced, withdrawn, or revalidated. Keep the change trigger, affected dependencies, persistent state, Unknowns, substitution evidence, verification, and final human authority explicit.
 
+### Optional Structured Assurance Case
+
+After selecting Quick Review or Full Assurance Lifecycle, use [Assurance Intelligence](13-assurance-intelligence/README.md) when one machine-readable evidence-to-decision record would reduce reconciliation or reporting drift.
+
+The Assurance Case is a representation of the bounded review. It does not create a separate decision hierarchy.
+
 ## 2. Create the Private Package
 
 1. Create a private or access-controlled folder outside this repository.
@@ -53,6 +59,8 @@ Use [Cryptographic Change Assurance](12-cryptographic-change-assurance/README.md
 3. Assign a package ID.
 4. Record the system, scope, owners, decision authority, review date, expiration, and sensitivity.
 5. Reference sensitive evidence by controlled location or evidence ID. Do not copy sensitive evidence into the public toolkit.
+
+For a structured case, the private package may include `assurance-case.json` and generated views. Keep the real underlying evidence in the approved controlled location.
 
 ## 3. Select Applicable Records
 
@@ -76,11 +84,19 @@ Document the reason for every **Not Applicable** decision.
 
 Record facts, sources, owners, dates, integrity methods, limitations, and evidence gaps.
 
-When AI assists, use the evidence classes and operating rules in [AGENTS.md](AGENTS.md). AI must not silently convert reported or inferred information into observed or tested evidence.
+When AI assists, use the evidence classes and operating rules in [AGENTS.md](AGENTS.md):
+
+- Observed
+- Tested
+- Reported
+- Inferred
+- Unknown
+
+AI must not silently convert reported or inferred information into observed or tested evidence.
 
 ## 5. Use AI Safely
 
-AI may organize, draft, map, question, summarize, and check.
+AI may organize, draft, map, question, summarize, check, and validate structural relationships.
 
 Authorized humans remain responsible for:
 
@@ -100,6 +116,8 @@ Authorized humans remain responsible for:
 
 Only the final assurance decision grants the disposition recorded for the stated scope and period.
 
+Generated Decision Receipts, Assurance Passports, and Executive Summaries communicate the decision; they do not create authority independently.
+
 ## 7. Validate
 
 Run the public repository validator from the repository root:
@@ -108,11 +126,27 @@ Run the public repository validator from the repository root:
 python scripts/validate_repo.py --root .
 ```
 
-The validator checks the controlled public toolkit, including repository structure, manifests, hashes, links, required guidance, safety language, and workflow controls.
+For a structured Assurance Case:
 
-The validator does not prove that a private completed review is factually correct, that evidence is sufficient, that a control works in a real environment, or that a system is authorized.
+```bash
+python scripts/validate_assurance_case.py path/to/assurance-case.json
+```
 
-## 8. Complete and Preserve the Review
+The repository validator checks the controlled public toolkit. The Assurance Case validator checks structural consistency, evidence-class discipline, reference integrity, required human authority fields, and closure preconditions.
+
+The validator does not prove that a private completed review is factually correct, that evidence is authentic or sufficient, that a control works in a real environment, or that a system is authorized. The Assurance Case validator has the same factual boundary.
+
+## 8. Generate Consistent Views
+
+After a case validates:
+
+```bash
+python scripts/render_assurance_outputs.py path/to/assurance-case.json
+```
+
+The renderer produces a Decision Receipt, Assurance Passport, and Executive Summary from the same canonical case.
+
+## 9. Complete and Preserve the Review
 
 A package is complete only when:
 
@@ -121,5 +155,6 @@ A package is complete only when:
 - Blocking gaps are resolved or explicitly accepted by an authorized decision owner.
 - Corrective actions and retest status are recorded where applicable.
 - The final assurance decision is recorded with scope, conditions, owner, date, expiration, and limitations.
+- If an Assurance Case is used, it passes structural validation and its generated views remain consistent with the canonical record.
 
 Preserve the completed package and supporting evidence in the approved private location.

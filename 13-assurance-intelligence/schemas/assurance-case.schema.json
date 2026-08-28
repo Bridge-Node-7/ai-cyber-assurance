@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Bridge-Node-7/ai-cyber-assurance/13-assurance-intelligence/schemas/assurance-case.schema.json",
+  "title": "AI Cyber Assurance Case",
+  "description": "Machine-readable envelope for a bounded assurance review. Structural validity does not establish factual truth, control effectiveness, certification, compliance, or operational authorization.",
+  "type": "object",
+  "required": [
+    "case_version",
+    "case",
+    "identities",
+    "claims",
+    "risks",
+    "controls",
+    "evidence",
+    "findings",
+    "decisions",
+    "corrective_actions",
+    "retests",
+    "review_history"
+  ],
+  "properties": {
+    "case_version": {
+      "const": "0.1"
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "scope",
+        "decision_question",
+        "review_path",
+        "public_synthetic",
+        "reviewed_at",
+        "expires_at"
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "scope": {"type": "string", "minLength": 1},
+        "decision_question": {"type": "string", "minLength": 1},
+        "review_path": {"enum": ["Quick Review", "Full Assurance Lifecycle"]},
+        "public_synthetic": {"type": "boolean"},
+        "reviewed_at": {"type": "string", "format": "date"},
+        "expires_at": {"type": "string", "format": "date"},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "identities": {"type": "array", "items": {"type": "object"}},
+    "claims": {"type": "array", "items": {"type": "object"}},
+    "risks": {"type": "array", "items": {"type": "object"}},
+    "controls": {"type": "array", "items": {"type": "object"}},
+    "evidence": {"type": "array", "items": {"type": "object"}},
+    "findings": {"type": "array", "items": {"type": "object"}},
+    "decisions": {"type": "array", "items": {"type": "object"}},
+    "corrective_actions": {"type": "array", "items": {"type": "object"}},
+    "retests": {"type": "array", "items": {"type": "object"}},
+    "review_history": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": true
+}
