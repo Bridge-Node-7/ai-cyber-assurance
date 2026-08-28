@@ -11,11 +11,13 @@
 - A completed synthetic AI-agent assurance case demonstrating excessive initial authority, human decision ownership, corrective action, retest, and structural closure.
 - A minimal partner starter kit with explicit public/private evidence boundaries.
 - Regression tests covering valid cases, duplicate IDs, dangling references, invalid evidence classes, missing human authority, invalid closure, Unknown evidence misuse, and output determinism.
+- Validated-main GitHub Release publication after required hosted checks succeed.
 
 ### Improved
 
 - Added Assurance Intelligence routing to README and Start Here without replacing Quick Review or Full Assurance Lifecycle.
 - Added a structured-case example to the example index.
+- Strengthened partner-pilot entry, outputs, completion criteria, and real-use boundaries.
 - Refreshed selected 2026 cybersecurity supply-chain references.
 
 ### Limitations
