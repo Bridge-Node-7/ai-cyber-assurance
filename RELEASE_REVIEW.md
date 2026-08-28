@@ -13,7 +13,7 @@ The release:
 - adds partner guidance that keeps real evidence in private or access-controlled workspaces;
 - preserves the existing Quick Review and Full Assurance Lifecycle paths;
 - preserves the evidence classes Observed, Tested, Reported, Inferred, and Unknown;
-- extends the existing regression suite without requiring a new CI architecture;
+- extends the existing regression suite without requiring a separate validation architecture;
 - updates selected 2026 cybersecurity supply-chain references.
 
 ## Validation boundary
@@ -54,9 +54,11 @@ Real partner architecture, evidence, telemetry, supplier information, credential
 
 Security concerns should use the private reporting path described in [`SECURITY.md`](SECURITY.md).
 
-## Release condition
+## Release result
 
-The v0.4.0 release candidate is not complete until the pull-request diff receives human review and required hosted validation passes.
+v0.4.0 was merged to protected `main` after human authorization and successful required pull-request validation on Ubuntu and Windows. Post-merge validation on `main` also passed.
+
+Versioned GitHub Release publication is gated behind successful validation on protected `main`. Publication is idempotent: if the current `VERSION` release already exists, the release job makes no change.
 
 ## Limitations
 
