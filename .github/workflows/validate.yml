@@ -49,7 +49,9 @@ jobs:
         shell: bash
         run: |
           command -v sha256sum
-          python scripts/validate_repo.py             --root .             --json-output validation-report.json
+          python scripts/validate_repo.py \
+            --root . \
+            --json-output validation-report.json
           sha256sum -c MANIFEST.sha256
           git diff --check
 
@@ -61,3 +63,74 @@ jobs:
           path: validation-report.json
           if-no-files-found: error
           retention-days: 30
+
+  release:
+    name: Publish validated release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out validated main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Publish versioned release if absent
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          command -v gh
+          command -v sha256sum
+
+          VERSION="$(tr -d '\r\n' < VERSION)"
+          TAG="v${VERSION}"
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; no publication required."
+            exit 0
+          fi
+
+          NOTES="release-notes.md"
+          python - "$VERSION" "$NOTES" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          version, output = sys.argv[1], Path(sys.argv[2])
+          text = Path("CHANGELOG.md").read_text(encoding="utf-8")
+          pattern = re.compile(
+              rf"^## \[{re.escape(version)}\].*?\n(?P<body>.*?)(?=^## \[|\Z)",
+              re.MULTILINE | re.DOTALL,
+          )
+          match = pattern.search(text)
+          if not match:
+              raise SystemExit(f"Unable to find changelog section for {version}.")
+          body = match.group("body").strip()
+          output.write_text(
+              f"# AI Cyber Assurance v{version}\n\n{body}\n",
+              encoding="utf-8",
+              newline="\n",
+          )
+          PY
+
+          ARCHIVE="ai-cyber-assurance-${TAG}.zip"
+          git archive \
+            --format=zip \
+            --prefix="ai-cyber-assurance-${TAG}/" \
+            HEAD \
+            -o "$ARCHIVE"
+          sha256sum "$ARCHIVE" > "${ARCHIVE}.sha256"
+
+          gh release create "$TAG" \
+            "$ARCHIVE" \
+            "${ARCHIVE}.sha256" \
+            --target "$GITHUB_SHA" \
+            --title "AI Cyber Assurance ${TAG}" \
+            --notes-file "$NOTES"
