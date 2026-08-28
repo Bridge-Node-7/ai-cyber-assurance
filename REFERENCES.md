@@ -1,7 +1,6 @@
-
 # References
 
-Authoritative public references supporting the repository's assurance, engineering, AI, incident-response, Zero Trust, secure-development, and public-safety approach.
+Authoritative public references supporting the repository's assurance, engineering, AI, incident-response, Zero Trust, secure-development, supply-chain, and public-safety approach.
 
 Publication status should be rechecked before each major release.
 
@@ -38,6 +37,24 @@ Publication status should be rechecked before each major release.
 - Published: March 2026
 - Source: https://csrc.nist.gov/pubs/sp/1308/final
 - Relevance: Connecting cybersecurity outcomes to enterprise risk decisions.
+
+## Cybersecurity Supply Chain Risk Management
+
+### NIST SP 1326
+
+- *Cybersecurity Supply Chain Risk Management: Due Diligence Assessment Quick-Start Guide*
+- Status: Final
+- Published: July 2026
+- Source: https://csrc.nist.gov/pubs/sp/1326/final
+- Relevance: Supplier due diligence, provenance, resilience, foundational cybersecurity practices, supply-chain tiers, and foreign ownership, control, or influence considerations.
+
+### NIST SP 800-18 Rev. 2
+
+- *Developing Security, Privacy, and Cybersecurity Supply Chain Risk Management Plans for Systems*
+- Status: Final
+- Published: June 2026
+- Source: https://csrc.nist.gov/pubs/sp/800/18/r2/final
+- Relevance: System-level planning that integrates security, privacy, and cybersecurity supply-chain risk management.
 
 ## Cryptographic Agility and Post-Quantum Migration
 
@@ -119,6 +136,13 @@ Publication status should be rechecked before each major release.
 - Published: July 2024
 - Source: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
 - Relevance: Generative AI risk considerations and actions.
+
+### NIST Cyber AI Profile
+
+- Status: Emerging / draft profile work
+- Source: https://www.nist.gov/cybersecurity
+- Relevance: Track future NIST guidance for securing AI components, AI-enabled cyber defense, and AI-enabled attack considerations.
+- Use limitation: Do not treat draft or workshop material as controlling final doctrine.
 
 ## Secure by Design
 

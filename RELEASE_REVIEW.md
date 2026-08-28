@@ -1,29 +1,63 @@
-# Release Validation: AI Cyber Assurance v0.3.0
+# Release Validation: AI Cyber Assurance v0.4.0
 
-AI Cyber Assurance v0.3.0 adds a bounded Cryptographic Change Assurance specialist review while preserving the toolkit's defensive assurance boundaries.
+AI Cyber Assurance v0.4.0 adds a bounded Assurance Intelligence kernel while preserving the toolkit's defensive assurance boundaries and human decision authority.
 
 ## User-facing scope
 
 The release:
 
-- adds a reusable cryptographic-change review, evidence gate, withdrawal exercise, and Decision Pack;
-- adds one fully synthetic cryptographic-withdrawal example;
-- keeps Unknowns, persistent state, substitution evidence, and consequential authority explicit;
-- adds deterministic release-metadata refresh and focused validation coverage;
-- maintains Ubuntu and Windows GitHub Actions validation.
+- adds one canonical machine-readable Assurance Case representation;
+- adds a standard-library assurance-case validator for structural and relationship invariants;
+- adds deterministic rendering of a Decision Receipt, Assurance Passport, and Executive Summary from the same case;
+- adds one fully synthetic AI-agent assurance example with corrective action and successful retest;
+- adds partner guidance that keeps real evidence in private or access-controlled workspaces;
+- preserves the existing Quick Review and Full Assurance Lifecycle paths;
+- preserves the evidence classes Observed, Tested, Reported, Inferred, and Unknown;
+- extends the existing regression suite without requiring a new CI architecture;
+- updates selected 2026 cybersecurity supply-chain references.
 
-It does not add live-system integrations, cryptographic implementations, autonomous remediation, production key operations, offensive procedures, certification, or operational authorization.
+## Validation boundary
+
+Assurance Case validation checks structural consistency, reference integrity, evidence-class discipline, required authority fields, and closure preconditions.
+
+It does not establish:
+
+- factual truth or evidence authenticity;
+- evidence sufficiency;
+- real-world control effectiveness;
+- certification or compliance;
+- deployment or operational authorization;
+- independent validation of a real system.
 
 ## Repository validation
 
-Validation covers the regression suite, Cryptographic Change Assurance invariants, repository structure, deterministic metadata, manifest and checksum integrity, syntax, internal links, common secret and personal-information patterns, public-safety declarations, and hosted GitHub Actions.
+Release validation covers:
+
+- the regression suite;
+- assurance-case positive and negative tests;
+- deterministic rendering checks;
+- repository structure;
+- deterministic metadata;
+- manifest and checksum integrity;
+- internal links;
+- common secret and personal-information patterns;
+- public-safety declarations;
+- hosted Ubuntu and Windows GitHub Actions.
+
+## Public/private boundary
+
+The repository contains only reusable public methodology, validation logic, templates, and synthetic examples.
+
+Real partner architecture, evidence, telemetry, supplier information, credentials, vulnerabilities, regulated data, proprietary material, and decision records belong in private or access-controlled workspaces unless deliberately approved for unrestricted release.
 
 ## Security reports
 
 Security concerns should use the private reporting path described in [`SECURITY.md`](SECURITY.md).
 
+## Release condition
+
+The v0.4.0 release candidate is not complete until the pull-request diff receives human review and required hosted validation passes.
+
 ## Limitations
 
-Cryptographic Change Assurance supports bounded review and decision preparation; it does not implement cryptography or establish universal cryptographic safety. The synthetic example demonstrates repository behavior rather than real-world performance. Time to Safe Substitution is a defender-controlled review measure, not a prediction of adversary timing.
-
-Repository validation does not establish factual sufficiency of a private review, effectiveness of a real control, certification, compliance, deployment approval, or operational authorization.
+Assurance Intelligence supports bounded review consistency and decision communication. It is not a certification engine, autonomous decision maker, production authorization service, GRC replacement, SIEM, SOC platform, or proof that a real system is secure.

@@ -4,7 +4,7 @@
 > **Completion status:** Reference document  
 > **Operational authority:** None
 
-The examples are fully synthetic and fictional. They demonstrate how to use the repository without describing a real person, organization, system, supplier, customer, material, or security finding.
+The examples are fully synthetic and fictional. They demonstrate how to use the repository without describing a real person, organization, system, supplier, customer, material, credential, or security finding.
 
 ## Completed Quick Review
 
@@ -26,9 +26,16 @@ This is a concise partial profile. It is not a completed Full Assurance Lifecycl
 
 Demonstrates a fictional cryptographic withdrawal review with an evidence gate, dependency map, state-mobility classification, fail-closed Unknown handling, corrective action, substitution readiness, Time to Safe Substitution, and a bounded module assessment.
 
+## Completed Structured Assurance Case
+
+[**Synthetic AI Agent Assurance**](synthetic-ai-agent-assurance/)
+
+Demonstrates one canonical machine-readable Assurance Case for a fictional AI agent with excessive initial authority, bounded human decision authority, corrective action, successful retest, verified structural closure, and deterministic Decision Receipt, Assurance Passport, and Executive Summary views.
+
 ## How to use the examples
 
 - Follow the structure, not the fictional conclusions.
-- Replace every synthetic identifier with a controlled identifier appropriate to your review.
-- Do not copy a Green or Amber decision into another system without evaluating its actual evidence.
+- Replace every synthetic identifier with a controlled identifier appropriate to the private review.
+- Do not copy a Green, Amber, or bounded disposition into another system without evaluating its actual evidence.
 - Keep real sensitive information outside public repositories.
+- Treat generated views as communication artifacts derived from the canonical case, not separate sources of truth.

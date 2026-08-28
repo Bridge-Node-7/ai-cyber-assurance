@@ -5,8 +5,8 @@
 [Start here](START_HERE.md) to choose a review path, create a safe working package, and identify the records that apply.
 
 - **Use it when:** reviewing a workflow, pilot, release, supplier, incident, AI agent, or high-impact system.
-- **Use it with:** system owners, engineers, security reviewers, operators, governance teams, auditors, and authorized decision owners.
-- **AI may help with:** organizing, drafting, mapping, questioning, summarizing, and checking.
+- **Use it with:** system owners, engineers, security reviewers, operators, governance teams, auditors, founders, and authorized decision owners.
+- **AI may help with:** organizing, drafting, mapping, questioning, summarizing, checking, and validating structure.
 - **Humans remain responsible for:** evidence access, fact validation, consequential actions, risk acceptance, and the final assurance decision.
 
 > **Start safely:** Create a private or access-controlled working package outside this public repository before adding real evidence. Publish only material deliberately approved for unrestricted release.
@@ -15,7 +15,7 @@ AI assistants and coding agents should read [`AGENTS.md`](AGENTS.md) before appl
 
 ## What this is
 
-AI Cyber Assurance is a defensive documentation and workflow toolkit for builders, operators, security reviewers, governance teams, auditors, founders, and system owners.
+AI Cyber Assurance is a defensive documentation, workflow, and bounded assurance-intelligence toolkit for builders, operators, security reviewers, governance teams, auditors, founders, and system owners.
 
 It helps teams connect:
 
@@ -40,6 +40,23 @@ Mission
 
 The result is a traceable review package with named owners, bounded claims, visible evidence gaps, accountable decisions, and next actions.
 
+## Assurance Intelligence
+
+[`13-assurance-intelligence/`](13-assurance-intelligence/) adds an optional machine-readable layer for a bounded Assurance Case.
+
+One canonical case can be structurally validated and used to generate three consistent views:
+
+```text
+Assurance Case
+   ├── Decision Receipt
+   ├── Assurance Passport
+   └── Executive Summary
+```
+
+The case validator checks structure and relationships. It does **not** establish factual truth, evidence authenticity or sufficiency, real-world control effectiveness, certification, compliance, deployment approval, or operational authorization.
+
+See the [completed synthetic AI-agent assurance case](10-examples/synthetic-ai-agent-assurance/) for the end-to-end example.
+
 ## What this produces
 
 A completed review can include:
@@ -53,6 +70,7 @@ A completed review can include:
 - Recovery evidence
 - A bounded review decision
 - Corrective actions and retest status
+- Optionally, one machine-readable Assurance Case and generated communication views
 
 ## What this does not do
 
@@ -76,12 +94,13 @@ This is an orientation, not a completion-time estimate.
 5. Copy only the applicable records.
 6. Record evidence, gaps, owners, limitations, and required human decisions.
 7. Apply the [Decision Rubric](DECISION_RUBRIC.md) and complete the [Review Decision](02-evidence-manifests/review-decision-template.md).
+8. If useful, represent the bounded review as an [Assurance Case](13-assurance-intelligence/README.md) for machine consistency checking and generated views.
 
 ## Choose your path
 
 ### Quick Review
 
-Use this path for one workflow, product, pilot, or release:
+Use this path for one workflow, product, pilot, supplier decision, incident, or release:
 
 ```text
 Review Package Index
@@ -114,6 +133,23 @@ Use this path for high-impact, operational, multi-party, or deeply integrated sy
 9. Make an accountable human decision.
 10. Track corrective action and retest.
 
+### Structured Assurance Case
+
+Use the Assurance Case as an optional representation after the scope and review path are understood. It does not create a third decision hierarchy.
+
+```text
+Scope
+→ Claims
+→ Evidence
+→ Findings
+→ Human Decision
+→ Corrective Action
+→ Retest
+→ Generated Views
+```
+
+Start with [Assurance Intelligence](13-assurance-intelligence/README.md).
+
 ## Which artifacts apply?
 
 ```text
@@ -134,15 +170,19 @@ Does approved cryptography need to be replaced, withdrawn, or revalidated?
 
 Is the system high-impact, multi-party, operational, or deeply integrated?
 → Use the Full Assurance Lifecycle.
+
+Would one structured evidence-to-decision record reduce reconciliation or reporting drift?
+→ Use the Assurance Case after selecting the appropriate review path.
 ```
 
 ## Expected effort
 
 Effort depends on scope and evidence availability:
 
-- **Quick Review:** one bounded workflow, product change, pilot, or release.
+- **Quick Review:** one bounded workflow, product change, pilot, supplier decision, incident, or release.
 - **Specialist Module:** one control family or risk area.
 - **Full Assurance Lifecycle:** a multi-stakeholder review across the system lifecycle.
+- **Structured Assurance Case:** an optional machine-readable representation of a bounded review.
 
 These are relative effort bands, not measured completion-time promises.
 
@@ -150,10 +190,11 @@ These are relative effort bands, not measured completion-time promises.
 
 - **Judgment stays human.** AI may assist analysis, drafting, mapping, and evidence review. Accountable people retain authority over consequential decisions.
 - **Evidence leads.** A policy statement is not operating evidence. A configuration is not test evidence. An alert is not an incident determination.
+- **Evidence classes stay explicit.** Use Observed, Tested, Reported, Inferred, and Unknown without silently promoting weaker evidence.
 - **Boundaries are explicit.** Systems include people, identities, data, tools, suppliers, infrastructure, facilities, and dependencies.
 - **Controls are traceable.** Requirements connect to controls, evidence, validation, decisions, and corrective action.
 - **Recovery is engineered.** A backup, rollback path, or disable mechanism is not trusted until it is tested and reviewed.
-- **Claims remain bounded.** Templates support assurance work; they do not establish certification or operational effectiveness by themselves.
+- **Claims remain bounded.** Templates and validators support assurance work; they do not establish certification or operational effectiveness by themselves.
 
 ## Specialist modules
 
@@ -166,17 +207,19 @@ These are relative effort bands, not measured completion-time promises.
 | [Secure by Design](05-secure-by-design/secure-by-design-product-review.md) | Review secure defaults and release design | Secure-by-design review |
 | [Software Supply Chain](06-software-supply-chain/sbom-readiness.md) | Review dependencies, provenance, models, and release integrity | Supply-chain readiness review |
 | [Cyber Survivability](07-cyber-survivability/cyber-survivability-review.md) | Review prevention, degradation, recovery, and adaptation | Survivability review |
-| [Cryptographic Change Assurance](12-cryptographic-change-assurance/README.md) | Review bounded cryptographic replacement, withdrawal, and revalidation | Cryptographic Change Decision Pack |
 | [High-Impact Systems](08-high-impact-systems/high-impact-system-readiness.md) | Organize deeper evidence for sensitive systems | High-impact readiness package |
 | [Incident Review](09-incident-review/incident-review-template.md) | Document incidents, near misses, response, and lessons | Incident review |
 | [Examples](10-examples/) | Learn from completed synthetic examples | Example review packages |
 | [Assurance Lifecycle Records](11-assurance-lifecycle/) | Complete an end-to-end assurance package | Policy, authority, mapping, validation, and recovery records |
+| [Cryptographic Change Assurance](12-cryptographic-change-assurance/README.md) | Review bounded cryptographic replacement, withdrawal, and revalidation | Cryptographic Change Decision Pack |
+| [Assurance Intelligence](13-assurance-intelligence/) | Validate one structured evidence-to-decision case and render consistent views | Assurance Case, Decision Receipt, Assurance Passport, Executive Summary |
 
 ## Examples
 
 - [Synthetic AI Workflow Cyber Review](10-examples/example-ai-workflow-cyber-review.md) demonstrates a completed Quick Review.
-- [Synthetic Supplier Assurance](10-examples/synthetic-supplier-assurance/) is a concise partial profile demonstrating AI-assisted evidence review, integrity checking, corrective action, and a human Amber decision. It is not a completed Full Assurance Lifecycle package.
-- [Synthetic Cryptographic Withdrawal](10-examples/synthetic-cryptographic-withdrawal/) demonstrates evidence gating, dependency mapping, persistent-state classification, fail-closed Unknown handling, substitution readiness, and a bounded withdrawal exercise.
+- [Synthetic Supplier Assurance](10-examples/synthetic-supplier-assurance/) is a concise partial profile demonstrating AI-assisted evidence review, integrity checking, corrective action, and a human Amber decision.
+- [Synthetic Cryptographic Withdrawal](10-examples/synthetic-cryptographic-withdrawal/) demonstrates evidence gating, dependency mapping, fail-closed Unknown handling, substitution readiness, and a bounded withdrawal exercise.
+- [Synthetic AI Agent Assurance](10-examples/synthetic-ai-agent-assurance/) demonstrates a canonical Assurance Case, human authority, corrective action, successful retest, structural validation, and three generated views.
 
 ## Framework alignment
 
@@ -184,6 +227,7 @@ The toolkit can support mapping and readiness work informed by:
 
 - NIST Cybersecurity Framework 2.0
 - NIST systems security engineering and cyber-resilience guidance
+- NIST cybersecurity supply-chain risk management guidance
 - NIST cryptographic agility and post-quantum migration guidance
 - NIST Zero Trust Architecture
 - NIST incident-response guidance
@@ -196,7 +240,7 @@ See [REFERENCES.md](REFERENCES.md) for exact publication titles, versions, statu
 
 ## Repository validation
 
-The repository includes a standard-library-only validator, a small regression suite, and a GitHub Actions workflow.
+The repository includes standard-library-only validators, a regression suite, and a GitHub Actions workflow.
 
 Run locally:
 
@@ -207,15 +251,21 @@ python scripts/validate_repo.py --root .
 sha256sum -c MANIFEST.sha256
 ```
 
-The validator checks the structural manifest, hashes, internal links, current identity, required template fields, onboarding and AI-assistance guidance, synthetic-example labels, common secret patterns, and public-safety declarations.
+Validate the synthetic Assurance Case directly:
 
-Validation confirms the controlled public toolkit structure. It does **not** prove that a private completed review is factually correct, that evidence is sufficient, that a control works in a real environment, or that a system is authorized.
+```bash
+python scripts/validate_assurance_case.py 10-examples/synthetic-ai-agent-assurance/assurance-case.json
+```
+
+The repository validator checks the structural manifest, hashes, internal links, current identity, required template fields, onboarding and AI-assistance guidance, synthetic-example labels, common secret patterns, and public-safety declarations.
+
+Assurance Case validation checks structural consistency and bounded assurance invariants. Neither validator proves that a private completed review is factually correct, that evidence is sufficient, that a control works in a real environment, or that a system is authorized.
 
 ## Scope and limitations
 
 The repository provides reusable documentation, examples, and validation tooling. It does not demonstrate control effectiveness in a real system, production deployment, certification, formal authorization, or independent assessment.
 
-Quick Review is designed for self-guided use. Full Assurance Lifecycle remains expert-led.
+Quick Review is designed for self-guided use. Full Assurance Lifecycle remains expert-led. Assurance Intelligence is an optional structured representation and does not replace accountable review.
 
 See [RELEASE_REVIEW.md](RELEASE_REVIEW.md) for release-specific validation scope and remaining conditions.
 

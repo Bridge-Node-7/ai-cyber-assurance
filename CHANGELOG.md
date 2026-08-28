@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.4.0] - 2026-08-28
+
+### Added
+
+- Assurance Intelligence as an optional structured layer over the existing assurance methodology.
+- A canonical machine-readable Assurance Case schema.
+- A standard-library assurance-case validator with fail-closed relationship and closure checks.
+- Deterministic Decision Receipt, Assurance Passport, and Executive Summary rendering from one canonical case.
+- A completed synthetic AI-agent assurance case demonstrating excessive initial authority, human decision ownership, corrective action, retest, and structural closure.
+- A minimal partner starter kit with explicit public/private evidence boundaries.
+- Regression tests covering valid cases, duplicate IDs, dangling references, invalid evidence classes, missing human authority, invalid closure, Unknown evidence misuse, and output determinism.
+
+### Improved
+
+- Added Assurance Intelligence routing to README and Start Here without replacing Quick Review or Full Assurance Lifecycle.
+- Added a structured-case example to the example index.
+- Refreshed selected 2026 cybersecurity supply-chain references.
+
+### Limitations
+
+- Assurance Case validation checks structure and relationships only. It does not establish evidence authenticity or sufficiency, real-world control effectiveness, certification, compliance, deployment approval, or operational authorization.
+- This release does not add a database, graph backend, API, dashboard, customer portal, autonomous remediation, autonomous risk acceptance, or numerical trust score.
+
 ## [0.3.0] - 2026-08-17
 
 ### Added
