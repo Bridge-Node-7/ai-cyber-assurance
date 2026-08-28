@@ -37,6 +37,10 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Report validation workflow hash
+        shell: bash
+        run: sha256sum .github/workflows/validate.yml
+
       - name: Run validator regression tests
         shell: bash
         run: python -m unittest discover -s tests -p "test_*.py"
