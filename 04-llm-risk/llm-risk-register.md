@@ -51,3 +51,10 @@ Conditions:
 Expiration / revisit date:
 
 Notes:
+
+## Navigation
+
+- Evidence source: [Evidence Manifest](../02-evidence-manifests/evidence-manifest-template.md)
+- Decision semantics: [Decision Rubric](../DECISION_RUBRIC.md)
+- Next decision record: [Review Decision](../02-evidence-manifests/review-decision-template.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)
