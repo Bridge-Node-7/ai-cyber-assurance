@@ -1,5 +1,43 @@
 # Changelog
 
+## [0.6.0] - 2026-08-28
+
+### Added
+
+- Assurance Case schema version `0.3` with material renderer-consumed and validator-enforced fields documented in the public contract.
+- Controlled decision-status vocabulary: Green, Amber, Red, and More evidence required.
+- Explicit absence states for conditions and missing evidence so `none_identified`, `not_assessed`, `not_applicable`, `unknown`, and recorded items remain distinct.
+- Review-currency reporting with `CURRENT`, `EXPIRED`, and `NOT_YET_CURRENT`, plus an optional `--require-current` gate.
+- Chronology checks across evidence collection, findings, human decision, corrective action, retest, closure, review history, and the review cutoff.
+- Adversarial regression tests for Markdown/HTML injection, Unicode formatting controls, silent material-field blanking, Amber decision completeness, stale review currency, chronology, output overwrite protection, and CLI help.
+- Navigation regression tests for partner onboarding and reusable lifecycle/specialist records identified by UX review.
+- A narrow-screen/editor authoring alternative that preserves wide-table field semantics without creating a second assurance model.
+
+### Fixed
+
+- Escaped case-controlled Markdown and raw HTML before generated views are produced, preventing supplied text from creating a forged `Human decision` section.
+- Required material statements for claims, risks, controls, and findings so a structurally valid case cannot silently render blank executive content.
+- Required Amber decisions to carry explicit bounded scope, conditions, due date, prohibited actions, monitoring requirements, required retests, and expiration/review context.
+- Replaced ambiguous `None recorded` output with explicit state-aware language.
+- Prevented the renderer from silently overwriting existing generated views unless `--force` is supplied.
+- Linked the partner confidentiality boundary and intake template directly into the intended partner workflow.
+- Added return/next-step navigation to the reusable LLM-risk, software-supply-chain, survivability, high-impact, incident, and assurance-lifecycle records identified as workflow dead ends.
+- Added `.pytest_cache/` to ignored local Python artifacts.
+
+### Improved
+
+- Added output-fidelity checks after rendering and direct-library fail-closed validation before files are written.
+- Expanded CLI help for both Assurance Case validation and rendering.
+- Clarified that historical cases may remain structurally valid after expiry while a current decision can require current review status explicitly.
+- Clarified that Markdown templates remain sufficient for many reviews and Assurance Intelligence is an optional structured layer.
+- Replaced time-sensitive manifest release-candidate state with durable validation-gated release-policy metadata; GitHub Releases and tags are the publication source of truth.
+
+### Limitations
+
+- Structural and presentation-integrity validation still does not establish evidence authenticity or sufficiency, real-world control effectiveness, certification, compliance, deployment approval, operational authorization, or partner outcomes.
+- Private cases created against Assurance Case schema v0.2 or earlier require migration before validation under schema v0.3.
+- Human usability and accessibility in real partner environments require observation during controlled pilots; the public repository does not claim those outcomes in advance.
+
 ## [0.5.0] - 2026-08-28
 
 ### Added
