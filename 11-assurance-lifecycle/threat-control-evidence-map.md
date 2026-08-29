@@ -79,3 +79,10 @@ Next review date:
 ## Limitations
 
 A mapped control is not proof of implementation or effectiveness. Evidence and validation must support those claims.
+
+## Navigation
+
+- Previous: [Identity and Authority Register](identity-and-authority-register.md)
+- Next: [Control Validation Record](control-validation-record.md)
+- Recovery validation: [Recovery Assurance Record](recovery-assurance-record.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)

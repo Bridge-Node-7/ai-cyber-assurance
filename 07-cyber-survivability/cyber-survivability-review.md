@@ -103,3 +103,10 @@ Next test date:
 ## Limitations
 
 A completed review is not proof that the system will survive every event. Claims should distinguish planned, implemented, observed, tested, and independently validated capabilities.
+
+## Navigation
+
+- Evidence source: [Evidence Manifest](../02-evidence-manifests/evidence-manifest-template.md)
+- Full recovery record: [Recovery Assurance Record](../11-assurance-lifecycle/recovery-assurance-record.md)
+- Decision semantics: [Decision Rubric](../DECISION_RUBRIC.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)

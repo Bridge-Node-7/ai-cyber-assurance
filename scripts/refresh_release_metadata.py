@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -28,6 +29,16 @@ def expected_fields(root: Path) -> dict[str, object]:
         "file_count": len(files),
         "files": files,
     }
+
+
+def expected_hash_lines(root: Path) -> list[str]:
+    lines: list[str] = []
+    for rel in release_files(root):
+        if rel.as_posix() == "MANIFEST.sha256":
+            continue
+        digest = hashlib.sha256((root / rel).read_bytes()).hexdigest()
+        lines.append(f"{digest}  {rel.as_posix()}")
+    return lines
 
 
 def check_metadata(root: Path) -> list[str]:
@@ -61,11 +72,11 @@ def write_metadata(root: Path) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Refresh or verify deterministic release metadata and SHA-256 inventory.")
     parser.add_argument("--root", type=Path, default=Path("."))
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument("--check", action="store_true")
-    mode.add_argument("--write", action="store_true")
+    mode.add_argument("--check", action="store_true", help="Verify metadata without modifying files")
+    mode.add_argument("--write", action="store_true", help="Refresh manifest fields and SHA-256 inventory")
     args = parser.parse_args()
 
     root = args.root.resolve()
@@ -78,6 +89,10 @@ def main() -> int:
         print("FAIL - release metadata")
         for finding in findings:
             print(f"  - {finding}")
+        print("EXPECTED-MANIFEST-SHA256-BEGIN")
+        for line in expected_hash_lines(root):
+            print(line)
+        print("EXPECTED-MANIFEST-SHA256-END")
         return 1
 
     print("PASS - release metadata")

@@ -115,3 +115,10 @@ Next test date:
 ## Limitations
 
 A recovery plan, backup, or written procedure is not proof of recoverability. This record supports only the tested scope, condition, environment, and date.
+
+## Navigation
+
+- Previous: [Control Validation Record](control-validation-record.md)
+- Related incident path: [Incident and Near-Miss Review](../09-incident-review/incident-review-template.md)
+- Final decision: [Review Decision](../02-evidence-manifests/review-decision-template.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)

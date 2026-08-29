@@ -128,3 +128,10 @@ Next review date:
 ## Limitations
 
 This template does not establish attribution, legal responsibility, compliance status, or forensic admissibility by itself.
+
+## Navigation
+
+- Evidence source: [Evidence Manifest](../02-evidence-manifests/evidence-manifest-template.md)
+- Recovery follow-through: [Recovery Assurance Record](../11-assurance-lifecycle/recovery-assurance-record.md)
+- Decision semantics: [Decision Rubric](../DECISION_RUBRIC.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)

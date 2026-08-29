@@ -130,3 +130,10 @@ Next review date:
 ## Limitations
 
 Approval of this document does not prove that controls are implemented or effective. Those claims require evidence in the Control Validation Record and, where applicable, the Recovery Assurance Record.
+
+## Navigation
+
+- Previous: [Assurance Lifecycle](../ASSURANCE_LIFECYCLE.md)
+- Next: [Identity and Authority Register](identity-and-authority-register.md)
+- Evidence source: [Evidence Manifest](../02-evidence-manifests/evidence-manifest-template.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)
