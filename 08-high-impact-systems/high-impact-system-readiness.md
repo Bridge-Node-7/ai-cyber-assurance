@@ -138,3 +138,11 @@ Next review date:
 ## Limitations
 
 This record does not certify a system, authorize deployment by itself, replace legal or compliance review, or prove that listed controls are effective without supporting evidence and validation.
+
+## Navigation
+
+- Full lifecycle map: [Assurance Lifecycle](../ASSURANCE_LIFECYCLE.md)
+- Identity record: [Identity and Authority Register](../11-assurance-lifecycle/identity-and-authority-register.md)
+- Recovery record: [Recovery Assurance Record](../11-assurance-lifecycle/recovery-assurance-record.md)
+- Decision semantics: [Decision Rubric](../DECISION_RUBRIC.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)
