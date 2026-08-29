@@ -76,6 +76,10 @@ The repository contains reusable public methodology, validation logic, templates
 
 Real partner architecture, evidence, telemetry, supplier information, credentials, vulnerabilities, regulated data, proprietary material, and decision records belong in private or access-controlled workspaces unless deliberately approved for unrestricted release.
 
+## Security reports
+
+Security concerns should use the private reporting path described in [`SECURITY.md`](SECURITY.md). Do not place sensitive vulnerability details, credentials, private evidence, or partner information in public issues, pull requests, or repository files.
+
 ## Release-state semantics
 
 `REPO_MANIFEST.json` describes a validation-gated public release channel. The authoritative evidence that a specific version was actually published is the corresponding GitHub Release and tag.
