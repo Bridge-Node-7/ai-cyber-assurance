@@ -130,3 +130,10 @@ Next review date:
 ## Limitations
 
 Completion of this template does not certify a product, prove that a dependency is trustworthy, authorize deployment, or replace system-specific engineering, legal, contractual, or compliance review.
+
+## Navigation
+
+- Evidence source: [Evidence Manifest](../02-evidence-manifests/evidence-manifest-template.md)
+- Related specialist path: [Cryptographic Change Assurance](../12-cryptographic-change-assurance/README.md)
+- Decision semantics: [Decision Rubric](../DECISION_RUBRIC.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)
