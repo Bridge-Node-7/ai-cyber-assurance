@@ -144,3 +144,10 @@ Expiration or next validation date:
 ## Limitations
 
 A successful test demonstrates only the tested condition, scope, environment, and time. It does not prove universal effectiveness or future operation.
+
+## Navigation
+
+- Previous: [Threat-Control-Evidence Map](threat-control-evidence-map.md)
+- Next: [Recovery Assurance Record](recovery-assurance-record.md)
+- Final decision: [Review Decision](../02-evidence-manifests/review-decision-template.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)
