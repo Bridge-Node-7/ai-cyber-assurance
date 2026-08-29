@@ -26,11 +26,15 @@ This is a concise partial profile. It is not a completed Full Assurance Lifecycl
 
 Demonstrates a fictional cryptographic withdrawal review with an evidence gate, dependency map, state-mobility classification, fail-closed Unknown handling, corrective action, substitution readiness, Time to Safe Substitution, and a bounded module assessment.
 
-## Completed Structured Assurance Case
+## Completed Structured Assurance Cases
 
 [**Synthetic AI Agent Assurance**](synthetic-ai-agent-assurance/)
 
-Demonstrates one canonical machine-readable Assurance Case for a fictional AI agent with excessive initial authority, bounded human decision authority, corrective action, successful retest, verified structural closure, and deterministic Decision Receipt, Assurance Passport, and Executive Summary views.
+Demonstrates one canonical machine-readable Assurance Case for a fictional AI agent with excessive initial authority, bounded human decision authority, corrective action, successful independent retest, verified structural closure, and deterministic Decision Receipt, Assurance Passport, and Executive Summary views.
+
+[**Synthetic Cryptographic Assurance Case**](synthetic-cryptographic-assurance-case/)
+
+Demonstrates the same canonical Assurance Case and generated-view pipeline in a distinct non-AI domain, including typed relationships, bounded human decision authority, corrective action, independent retest, and generic rendering without AI-agent-specific assumptions.
 
 ## How to use the examples
 

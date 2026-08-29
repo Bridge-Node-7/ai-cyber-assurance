@@ -2,10 +2,11 @@
 """Validate a bounded AI Cyber Assurance Case.
 
 Standard-library only. This validator checks structural consistency,
-relationship integrity, evidence-class discipline, human authority fields,
-and closure preconditions. It does not establish factual truth, evidence
-authenticity or sufficiency, real-world control effectiveness, certification,
-compliance, deployment approval, or operational authorization.
+typed relationship integrity, evidence-class discipline, human authority
+fields, date fields, and closure preconditions. It does not establish
+factual truth, evidence authenticity or sufficiency, real-world control
+effectiveness, certification, compliance, deployment approval, or
+operational authorization.
 """
 
 from __future__ import annotations
@@ -13,10 +14,14 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Any
 
 EVIDENCE_CLASSES = {"Observed", "Tested", "Reported", "Inferred", "Unknown"}
+CASE_VERSION = "0.2"
+REVIEW_PATHS = {"Quick Review", "Full Assurance Lifecycle"}
+
 COLLECTIONS = (
     "identities",
     "claims",
@@ -27,25 +32,29 @@ COLLECTIONS = (
     "decisions",
     "corrective_actions",
     "retests",
+    "review_history",
 )
-REFERENCE_FIELDS = {
-    "subject_refs",
-    "identity_refs",
-    "claim_refs",
-    "risk_refs",
-    "control_refs",
-    "evidence_refs",
-    "finding_refs",
-    "decision_refs",
-    "corrective_action_refs",
-    "closure_evidence_refs",
+
+REFERENCE_FIELDS: dict[str, str] = {
+    "subject_refs": "identities",
+    "identity_refs": "identities",
+    "claim_refs": "claims",
+    "risk_refs": "risks",
+    "control_refs": "controls",
+    "evidence_refs": "evidence",
+    "finding_refs": "findings",
+    "decision_refs": "decisions",
+    "corrective_action_refs": "corrective_actions",
+    "closure_evidence_refs": "evidence",
 }
-SINGLE_REFERENCE_FIELDS = {
-    "owner_identity_ref",
-    "decision_ref",
-    "finding_ref",
-    "corrective_action_ref",
-    "retest_ref",
+
+SINGLE_REFERENCE_FIELDS: dict[str, str] = {
+    "owner_identity_ref": "identities",
+    "accountable_human_ref": "identities",
+    "decision_ref": "decisions",
+    "finding_ref": "findings",
+    "corrective_action_ref": "corrective_actions",
+    "retest_ref": "retests",
 }
 
 
@@ -60,26 +69,42 @@ def _nonempty(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip())
 
 
+def _parse_date(value: Any, label: str, errors: list[str]) -> date | None:
+    if not _nonempty(value):
+        errors.append(f"{label} is required.")
+        return None
+    try:
+        return date.fromisoformat(value)
+    except ValueError:
+        errors.append(f"{label} must be an ISO date (YYYY-MM-DD).")
+        return None
+
+
 def validate_case(data: dict[str, Any]) -> list[str]:
     errors: list[str] = []
 
-    if data.get("case_version") != "0.1":
-        errors.append("case_version must be '0.1'.")
+    if data.get("case_version") != CASE_VERSION:
+        errors.append(f"case_version must be {CASE_VERSION!r}.")
 
     case = data.get("case")
     if not isinstance(case, dict):
         errors.append("case must be an object.")
         case = {}
-    for field in ("id", "title", "scope", "decision_question", "review_path", "reviewed_at", "expires_at"):
+    for field in ("id", "title", "scope", "decision_question"):
         if not _nonempty(case.get(field)):
             errors.append(f"case.{field} is required.")
-    if case.get("review_path") not in {"Quick Review", "Full Assurance Lifecycle"}:
+    if case.get("review_path") not in REVIEW_PATHS:
         errors.append("case.review_path must be Quick Review or Full Assurance Lifecycle.")
     if not isinstance(case.get("public_synthetic"), bool):
         errors.append("case.public_synthetic must be true or false.")
+    reviewed = _parse_date(case.get("reviewed_at"), "case.reviewed_at", errors)
+    expires = _parse_date(case.get("expires_at"), "case.expires_at", errors)
+    if reviewed and expires and expires < reviewed:
+        errors.append("case.expires_at must not precede case.reviewed_at.")
 
     objects: list[tuple[str, dict[str, Any]]] = []
     ids: dict[str, str] = {}
+    by_collection: dict[str, dict[str, dict[str, Any]]] = {name: {} for name in COLLECTIONS}
     for collection in COLLECTIONS:
         value = data.get(collection)
         if not isinstance(value, list):
@@ -99,11 +124,16 @@ def validate_case(data: dict[str, Any]) -> list[str]:
                 )
             else:
                 ids[object_id] = collection
+                by_collection[collection][object_id] = item
             objects.append((collection, item))
 
-    for collection, item in objects:
+    decisions = data.get("decisions", [])
+    if isinstance(decisions, list) and len(decisions) != 1:
+        errors.append("decisions must contain exactly one bounded decision.")
+
+    for _collection, item in objects:
         object_id = item.get("id", "<unknown>")
-        for field in REFERENCE_FIELDS:
+        for field, expected_collection in REFERENCE_FIELDS.items():
             refs = item.get(field)
             if refs is None:
                 continue
@@ -113,47 +143,103 @@ def validate_case(data: dict[str, Any]) -> list[str]:
             for ref in refs:
                 if not _nonempty(ref) or ref not in ids:
                     errors.append(f"{object_id}.{field} contains unresolved reference {ref!r}.")
-        for field in SINGLE_REFERENCE_FIELDS:
+                elif ids[ref] != expected_collection:
+                    errors.append(
+                        f"{object_id}.{field} reference {ref!r} must target {expected_collection}, not {ids[ref]}."
+                    )
+        for field, expected_collection in SINGLE_REFERENCE_FIELDS.items():
             ref = item.get(field)
             if ref is None:
                 continue
             if not _nonempty(ref) or ref not in ids:
                 errors.append(f"{object_id}.{field} has unresolved reference {ref!r}.")
+            elif ids[ref] != expected_collection:
+                errors.append(
+                    f"{object_id}.{field} reference {ref!r} must target {expected_collection}, not {ids[ref]}."
+                )
 
-    evidence_by_id: dict[str, dict[str, Any]] = {}
-    for item in data.get("evidence", []):
-        if not isinstance(item, dict) or not _nonempty(item.get("id")):
+    identities = by_collection["identities"]
+    for identity_id, identity in identities.items():
+        identity_type = str(identity.get("type", "")).strip().lower()
+        if not identity_type:
+            errors.append(f"{identity_id}.type is required.")
             continue
-        eid = item["id"]
-        evidence_by_id[eid] = item
+        if identity_type != "human":
+            accountable_ref = identity.get("accountable_human_ref")
+            if not _nonempty(accountable_ref):
+                errors.append(f"{identity_id}.accountable_human_ref is required for a nonhuman identity.")
+            else:
+                target = identities.get(accountable_ref)
+                if target and str(target.get("type", "")).strip().lower() != "human":
+                    errors.append(
+                        f"{identity_id}.accountable_human_ref must reference an identity with type 'human'."
+                    )
+
+    evidence_by_id = by_collection["evidence"]
+    for eid, item in evidence_by_id.items():
         evidence_class = item.get("evidence_class")
         if evidence_class not in EVIDENCE_CLASSES:
             errors.append(
                 f"{eid}.evidence_class must be one of: {', '.join(sorted(EVIDENCE_CLASSES))}."
             )
-        for field in ("source", "owner", "collected_at"):
+        for field in ("source", "owner"):
             if not _nonempty(item.get(field)):
                 errors.append(f"{eid}.{field} is required.")
+        _parse_date(item.get("collected_at"), f"{eid}.collected_at", errors)
         if not isinstance(item.get("limitations"), list):
             errors.append(f"{eid}.limitations must be an array.")
         if item.get("confidence") is not None and not _nonempty(item.get("confidence_basis")):
             errors.append(f"{eid}.confidence_basis is required when confidence is stated.")
 
-    finding_by_id = {
-        item["id"]: item
-        for item in data.get("findings", [])
-        if isinstance(item, dict) and _nonempty(item.get("id"))
-    }
-    ca_by_id = {
-        item["id"]: item
-        for item in data.get("corrective_actions", [])
-        if isinstance(item, dict) and _nonempty(item.get("id"))
-    }
-    retest_by_id = {
-        item["id"]: item
-        for item in data.get("retests", [])
-        if isinstance(item, dict) and _nonempty(item.get("id"))
-    }
+    finding_by_id = by_collection["findings"]
+    ca_by_id = by_collection["corrective_actions"]
+    retest_by_id = by_collection["retests"]
+    decision_by_id = by_collection["decisions"]
+
+    for did, decision in decision_by_id.items():
+        if not _nonempty(decision.get("disposition")):
+            errors.append(f"{did}.disposition is required.")
+        authority = decision.get("authority")
+        if not isinstance(authority, dict):
+            errors.append(f"{did}.authority is required for the bounded human decision.")
+        else:
+            if str(authority.get("type", "")).strip().lower() != "human":
+                errors.append(f"{did}.authority.type must be 'human'.")
+            for field in ("name", "role"):
+                if not _nonempty(authority.get(field)):
+                    errors.append(f"{did}.authority.{field} is required.")
+        if decision.get("confidence") is not None and not _nonempty(decision.get("confidence_basis")):
+            errors.append(f"{did}.confidence_basis is required when confidence is stated.")
+
+    sole_decision_id = next(iter(decision_by_id), None) if len(decision_by_id) == 1 else None
+
+    for cid, ca in ca_by_id.items():
+        if not _nonempty(ca.get("finding_ref")):
+            errors.append(f"{cid}.finding_ref is required.")
+        if not _nonempty(ca.get("owner")):
+            errors.append(f"{cid}.owner is required.")
+        if ca.get("status") not in {"proposed", "approved", "in_progress", "complete"}:
+            errors.append(f"{cid}.status has an invalid value.")
+        if not _nonempty(ca.get("decision_ref")):
+            errors.append(f"{cid}.decision_ref is required to preserve human decision linkage.")
+        elif sole_decision_id and ca.get("decision_ref") != sole_decision_id:
+            errors.append(f"{cid}.decision_ref must reference the case's bounded decision {sole_decision_id}.")
+
+    for rid, retest in retest_by_id.items():
+        for field in ("tester", "method"):
+            if not _nonempty(retest.get(field)):
+                errors.append(f"{rid}.{field} is required.")
+        _parse_date(retest.get("tested_at"), f"{rid}.tested_at", errors)
+        if retest.get("result") not in {"pass", "fail"}:
+            errors.append(f"{rid}.result must be pass or fail.")
+        if not isinstance(retest.get("independent"), bool):
+            errors.append(f"{rid}.independent must be true or false.")
+        elif retest.get("independent") is False and not _nonempty(retest.get("independence_rationale")):
+            errors.append(f"{rid}.independence_rationale is required when independent is false.")
+        for ref in retest.get("evidence_refs", []):
+            ev = evidence_by_id.get(ref)
+            if ev and ev.get("evidence_class") == "Unknown":
+                errors.append(f"{rid} cannot use Unknown evidence {ref} as retest evidence.")
 
     for fid, finding in finding_by_id.items():
         if not _nonempty(finding.get("owner")):
@@ -165,6 +251,7 @@ def validate_case(data: dict[str, Any]) -> list[str]:
         if status == "closed":
             retest_ref = finding.get("retest_ref")
             closure_refs = finding.get("closure_evidence_refs")
+            ca_refs = finding.get("corrective_action_refs")
             if not _nonempty(retest_ref):
                 errors.append(f"{fid} is closed but has no retest_ref.")
             if not isinstance(closure_refs, list) or not closure_refs:
@@ -174,55 +261,27 @@ def validate_case(data: dict[str, Any]) -> list[str]:
                     ev = evidence_by_id.get(ref)
                     if ev and ev.get("evidence_class") == "Unknown":
                         errors.append(f"{fid} uses Unknown evidence {ref} for verified closure.")
+            if not isinstance(ca_refs, list) or not ca_refs:
+                errors.append(f"{fid} is closed but has no corrective_action_refs.")
             retest = retest_by_id.get(retest_ref) if isinstance(retest_ref, str) else None
             if retest and retest.get("result") != "pass":
                 errors.append(f"{fid} is closed but retest {retest_ref} did not pass.")
-            for ca_ref in finding.get("corrective_action_refs", []):
+            if retest and retest.get("finding_ref") != fid:
+                errors.append(f"{fid} retest {retest_ref} must reference the same finding.")
+            for ca_ref in ca_refs if isinstance(ca_refs, list) else []:
                 ca = ca_by_id.get(ca_ref)
                 if ca and ca.get("status") != "complete":
                     errors.append(f"{fid} is closed but corrective action {ca_ref} is not complete.")
+                if ca and ca.get("finding_ref") != fid:
+                    errors.append(f"{fid} corrective action {ca_ref} must reference the same finding.")
+                if ca and sole_decision_id and ca.get("decision_ref") != sole_decision_id:
+                    errors.append(f"{fid} corrective action {ca_ref} is not linked to the bounded decision.")
 
-    for decision in data.get("decisions", []):
-        if not isinstance(decision, dict) or not _nonempty(decision.get("id")):
-            continue
-        did = decision["id"]
-        if decision.get("consequential") is True:
-            authority = decision.get("authority")
-            if not isinstance(authority, dict):
-                errors.append(f"{did}.authority is required for a consequential decision.")
-            else:
-                if authority.get("type") != "human":
-                    errors.append(f"{did}.authority.type must be 'human'.")
-                for field in ("name", "role"):
-                    if not _nonempty(authority.get(field)):
-                        errors.append(f"{did}.authority.{field} is required.")
-        if decision.get("confidence") is not None and not _nonempty(decision.get("confidence_basis")):
-            errors.append(f"{did}.confidence_basis is required when confidence is stated.")
-
-    for ca in data.get("corrective_actions", []):
-        if not isinstance(ca, dict) or not _nonempty(ca.get("id")):
-            continue
-        cid = ca["id"]
-        if not _nonempty(ca.get("finding_ref")):
-            errors.append(f"{cid}.finding_ref is required.")
-        if not _nonempty(ca.get("owner")):
-            errors.append(f"{cid}.owner is required.")
-        if ca.get("status") not in {"proposed", "approved", "in_progress", "complete"}:
-            errors.append(f"{cid}.status has an invalid value.")
-
-    for retest in data.get("retests", []):
-        if not isinstance(retest, dict) or not _nonempty(retest.get("id")):
-            continue
-        rid = retest["id"]
-        for field in ("tester", "method", "tested_at"):
-            if not _nonempty(retest.get(field)):
-                errors.append(f"{rid}.{field} is required.")
-        if retest.get("result") not in {"pass", "fail"}:
-            errors.append(f"{rid}.result must be pass or fail.")
-        for ref in retest.get("evidence_refs", []):
-            ev = evidence_by_id.get(ref)
-            if ev and ev.get("evidence_class") == "Unknown":
-                errors.append(f"{rid} cannot use Unknown evidence {ref} as retest evidence.")
+    for hid, history in by_collection["review_history"].items():
+        for field in ("actor", "summary"):
+            if not _nonempty(history.get(field)):
+                errors.append(f"{hid}.{field} is required.")
+        _parse_date(history.get("date"), f"{hid}.date", errors)
 
     return sorted(set(errors))
 

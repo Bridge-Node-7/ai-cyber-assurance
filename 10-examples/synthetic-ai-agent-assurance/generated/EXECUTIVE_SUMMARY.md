@@ -1,15 +1,19 @@
 # Executive Summary — CASE-AI-001
 
-> **Artifact type:** COMPLETED SYNTHETIC GENERATED VIEW  
+> **Artifact type:** GENERATED VIEW  
 > **Operational authority:** None
 
-## Decision
+## Decision question
 
 May the synthetic AI agent continue operating with bounded supplier-information access after remediation and retest?
 
-## Why it matters
+## Scope
 
-The synthetic AI agent can access supplier-information records. Authority beyond its documented purpose would increase the chance of unauthorized change or disclosure.
+Fictional AI agent access to synthetic supplier-information records and associated authority controls.
+
+## Material risks
+
+- RISK-001: Excessive or persistent AI-agent authority could enable unauthorized modification or access outside the approved purpose.
 
 ## Material findings
 
@@ -19,17 +23,25 @@ The synthetic AI agent can access supplier-information records. Authority beyond
 
 ## Important Unknowns
 
-- EVID-003
+- EVID-003: Synthetic pre-remediation logging gap
 
 ## Human decision
 
 **Proceed with bounded authority after successful retest**
 
-The authorized human decision owner required reduced authority, bounded credential lifetime, complete logging, and successful retest before closure.
+**Decision authority:** Fictional Security Owner — Authorized Human Decision Owner
+
+## Conditions
+
+- Read-only scope
+- Bounded credential lifetime
+- Revocation path
+- Audit logging
+- Successful retest
 
 ## Next review
 
 - Expiration: 2026-11-26
 - Reversal trigger: Unauthorized action, material scope change, failed future retest, or loss of required logging.
 
-This summary translates the canonical synthetic case without changing its evidence. It does not establish financial loss, probability, certification, compliance, or real-world control effectiveness.
+This summary translates the canonical case without inventing additional facts. It does not establish financial loss, probability, certification, compliance, authorization, or real-world control effectiveness.

@@ -22,15 +22,15 @@ Scope
 → Verified Closure
 ```
 
-## One case, multiple views
+## One bounded decision, multiple views
 
-A canonical `assurance-case.json` is the source for:
+Assurance Case schema v0.2 represents exactly one bounded human decision and is the source for:
 
 - a Decision Receipt;
 - an Assurance Passport; and
 - an Executive Summary.
 
-Generated views are communication artifacts, not separate sources of truth.
+Generated views are communication artifacts, not separate sources of truth. Renderer prose is derived from the canonical case rather than from scenario-specific assumptions.
 
 ## Evidence classes
 
@@ -44,11 +44,19 @@ Use the repository evidence classes exactly:
 
 Confidence is separate from evidence class. If confidence is stated, record the basis.
 
+## Relationship and authority invariants
+
+The validator enforces typed references between claims, evidence, findings, controls, decisions, corrective actions, retests, and identities.
+
+Nonhuman identities require an accountable human identity reference. The bounded case decision requires named human authority. Corrective actions preserve decision linkage. Closed findings require completed corrective action, successful retest, non-Unknown closure evidence, and matching finding relationships. Retests record whether they were independent; non-independent retests require a rationale.
+
 ## Validation boundary
 
-`validate_assurance_case.py` checks structural consistency, required authority fields, evidence-class discipline, relationship integrity, and closure preconditions.
+`validate_assurance_case.py` checks structural consistency, typed relationship integrity, date fields, required authority fields, evidence-class discipline, and closure preconditions.
 
 A validation pass does **not** establish that evidence is authentic or sufficient, that a control is effective in a real environment, that a system is secure or compliant, or that deployment or operation is authorized.
+
+The JSON Schema documents the case envelope and key local field constraints. The standard-library Python validator is the executable authority for cross-object relational invariants, with regression tests checking key schema/validator parity.
 
 ## Public and private boundary
 
@@ -73,3 +81,8 @@ python scripts/render_assurance_outputs.py path/to/assurance-case.json
 ```
 
 The renderer validates the case before producing output.
+
+## Synthetic proofs
+
+- [AI-agent assurance case](../10-examples/synthetic-ai-agent-assurance/) — identity authority, logging, corrective action, and retest.
+- [Cryptographic assurance case](../10-examples/synthetic-cryptographic-assurance-case/) — a distinct non-AI domain proving generic rendering and relational validation.

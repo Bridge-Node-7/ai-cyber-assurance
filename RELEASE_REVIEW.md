@@ -1,24 +1,26 @@
-# Release Validation: AI Cyber Assurance v0.4.0
+# Release Validation: AI Cyber Assurance v0.5.0
 
-AI Cyber Assurance v0.4.0 adds a bounded Assurance Intelligence kernel while preserving the toolkit's defensive assurance boundaries and human decision authority.
+AI Cyber Assurance v0.5.0 hardens the Assurance Intelligence kernel for generic bounded partner use while preserving defensive assurance boundaries and human decision authority.
 
 ## User-facing scope
 
 The release:
 
-- adds one canonical machine-readable Assurance Case representation;
-- adds a standard-library assurance-case validator for structural and relationship invariants;
-- adds deterministic rendering of a Decision Receipt, Assurance Passport, and Executive Summary from the same case;
-- adds one fully synthetic AI-agent assurance example with corrective action and successful retest;
-- adds partner guidance that keeps real evidence in private or access-controlled workspaces;
-- preserves the existing Quick Review and Full Assurance Lifecycle paths;
-- preserves the evidence classes Observed, Tested, Reported, Inferred, and Unknown;
-- extends the existing regression suite without requiring a separate validation architecture;
-- updates selected 2026 cybersecurity supply-chain references.
+- advances the Assurance Case contract to schema version `0.2`;
+- requires exactly one bounded human decision per Assurance Case;
+- enforces typed cross-object references rather than existence-only references;
+- requires an accountable human identity for nonhuman identities;
+- requires corrective actions to preserve decision linkage;
+- requires retest independence metadata or a rationale when retest is not independent;
+- validates review-history and ISO date fields;
+- removes AI-agent-specific assumptions from generated Executive Summaries and other views;
+- adds a second, distinct synthetic cryptographic Assurance Case to prove cross-domain rendering;
+- expands adversarial regression coverage for decision cardinality, typed references, authority, dates, review history, retest independence, and multi-domain rendering;
+- records that repository version 0.3.0 was not separately published as a GitHub Release/tag.
 
 ## Validation boundary
 
-Assurance Case validation checks structural consistency, reference integrity, evidence-class discipline, required authority fields, and closure preconditions.
+Assurance Case validation checks structural consistency, typed reference integrity, evidence-class discipline, required human authority fields, date fields, and closure preconditions.
 
 It does not establish:
 
@@ -34,8 +36,9 @@ It does not establish:
 Release validation covers:
 
 - the regression suite;
-- assurance-case positive and negative tests;
-- deterministic rendering checks;
+- Assurance Case positive and adversarial negative tests;
+- deterministic rendering across two distinct synthetic domains;
+- schema/validator parity checks for core invariants;
 - repository structure;
 - deterministic metadata;
 - manifest and checksum integrity;
@@ -54,9 +57,9 @@ Real partner architecture, evidence, telemetry, supplier information, credential
 
 Security concerns should use the private reporting path described in [`SECURITY.md`](SECURITY.md).
 
-## Release result
+## Release gate
 
-v0.4.0 was merged to protected `main` after human authorization and successful required pull-request validation on Ubuntu and Windows. Post-merge validation on `main` also passed.
+v0.5.0 is complete only after the human-authorized pull request is merged, required Ubuntu and Windows validation passes on protected `main`, and the versioned GitHub Release is published.
 
 Versioned GitHub Release publication is gated behind successful validation on protected `main`. Publication is idempotent: if the current `VERSION` release already exists, the release job makes no change.
 

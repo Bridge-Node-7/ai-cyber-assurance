@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.5.0] - 2026-08-28
+
+### Added
+
+- Assurance Case schema version `0.2` for generic bounded partner use.
+- Typed cross-object reference validation for identities, claims, risks, controls, evidence, findings, decisions, corrective actions, and retests.
+- Accountable-human linkage for nonhuman identities.
+- Required retest-independence metadata, with rationale required when retest is not independent.
+- ISO date and review-history validation.
+- A second completed synthetic Assurance Case in a distinct cryptographic-change domain.
+- Adversarial regression tests for decision cardinality, wrong-type references, authority, dates, review history, retest independence, and cross-domain rendering.
+
+### Fixed
+
+- Removed AI-agent and supplier-information assumptions from the generic Executive Summary renderer.
+- Prevented structurally valid cases with zero or multiple decisions from reaching a renderer that expects one bounded decision.
+- Prevented references from resolving merely because an ID exists in the wrong object collection.
+- Strengthened closure linkage between findings, corrective actions, retests, evidence, and the bounded human decision.
+
+### Improved
+
+- Clarified that the JSON Schema documents the envelope and local field constraints while the standard-library validator is authoritative for cross-object relational invariants.
+- Added schema/validator parity tests for the case version, decision cardinality, and evidence classes.
+- Documented the historical 0.3.0 repository-version milestone as not separately published as a GitHub Release/tag.
+
+### Limitations
+
+- Structural validation still does not establish evidence authenticity or sufficiency, real-world control effectiveness, certification, compliance, deployment approval, or operational authorization.
+- The v0.2 Assurance Case contract is stricter than v0.1; private cases created against v0.1 require migration before validation under this release.
+
 ## [0.4.0] - 2026-08-28
 
 ### Added
@@ -27,6 +57,8 @@
 
 ## [0.3.0] - 2026-08-17
 
+> Repository version milestone. This version was not separately published as a GitHub Release or `v0.3.0` tag.
+
 ### Added
 
 - Cryptographic Change Assurance as a bounded specialist review for cryptographic replacement, withdrawal, and revalidation.
@@ -44,7 +76,7 @@
 
 ### Limitations
 
-- This release does not implement cryptography, authorize live changes, establish certification or compliance, or prove that a real system can complete a cryptographic transition.
+- This version does not implement cryptography, authorize live changes, establish certification or compliance, or prove that a real system can complete a cryptographic transition.
 
 ## [0.2.2] - 2026-08-06
 

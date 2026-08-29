@@ -26,19 +26,24 @@ def _lines(values: list[str]) -> str:
     return "\n".join(f"- {value}" for value in values) if values else "- None recorded"
 
 
+def _decision(data: dict[str, Any]) -> dict[str, Any]:
+    return data["decisions"][0]
+
+
 def render_decision_receipt(data: dict[str, Any]) -> str:
     case = data["case"]
-    decision = data["decisions"][0]
+    decision = _decision(data)
     evidence = data.get("evidence", [])
     by_class = {
         name: [item["id"] for item in evidence if item.get("evidence_class") == name]
         for name in ("Observed", "Tested", "Reported", "Inferred", "Unknown")
     }
-    actions = [item["id"] for item in data.get("corrective_actions", [])]
+    actions = [f'{item["id"]}: {item.get("action", "action not recorded")}' for item in data.get("corrective_actions", [])]
     missing = decision.get("missing_evidence", [])
+    conditions = decision.get("conditions", [])
     return f"""# Decision Receipt — {decision["id"]}
 
-> **Artifact type:** COMPLETED SYNTHETIC GENERATED VIEW  
+> **Artifact type:** GENERATED VIEW  
 > **Operational authority:** None  
 > **Source of truth:** `{case["id"]}` canonical Assurance Case
 
@@ -71,44 +76,48 @@ def render_decision_receipt(data: dict[str, Any]) -> str:
 
 {_lines(missing)}
 
-## Decision
+## Human decision
 
 **Disposition:** {decision["disposition"]}
 
 **Authorized human decision owner:** {decision["authority"]["name"]} — {decision["authority"]["role"]}
 
-**Confidence:** {decision["confidence"]}
+**Confidence:** {decision.get("confidence", "not stated")}
 
-**Confidence basis:** {decision["confidence_basis"]}
+**Confidence basis:** {decision.get("confidence_basis", "not stated")}
 
-## Conditions and corrective actions
+## Conditions
+
+{_lines(conditions)}
+
+## Corrective actions
 
 {_lines(actions)}
 
 ## Reversal trigger
 
-{decision["reversal_trigger"]}
+{decision.get("reversal_trigger", "None recorded")}
 
 ## Review
 
 - Review date: {case["reviewed_at"]}
 - Expiration: {case["expires_at"]}
 
-This synthetic receipt demonstrates repository behavior. It does not certify, authorize, or establish the security of a real system.
+This receipt communicates the bounded human decision recorded in the canonical case. It does not independently certify, authorize, or establish the security of a real system.
 """
 
 
 def render_passport(data: dict[str, Any]) -> str:
     case = data["case"]
-    decision = data["decisions"][0]
+    decision = _decision(data)
     open_findings = [x["id"] for x in data.get("findings", []) if x.get("status") != "closed"]
     identities = [f'{x["id"]}: {x.get("purpose", "purpose not recorded")}' for x in data.get("identities", [])]
     return f"""# Assurance Passport — {case["id"]}
 
-> **Artifact type:** COMPLETED SYNTHETIC GENERATED VIEW  
+> **Artifact type:** GENERATED VIEW  
 > **Operational authority:** None
 
-## System
+## System or review subject
 
 **Name:** {case["title"]}
 
@@ -120,7 +129,7 @@ def render_passport(data: dict[str, Any]) -> str:
 
 ## Bounded assurance status
 
-**Disposition:** {decision["disposition"]}
+**Human decision recorded:** {decision["disposition"]}
 
 **Decision authority:** {decision["authority"]["name"]} — {decision["authority"]["role"]}
 
@@ -130,36 +139,41 @@ def render_passport(data: dict[str, Any]) -> str:
 
 ## Review boundary
 
-- Evidence current for this synthetic case as of: {case["reviewed_at"]}
+- Evidence cutoff / review date: {case["reviewed_at"]}
 - Review expires: {case["expires_at"]}
-- Reversal trigger: {decision["reversal_trigger"]}
+- Reversal trigger: {decision.get("reversal_trigger", "None recorded")}
 
-This passport is a bounded communication view. It is not a certification, compliance statement, or claim of indefinite trust.
+This passport is a bounded communication view of a recorded human decision. It is not a certification, compliance statement, or claim of indefinite trust.
 """
 
 
 def render_executive_summary(data: dict[str, Any]) -> str:
     case = data["case"]
-    decision = data["decisions"][0]
-    findings = data.get("findings", [])
-    material = [f'{x["id"]}: {x["statement"]}' for x in findings]
-    unknown = [x["id"] for x in data.get("evidence", []) if x.get("evidence_class") == "Unknown"]
+    decision = _decision(data)
+    risks = [f'{x["id"]}: {x.get("statement", "risk statement not recorded")}' for x in data.get("risks", [])]
+    findings = [f'{x["id"]}: {x.get("statement", "finding statement not recorded")}' for x in data.get("findings", [])]
+    unknown = [f'{x["id"]}: {x.get("source", "source not recorded")}' for x in data.get("evidence", []) if x.get("evidence_class") == "Unknown"]
+    conditions = decision.get("conditions", [])
     return f"""# Executive Summary — {case["id"]}
 
-> **Artifact type:** COMPLETED SYNTHETIC GENERATED VIEW  
+> **Artifact type:** GENERATED VIEW  
 > **Operational authority:** None
 
-## Decision
+## Decision question
 
 {case["decision_question"]}
 
-## Why it matters
+## Scope
 
-The synthetic AI agent can access supplier-information records. Authority beyond its documented purpose would increase the chance of unauthorized change or disclosure.
+{case["scope"]}
+
+## Material risks
+
+{_lines(risks)}
 
 ## Material findings
 
-{_lines(material)}
+{_lines(findings)}
 
 ## Important Unknowns
 
@@ -169,14 +183,18 @@ The synthetic AI agent can access supplier-information records. Authority beyond
 
 **{decision["disposition"]}**
 
-The authorized human decision owner required reduced authority, bounded credential lifetime, complete logging, and successful retest before closure.
+**Decision authority:** {decision["authority"]["name"]} — {decision["authority"]["role"]}
+
+## Conditions
+
+{_lines(conditions)}
 
 ## Next review
 
 - Expiration: {case["expires_at"]}
-- Reversal trigger: {decision["reversal_trigger"]}
+- Reversal trigger: {decision.get("reversal_trigger", "None recorded")}
 
-This summary translates the canonical synthetic case without changing its evidence. It does not establish financial loss, probability, certification, compliance, or real-world control effectiveness.
+This summary translates the canonical case without inventing additional facts. It does not establish financial loss, probability, certification, compliance, authorization, or real-world control effectiveness.
 """
 
 
