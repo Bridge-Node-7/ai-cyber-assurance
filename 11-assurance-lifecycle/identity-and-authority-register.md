@@ -104,3 +104,10 @@ Next review date:
 ## Limitations
 
 This register does not replace the authoritative identity source or prove that access controls operate correctly. Validate material controls and revocation paths separately.
+
+## Navigation
+
+- Previous: [Security Policy and Target](security-policy-and-target-template.md)
+- Next: [Threat-Control-Evidence Map](threat-control-evidence-map.md)
+- Validate critical controls: [Control Validation Record](control-validation-record.md)
+- Back to toolkit: [START_HERE.md](../START_HERE.md)
