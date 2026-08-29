@@ -1,45 +1,43 @@
-# Release Validation: AI Cyber Assurance v0.6.0
+# Release Validation: AI Cyber Assurance v0.6.1
 
-AI Cyber Assurance v0.6.0 closes the generated-view trust-boundary and authoring-contract findings identified during adversarial V&V of v0.5.0 while preserving defensive assurance boundaries and human decision authority.
+AI Cyber Assurance v0.6.1 is the final schema-authoring-parity patch over the v0.6.0 output-integrity hardening release.
 
-## User-facing scope
+## Scope carried forward from v0.6.0
 
-The release:
+The current release retains all v0.6.0 controls and UX corrections:
 
-- advances the Assurance Case contract to schema version `0.3`;
-- preserves exactly one bounded human decision per Assurance Case;
-- keeps typed cross-object references and accountable-human linkage for nonhuman identities;
-- requires material statements for claims, risks, controls, and findings before a case can render;
-- adds controlled decision status: Green, Amber, Red, or More evidence required;
-- requires a complete bounded condition package for Amber decisions;
-- distinguishes recorded items, none identified, not assessed, not applicable, and unknown for conditions and missing evidence;
-- validates chronology across evidence, findings, decisions, corrective actions, retests, closure, and review history;
-- reports case currency as CURRENT, EXPIRED, or NOT_YET_CURRENT without rewriting historical records;
-- escapes case-controlled Markdown and raw HTML before generated views are produced;
-- rejects unsafe Unicode formatting/control characters in the canonical case;
-- performs output-fidelity checks so supplied content cannot create a second generated `Human decision` section;
-- refuses to overwrite existing generated views unless a human explicitly supplies `--force`;
-- links the partner confidentiality boundary and intake template into the intended partner workflow;
-- adds workflow navigation to reusable specialist and lifecycle records identified as dead ends;
-- adds a narrow-screen/editor authoring alternative for wide traceability tables;
-- expands adversarial regression coverage for view injection, material-field omissions, conditional-decision semantics, currency, chronology, schema parity, safe overwrite, CLI help, and navigation.
+- Assurance Case schema version `0.3`;
+- exactly one bounded human decision;
+- typed cross-object references;
+- accountable-human linkage for nonhuman identities;
+- material statements for claims, risks, controls, and findings;
+- Green / Amber / Red / More evidence required decision status;
+- complete Amber condition package;
+- explicit recorded / none identified / not assessed / not applicable / unknown states;
+- chronology and review-currency checks;
+- Markdown/HTML output escaping and Unicode-control rejection;
+- output-fidelity checks against forged `Human decision` sections;
+- no generated-output overwrite without explicit `--force`;
+- partner confidentiality/intake routing;
+- workflow navigation and narrow-screen authoring guidance;
+- adversarial regression coverage.
 
-## V&V findings closed by this release
+## v0.6.1 closure additions
 
-The corrective scope directly addresses:
+This patch closes the final verification gaps found during post-release audit:
 
-- generated-view Markdown/HTML structure injection;
-- schema omissions for material validator/renderer fields;
-- silent blanking of material risk/finding statements;
-- Amber decisions without explicit conditions and bounded operating context;
-- stale-review ambiguity;
-- incomplete chronology between remediation and retest/closure;
-- ambiguous `None recorded` presentation;
-- partner confidentiality/intake documents outside the intended navigation path;
-- reusable workflow records with no return/next-step path;
-- accidental overwriting of generated views;
-- minimal CLI help;
-- `.pytest_cache/` local hygiene.
+1. **Schema authoring parity.** Local conditional requirements are now encoded in the JSON Schema for:
+   - nonhuman identity accountability;
+   - confidence basis when confidence is supplied;
+   - required closure fields for closed findings;
+   - Amber decision conditions and bounded operating fields;
+   - More-evidence-required cases;
+   - completed corrective-action dates; and
+   - rationale for non-independent retests.
+
+2. **Committed generated-output parity.** The regression suite again proves that the committed synthetic AI-agent Decision Receipt, Assurance Passport, and Executive Summary match the current safe renderer byte-for-byte for the fixed example review date.
+
+Cross-object ID typing, chronology, closure semantics, and other repository-specific relational invariants remain the responsibility of the standard-library executable validator; JSON Schema does not resolve those relationships by itself.
 
 ## Validation boundary
 
@@ -65,15 +63,11 @@ Release validation covers:
 - Assurance Case positive and adversarial negative tests;
 - Markdown/HTML and Unicode-control injection tests;
 - deterministic safe rendering across two distinct synthetic domains;
-- schema/validator parity checks for the material contract;
+- committed generated-output parity;
+- schema/validator material-field and local-conditional parity checks;
 - chronology and currency tests;
 - navigation regression tests;
-- repository structure;
-- deterministic metadata;
-- manifest and checksum integrity;
-- internal links;
-- common secret and personal-information patterns;
-- public-safety declarations;
+- deterministic metadata, manifest, SHA-256 integrity, links, public-safety declarations, and repository identity;
 - hosted Ubuntu and Windows GitHub Actions.
 
 ## Public/private boundary
@@ -82,33 +76,23 @@ The repository contains reusable public methodology, validation logic, templates
 
 Real partner architecture, evidence, telemetry, supplier information, credentials, vulnerabilities, regulated data, proprietary material, and decision records belong in private or access-controlled workspaces unless deliberately approved for unrestricted release.
 
-The partner path links the confidentiality boundary before real evidence intake.
-
 ## Release-state semantics
 
-`REPO_MANIFEST.json` describes a **validation-gated public release channel**, not a time-sensitive publication state. The authoritative evidence that a specific version was actually published is the corresponding GitHub Release and tag.
-
-This avoids a manifest becoming stale after the protected-main release job publishes an otherwise identical validated tree.
-
-## Security reports
-
-Security concerns should use the private reporting path described in [`SECURITY.md`](SECURITY.md).
+`REPO_MANIFEST.json` describes a validation-gated public release channel. The authoritative evidence that a specific version was actually published is the corresponding GitHub Release and tag.
 
 ## Release gate
 
-v0.6.0 is complete only after:
+v0.6.1 is complete only after:
 
 1. the human-authorized pull request is merged through protected `main`;
 2. required Ubuntu and Windows validation passes on the merged commit; and
 3. the versioned GitHub Release is published for that exact commit.
 
-Versioned GitHub Release publication is gated behind successful validation on protected `main`. Publication is idempotent: if the current `VERSION` release already exists, the release job makes no change.
-
 ## Human UAT boundary
 
 The repository incorporates adversarial simulated UAT and deterministic regression tests. It does not claim that representative partner users have been observed completing real cases, that assistive-technology testing has been completed, or that real partner outcomes have been established.
 
-Those are evidence to collect during controlled private pilots, not facts to invent in the public repository.
+Those are evidence to collect during controlled private pilots, not unfinished public-repository engineering claims.
 
 ## Limitations
 
