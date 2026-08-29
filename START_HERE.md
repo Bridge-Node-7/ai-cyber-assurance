@@ -48,7 +48,7 @@ Use [Cryptographic Change Assurance](12-cryptographic-change-assurance/README.md
 
 ### Optional Structured Assurance Case
 
-After selecting Quick Review or Full Assurance Lifecycle, use [Assurance Intelligence](13-assurance-intelligence/README.md) when one machine-readable evidence-to-decision record would reduce reconciliation or reporting drift.
+The Markdown templates are sufficient for many bounded reviews. After selecting Quick Review or Full Assurance Lifecycle, use [Assurance Intelligence](13-assurance-intelligence/README.md) only when one machine-readable evidence-to-decision record would reduce reconciliation or reporting drift.
 
 The Assurance Case is a representation of the bounded review. It does not create a separate decision hierarchy.
 
@@ -61,6 +61,8 @@ The Assurance Case is a representation of the bounded review. It does not create
 5. Reference sensitive evidence by controlled location or evidence ID. Do not copy sensitive evidence into the public toolkit.
 
 For a structured case, the private package may include `assurance-case.json` and generated views. Keep the real underlying evidence in the approved controlled location.
+
+For a partner-facing case, begin with [Partner Start Here](13-assurance-intelligence/partner-kit/START_HERE.md) and read the [Confidentiality Boundary](13-assurance-intelligence/partner-kit/confidentiality-boundary.md) before collecting real evidence.
 
 ## 3. Select Applicable Records
 
@@ -94,7 +96,32 @@ When AI assists, use the evidence classes and operating rules in [AGENTS.md](AGE
 
 AI must not silently convert reported or inferred information into observed or tested evidence.
 
-## 5. Use AI Safely
+## 5. Author Records Without Fighting Wide Tables
+
+Some lifecycle records use wide traceability tables because each row must preserve many linked fields. On a narrow screen or in a plain-text editor, you may author the **same fields** as one record per section instead of maintaining a single wide row.
+
+Example:
+
+```text
+### Record MAP-001
+Threat / failure mode:
+Affected asset / decision:
+Consequence:
+Requirement:
+Preventive control:
+Detective control:
+Corrective control:
+Recovery control:
+Evidence IDs:
+Validation record:
+Control owner:
+Risk owner:
+Status / decision:
+```
+
+Do not remove required fields or change their meaning. Normalize the record back into the applicable template when a tabular package is required. This is an authoring alternative, not a second assurance model.
+
+## 6. Use AI Safely
 
 AI may organize, draft, map, question, summarize, check, and validate structural relationships.
 
@@ -108,7 +135,7 @@ Authorized humans remain responsible for:
 - Declaring incident closure
 - Making the final assurance decision
 
-## 6. Apply the Decision Hierarchy
+## 7. Apply the Decision Hierarchy
 
 1. **Module assessment:** local conclusion within a specialist record.
 2. **Assurance recommendation:** package-level recommendation prepared by the review team, with AI assistance where appropriate.
@@ -118,7 +145,7 @@ Only the final assurance decision grants the disposition recorded for the stated
 
 Generated Decision Receipts, Assurance Passports, and Executive Summaries communicate the decision; they do not create authority independently.
 
-## 7. Validate
+## 8. Validate
 
 Run the public repository validator from the repository root:
 
@@ -129,24 +156,30 @@ python scripts/validate_repo.py --root .
 For a structured Assurance Case:
 
 ```bash
-python scripts/validate_assurance_case.py path/to/assurance-case.json
+python scripts/validate_assurance_case.py path/to/assurance-case.json --as-of YYYY-MM-DD
 ```
 
-The repository validator checks the controlled public toolkit. The Assurance Case validator checks structural consistency, evidence-class discipline, reference integrity, required human authority fields, and closure preconditions.
+When the decision depends on the review being current:
+
+```bash
+python scripts/validate_assurance_case.py path/to/assurance-case.json --as-of YYYY-MM-DD --require-current
+```
+
+The repository validator checks the controlled public toolkit. The Assurance Case validator checks structural consistency, evidence-class discipline, typed reference integrity, material statement presence, required human authority, chronology, decision-state semantics, and closure preconditions.
 
 The validator does not prove that a private completed review is factually correct, that evidence is authentic or sufficient, that a control works in a real environment, or that a system is authorized. The Assurance Case validator has the same factual boundary.
 
-## 8. Generate Consistent Views
+## 9. Generate Consistent Views
 
 After a case validates:
 
 ```bash
-python scripts/render_assurance_outputs.py path/to/assurance-case.json
+python scripts/render_assurance_outputs.py path/to/assurance-case.json --as-of YYYY-MM-DD
 ```
 
-The renderer produces a Decision Receipt, Assurance Passport, and Executive Summary from the same canonical case.
+The renderer produces a Decision Receipt, Assurance Passport, and Executive Summary from the same canonical case. Case-controlled Markdown and raw HTML are escaped before presentation. Existing generated files are preserved unless `--force` is supplied deliberately.
 
-## 9. Complete and Preserve the Review
+## 10. Complete and Preserve the Review
 
 A package is complete only when:
 
@@ -155,6 +188,6 @@ A package is complete only when:
 - Blocking gaps are resolved or explicitly accepted by an authorized decision owner.
 - Corrective actions and retest status are recorded where applicable.
 - The final assurance decision is recorded with scope, conditions, owner, date, expiration, and limitations.
-- If an Assurance Case is used, it passes structural validation and its generated views remain consistent with the canonical record.
+- If an Assurance Case is used, it passes structural validation, its currency is understood for the intended decision date, and its generated views remain consistent with the canonical record.
 
 Preserve the completed package and supporting evidence in the approved private location.
