@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.1] - 2026-08-28
+
+### Improved
+
+- Encoded local conditional authoring rules directly in the Assurance Case JSON Schema for nonhuman accountability, confidence basis, closed-finding closure fields, Amber decision requirements, More-evidence-required cases, completed corrective actions, and non-independent retests.
+- Restored an explicit regression test proving the committed synthetic AI-agent generated views match the current safe renderer byte-for-byte for the fixed review date.
+- Expanded schema/validator parity coverage to require the material conditional rules as part of the published authoring contract.
+
+### Limitations
+
+- Cross-object typed-reference, chronology, and other relational invariants remain the responsibility of the standard-library executable validator because JSON Schema does not resolve repository-specific object relationships by itself.
+- Structural and presentation-integrity validation still does not establish evidence authenticity or sufficiency, real-world control effectiveness, certification, compliance, deployment approval, operational authorization, or partner outcomes.
+
 ## [0.6.0] - 2026-08-28
 
 ### Added
