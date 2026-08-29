@@ -1,5 +1,5 @@
 {
-  "case_version": "0.1",
+  "case_version": "0.2",
   "case": {
     "id": "CASE-AI-001",
     "title": "Synthetic Supplier Research AI Agent",
@@ -16,9 +16,17 @@
   },
   "identities": [
     {
+      "id": "ID-HUM-001",
+      "type": "human",
+      "owner": "Fictional Organization",
+      "purpose": "Accountable security decision owner.",
+      "status": "active"
+    },
+    {
       "id": "ID-AI-001",
       "type": "AI agent",
       "owner": "Fictional Security Owner",
+      "accountable_human_ref": "ID-HUM-001",
       "purpose": "Read and summarize synthetic supplier-information records.",
       "permitted_actions": [
         "read supplier-information records",
@@ -32,13 +40,6 @@
       "credential_lifetime": "24 hours",
       "revocation_mechanism": "Synthetic identity control plane",
       "monitoring": "Synthetic audit log",
-      "status": "active"
-    },
-    {
-      "id": "ID-HUM-001",
-      "type": "human",
-      "owner": "Fictional Organization",
-      "purpose": "Accountable security decision owner.",
       "status": "active"
     }
   ],
@@ -332,6 +333,7 @@
       "finding_ref": "FIND-001",
       "corrective_action_ref": "CA-001",
       "tester": "Fictional Independent Tester",
+      "independent": true,
       "method": "Attempt an allowed read action and a denied write action in the synthetic fixture.",
       "result": "pass",
       "evidence_refs": [
@@ -344,6 +346,7 @@
       "finding_ref": "FIND-002",
       "corrective_action_ref": "CA-002",
       "tester": "Fictional Independent Tester",
+      "independent": true,
       "method": "Verify bounded credential lifetime, revocation behavior, and required audit-event generation in the synthetic fixture.",
       "result": "pass",
       "evidence_refs": [
@@ -356,6 +359,7 @@
       "finding_ref": "FIND-003",
       "corrective_action_ref": "CA-003",
       "tester": "Fictional Independent Tester",
+      "independent": true,
       "method": "Verify required synthetic audit events are generated for the bounded agent actions.",
       "result": "pass",
       "evidence_refs": [
