@@ -4,20 +4,7 @@
   "title": "AI Cyber Assurance Case",
   "description": "Machine-readable envelope for one bounded assurance decision. Structural validity does not establish factual truth, control effectiveness, certification, compliance, or operational authorization.",
   "type": "object",
-  "required": [
-    "case_version",
-    "case",
-    "identities",
-    "claims",
-    "risks",
-    "controls",
-    "evidence",
-    "findings",
-    "decisions",
-    "corrective_actions",
-    "retests",
-    "review_history"
-  ],
+  "required": ["case_version", "case", "identities", "claims", "risks", "controls", "evidence", "findings", "decisions", "corrective_actions", "retests", "review_history"],
   "properties": {
     "case_version": {"const": "0.3"},
     "case": {
@@ -45,7 +32,7 @@
           "id": {"type": "string", "minLength": 1},
           "type": {"type": "string", "minLength": 1},
           "owner": {"type": "string", "minLength": 1},
-          "accountable_human_ref": {"type": "string", "minLength": 1},
+          "accountable_human_ref": {"type": "string", "minLength": 1, "description": "Required for every nonhuman identity; must resolve to a human identity under executable validation."},
           "purpose": {"type": "string", "minLength": 1},
           "status": {"type": "string", "minLength": 1},
           "permitted_actions": {"type": "array", "items": {"type": "string"}},
@@ -54,6 +41,12 @@
           "revocation_mechanism": {"type": "string", "minLength": 1},
           "monitoring": {"type": "string", "minLength": 1}
         },
+        "allOf": [
+          {
+            "if": {"properties": {"type": {"pattern": "^[Hh][Uu][Mm][Aa][Nn]$"}}, "required": ["type"]},
+            "else": {"required": ["accountable_human_ref"]}
+          }
+        ],
         "additionalProperties": true
       }
     },
@@ -73,6 +66,9 @@
           "confidence": {"type": "string", "minLength": 1},
           "confidence_basis": {"type": "string", "minLength": 1}
         },
+        "allOf": [
+          {"if": {"required": ["confidence"]}, "then": {"required": ["confidence_basis"]}}
+        ],
         "additionalProperties": true
       }
     },
@@ -121,6 +117,9 @@
           "confidence": {"type": "string", "minLength": 1},
           "confidence_basis": {"type": "string", "minLength": 1}
         },
+        "allOf": [
+          {"if": {"required": ["confidence"]}, "then": {"required": ["confidence_basis"]}}
+        ],
         "additionalProperties": true
       }
     },
@@ -139,10 +138,22 @@
           "subject_refs": {"type": "array", "items": {"type": "string"}},
           "evidence_refs": {"type": "array", "items": {"type": "string"}},
           "control_refs": {"type": "array", "items": {"type": "string"}},
-          "corrective_action_refs": {"type": "array", "items": {"type": "string"}},
+          "corrective_action_refs": {"type": "array", "items": {"type": "string", "minLength": 1}},
           "retest_ref": {"type": "string", "minLength": 1},
-          "closure_evidence_refs": {"type": "array", "items": {"type": "string"}}
+          "closure_evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}}
         },
+        "allOf": [
+          {
+            "if": {"properties": {"status": {"const": "closed"}}, "required": ["status"]},
+            "then": {
+              "required": ["closed_at", "corrective_action_refs", "retest_ref", "closure_evidence_refs"],
+              "properties": {
+                "corrective_action_refs": {"minItems": 1},
+                "closure_evidence_refs": {"minItems": 1}
+              }
+            }
+          }
+        ],
         "additionalProperties": true
       }
     },
@@ -164,7 +175,7 @@
             "type": "object",
             "required": ["type", "name", "role"],
             "properties": {
-              "type": {"const": "human"},
+              "type": {"type": "string", "pattern": "^[Hh][Uu][Mm][Aa][Nn]$"},
               "name": {"type": "string", "minLength": 1},
               "role": {"type": "string", "minLength": 1}
             },
@@ -188,6 +199,44 @@
           "confidence_basis": {"type": "string", "minLength": 1},
           "reversal_trigger": {"type": "string", "minLength": 1}
         },
+        "allOf": [
+          {
+            "if": {"required": ["confidence"]},
+            "then": {"required": ["confidence_basis"]}
+          },
+          {
+            "if": {"properties": {"missing_evidence_state": {"const": "items_recorded"}}, "required": ["missing_evidence_state"]},
+            "then": {"properties": {"missing_evidence": {"minItems": 1}}},
+            "else": {"properties": {"missing_evidence": {"maxItems": 0}}}
+          },
+          {
+            "if": {"properties": {"conditions_state": {"const": "items_recorded"}}, "required": ["conditions_state"]},
+            "then": {"properties": {"conditions": {"minItems": 1}}},
+            "else": {"properties": {"conditions": {"maxItems": 0}}}
+          },
+          {
+            "if": {"properties": {"decision_status": {"const": "Amber"}}, "required": ["decision_status"]},
+            "then": {
+              "required": ["permitted_scope", "due_date", "prohibited_actions", "monitoring_requirements", "required_retests"],
+              "properties": {
+                "conditions_state": {"const": "items_recorded"},
+                "conditions": {"minItems": 1},
+                "prohibited_actions": {"minItems": 1},
+                "monitoring_requirements": {"minItems": 1},
+                "required_retests": {"minItems": 1}
+              }
+            }
+          },
+          {
+            "if": {"properties": {"decision_status": {"const": "More evidence required"}}, "required": ["decision_status"]},
+            "then": {
+              "properties": {
+                "missing_evidence_state": {"const": "items_recorded"},
+                "missing_evidence": {"minItems": 1}
+              }
+            }
+          }
+        ],
         "additionalProperties": true
       }
     },
@@ -207,6 +256,12 @@
           "completed_at": {"type": "string", "format": "date"},
           "evidence_refs": {"type": "array", "items": {"type": "string"}}
         },
+        "allOf": [
+          {
+            "if": {"properties": {"status": {"const": "complete"}}, "required": ["status"]},
+            "then": {"required": ["completed_at"]}
+          }
+        ],
         "additionalProperties": true
       }
     },
@@ -227,6 +282,12 @@
           "evidence_refs": {"type": "array", "items": {"type": "string"}},
           "tested_at": {"type": "string", "format": "date"}
         },
+        "allOf": [
+          {
+            "if": {"properties": {"independent": {"const": false}}, "required": ["independent"]},
+            "then": {"required": ["independence_rationale"]}
+          }
+        ],
         "additionalProperties": true
       }
     },

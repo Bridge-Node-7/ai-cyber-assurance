@@ -3,8 +3,8 @@
   "repository": "ai-cyber-assurance",
   "organization": "Bridge-Node-7",
   "target_url": "https://github.com/Bridge-Node-7/ai-cyber-assurance",
-  "version": "v0.6.0",
-  "release_title": "AI Cyber Assurance Output Integrity and Partner UX Hardening",
+  "version": "v0.6.1",
+  "release_title": "AI Cyber Assurance Schema Authoring Parity Closeout",
   "generated_date": "2026-08-28",
   "release_policy": {
     "channel": "validation-gated-public",
@@ -16,8 +16,8 @@
     "human_release_authority_required": true
   },
   "maturity_scope": {
-    "implemented": "The documentation templates, synthetic examples, guided start, review package index, Cryptographic Change Assurance module, Assurance Intelligence schema v0.3, typed relational and chronology validator, safe deterministic output renderer, currency reporting, partner workflow, release-metadata refresh, standard-library regression suite, and GitHub Actions workflow are present.",
-    "tested": "Repository validation, cryptographic-change invariants, Assurance Case multi-domain positive and adversarial negative tests, output-injection defenses, material-field completeness, decision-state semantics, chronology, currency, schema/validator parity, deterministic safe rendering, navigation regression tests, manifest parity, SHA-256 integrity, and hosted Ubuntu and Windows validation are release gates.",
+    "implemented": "The documentation templates, synthetic examples, guided start, review package index, Cryptographic Change Assurance module, Assurance Intelligence schema v0.3 with local conditional authoring rules, typed relational and chronology validator, safe deterministic output renderer, currency reporting, partner workflow, release-metadata refresh, standard-library regression suite, and GitHub Actions workflow are present.",
+    "tested": "Repository validation, cryptographic-change invariants, Assurance Case multi-domain positive and adversarial negative tests, output-injection defenses, material-field completeness, decision-state semantics, chronology, currency, schema/validator material and conditional parity, deterministic safe rendering, committed generated-output parity, navigation regression tests, manifest parity, SHA-256 integrity, and hosted Ubuntu and Windows validation are release gates.",
     "usability_reviewed": "The public toolkit includes guided onboarding, a partner starter path, narrow-screen authoring guidance, and synthetic examples across AI-agent and cryptographic domains. Simulated UX/UAT findings have been incorporated. The public source does not by itself establish broad usability, accessibility, independent validation, partner outcomes, or operational outcomes.",
     "independently_validated": false,
     "operationally_validated": false,
