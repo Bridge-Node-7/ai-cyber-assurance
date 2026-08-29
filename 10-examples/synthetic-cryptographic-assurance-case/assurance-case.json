@@ -1,0 +1,190 @@
+{
+  "case_version": "0.2",
+  "case": {
+    "id": "CASE-CRYPTO-001",
+    "title": "Synthetic Cryptographic Dependency Transition",
+    "scope": "Fictional service transition away from a withdrawn cryptographic dependency.",
+    "decision_question": "May the fictional service proceed with the replacement dependency after remediation and retest?",
+    "review_path": "Quick Review",
+    "public_synthetic": true,
+    "reviewed_at": "2026-08-28",
+    "expires_at": "2026-11-26",
+    "limitations": [
+      "All entities and outcomes are fictional.",
+      "No real cryptographic implementation or production system is assessed."
+    ]
+  },
+  "identities": [
+    {
+      "id": "ID-HUM-CRYPTO",
+      "type": "human",
+      "owner": "Fictional Organization",
+      "purpose": "Authorized cryptographic change decision owner.",
+      "status": "active"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLAIM-CRYPTO-001",
+      "statement": "The replacement dependency satisfies the bounded compatibility and rollback conditions for this fictional review.",
+      "evidence_refs": [
+        "EVID-CRYPTO-001",
+        "EVID-CRYPTO-002"
+      ],
+      "finding_refs": [
+        "FIND-CRYPTO-001"
+      ],
+      "control_refs": [
+        "CTRL-CRYPTO-001"
+      ],
+      "status": "supported",
+      "confidence": "high",
+      "confidence_basis": "Observed dependency inventory and Tested synthetic compatibility evidence."
+    }
+  ],
+  "risks": [
+    {
+      "id": "RISK-CRYPTO-001",
+      "statement": "An unverified dependency replacement could cause interoperability failure or an unsafe rollback path.",
+      "control_refs": [
+        "CTRL-CRYPTO-001"
+      ],
+      "evidence_refs": [
+        "EVID-CRYPTO-001"
+      ],
+      "status": "treated"
+    }
+  ],
+  "controls": [
+    {
+      "id": "CTRL-CRYPTO-001",
+      "statement": "The replacement dependency is inventoried, compatibility-tested, and paired with a tested rollback path.",
+      "owner_identity_ref": "ID-HUM-CRYPTO",
+      "status": "implemented"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVID-CRYPTO-001",
+      "evidence_class": "Observed",
+      "source": "Synthetic dependency inventory",
+      "owner": "Fictional Cryptographic Change Owner",
+      "collected_at": "2026-08-28",
+      "limitations": [
+        "Synthetic inventory only."
+      ],
+      "confidence": "high",
+      "confidence_basis": "Directly represented fictional dependency record."
+    },
+    {
+      "id": "EVID-CRYPTO-002",
+      "evidence_class": "Tested",
+      "source": "Synthetic compatibility and rollback retest",
+      "owner": "Fictional Independent Tester",
+      "collected_at": "2026-08-28",
+      "limitations": [
+        "Synthetic test only; no production cryptography exercised."
+      ],
+      "confidence": "high",
+      "confidence_basis": "Documented fictional compatibility and rollback test."
+    }
+  ],
+  "findings": [
+    {
+      "id": "FIND-CRYPTO-001",
+      "statement": "The initial replacement plan lacked tested rollback evidence.",
+      "owner": "Fictional Cryptographic Change Owner",
+      "evidence_refs": [
+        "EVID-CRYPTO-001"
+      ],
+      "control_refs": [
+        "CTRL-CRYPTO-001"
+      ],
+      "corrective_action_refs": [
+        "CA-CRYPTO-001"
+      ],
+      "retest_ref": "RETEST-CRYPTO-001",
+      "closure_evidence_refs": [
+        "EVID-CRYPTO-002"
+      ],
+      "status": "closed"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-CRYPTO-001",
+      "question": "May the fictional service proceed with the replacement dependency after remediation and retest?",
+      "consequential": true,
+      "authority": {
+        "type": "human",
+        "name": "Fictional Cryptographic Change Owner",
+        "role": "Authorized Human Decision Owner"
+      },
+      "claim_refs": [
+        "CLAIM-CRYPTO-001"
+      ],
+      "evidence_refs": [
+        "EVID-CRYPTO-001",
+        "EVID-CRYPTO-002"
+      ],
+      "finding_refs": [
+        "FIND-CRYPTO-001"
+      ],
+      "corrective_action_refs": [
+        "CA-CRYPTO-001"
+      ],
+      "missing_evidence": [
+        "No production evidence exists because the example is synthetic."
+      ],
+      "options": [
+        "Do not proceed",
+        "Proceed after successful compatibility and rollback retest"
+      ],
+      "disposition": "Proceed after successful compatibility and rollback retest",
+      "conditions": [
+        "Compatibility test passes",
+        "Rollback path passes",
+        "Review remains within stated scope"
+      ],
+      "confidence": "high",
+      "confidence_basis": "Synthetic Observed and Tested records support the bounded fictional disposition.",
+      "reversal_trigger": "Failed future compatibility test, rollback failure, or material dependency change."
+    }
+  ],
+  "corrective_actions": [
+    {
+      "id": "CA-CRYPTO-001",
+      "finding_ref": "FIND-CRYPTO-001",
+      "decision_ref": "DEC-CRYPTO-001",
+      "action": "Add and execute a bounded compatibility and rollback retest before proceeding.",
+      "owner": "Fictional Cryptographic Change Owner",
+      "status": "complete",
+      "evidence_refs": [
+        "EVID-CRYPTO-002"
+      ]
+    }
+  ],
+  "retests": [
+    {
+      "id": "RETEST-CRYPTO-001",
+      "finding_ref": "FIND-CRYPTO-001",
+      "corrective_action_ref": "CA-CRYPTO-001",
+      "tester": "Fictional Independent Tester",
+      "independent": true,
+      "method": "Execute the synthetic compatibility path and rollback path against the replacement dependency.",
+      "result": "pass",
+      "evidence_refs": [
+        "EVID-CRYPTO-002"
+      ],
+      "tested_at": "2026-08-28"
+    }
+  ],
+  "review_history": [
+    {
+      "id": "REV-CRYPTO-001",
+      "date": "2026-08-28",
+      "actor": "Fictional Review Team",
+      "summary": "Synthetic cryptographic case completed after compatibility and rollback retest."
+    }
+  ]
+}
