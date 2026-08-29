@@ -176,12 +176,27 @@ class AssuranceCaseTests(unittest.TestCase):
         findings = schema["properties"]["findings"]["items"]
         identities = schema["properties"]["identities"]["items"]
         retests = schema["properties"]["retests"]["items"]
+        corrective_actions = schema["properties"]["corrective_actions"]["items"]
         for field in ("authority", "missing_evidence_state", "missing_evidence", "conditions_state", "conditions", "reversal_trigger", "decision_status", "decided_at"):
             self.assertIn(field, decisions["properties"])
         for field in ("statement", "closure_evidence_refs", "corrective_action_refs", "retest_ref", "opened_at", "closed_at"):
             self.assertIn(field, findings["properties"])
         self.assertIn("accountable_human_ref", identities["properties"])
         self.assertIn("independence_rationale", retests["properties"])
+        for item in (decisions, findings, identities, retests, corrective_actions):
+            self.assertTrue(item.get("allOf"), "conditional schema contract is required")
+        decision_conditions = json.dumps(decisions["allOf"], sort_keys=True)
+        finding_conditions = json.dumps(findings["allOf"], sort_keys=True)
+        identity_conditions = json.dumps(identities["allOf"], sort_keys=True)
+        retest_conditions = json.dumps(retests["allOf"], sort_keys=True)
+        action_conditions = json.dumps(corrective_actions["allOf"], sort_keys=True)
+        for token in ("Amber", "More evidence required", "conditions_state", "missing_evidence_state", "required_retests"):
+            self.assertIn(token, decision_conditions)
+        for token in ("closed_at", "closure_evidence_refs", "corrective_action_refs", "retest_ref"):
+            self.assertIn(token, finding_conditions)
+        self.assertIn("accountable_human_ref", identity_conditions)
+        self.assertIn("independence_rationale", retest_conditions)
+        self.assertIn("completed_at", action_conditions)
 
     def test_renderer_is_deterministic_for_both_domains_given_same_as_of(self) -> None:
         for path in (AI_CASE_PATH, CRYPTO_CASE_PATH):
@@ -195,6 +210,17 @@ class AssuranceCaseTests(unittest.TestCase):
                     self.assertEqual(one, two)
                     self.assertIn(renderer.safe_text(data["case"]["id"]), one)
                     self.assertIn(data["decisions"][0]["decision_status"], one)
+
+    def test_committed_ai_outputs_match_renderer(self) -> None:
+        data = load_fixture(AI_CASE_PATH)
+        with tempfile.TemporaryDirectory() as temp:
+            renderer.render_all(data, Path(temp), as_of=AS_OF)
+            committed = AI_CASE_PATH.parent / "generated"
+            for name in renderer.TARGET_FILES:
+                self.assertEqual(
+                    (Path(temp) / name).read_text(encoding="utf-8"),
+                    (committed / name).read_text(encoding="utf-8"),
+                )
 
     def test_crypto_executive_summary_has_no_ai_supplier_invention(self) -> None:
         text = renderer.render_executive_summary(load_fixture(CRYPTO_CASE_PATH), AS_OF)
