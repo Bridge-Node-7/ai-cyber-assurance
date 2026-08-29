@@ -3,14 +3,14 @@
   "repository": "ai-cyber-assurance",
   "organization": "Bridge-Node-7",
   "target_url": "https://github.com/Bridge-Node-7/ai-cyber-assurance",
-  "version": "v0.4.0",
-  "release_title": "AI Cyber Assurance Assurance Intelligence Kernel",
+  "version": "v0.5.0",
+  "release_title": "AI Cyber Assurance Assurance Intelligence Hardening",
   "generated_date": "2026-08-28",
   "release_status": "RELEASE_CANDIDATE",
   "maturity_scope": {
-    "implemented": "The documentation templates, synthetic examples, guided start, review package index, Cryptographic Change Assurance module, Assurance Intelligence schema, case validator, deterministic output renderer, release-metadata refresh, standard-library validator, regression suite, and GitHub Actions workflow are present.",
-    "tested": "Repository validation, cryptographic-change invariants, Assurance Case positive and negative tests, deterministic output rendering, manifest parity, SHA-256 integrity, regression tests, and hosted Ubuntu and Windows validation are required release gates.",
-    "usability_reviewed": "The public toolkit includes guided onboarding, a partner starter path, and synthetic examples. The public source does not by itself establish broad usability, accessibility, independent validation, partner outcomes, or operational outcomes.",
+    "implemented": "The documentation templates, synthetic examples, guided start, review package index, Cryptographic Change Assurance module, Assurance Intelligence schema v0.2, typed relational validator, generic deterministic output renderer, release-metadata refresh, standard-library validator, regression suite, and GitHub Actions workflow are present.",
+    "tested": "Repository validation, cryptographic-change invariants, Assurance Case multi-domain positive and adversarial negative tests, schema/validator parity checks, deterministic output rendering, manifest parity, SHA-256 integrity, regression tests, and hosted Ubuntu and Windows validation are required release gates.",
+    "usability_reviewed": "The public toolkit includes guided onboarding, a partner starter path, and synthetic examples across AI-agent and cryptographic domains. The public source does not by itself establish broad usability, accessibility, independent validation, partner outcomes, or operational outcomes.",
     "independently_validated": false,
     "operationally_validated": false,
     "certified": false,
@@ -40,7 +40,10 @@
     "assurance_intelligence": {
       "start": "13-assurance-intelligence/README.md",
       "schema": "13-assurance-intelligence/schemas/assurance-case.schema.json",
-      "example": "10-examples/synthetic-ai-agent-assurance/",
+      "examples": [
+        "10-examples/synthetic-ai-agent-assurance/",
+        "10-examples/synthetic-cryptographic-assurance-case/"
+      ],
       "validate": "scripts/validate_assurance_case.py",
       "render": "scripts/render_assurance_outputs.py"
     }
@@ -60,7 +63,7 @@
     "12": "Cryptographic Change Assurance",
     "13": "Assurance Intelligence"
   },
-  "file_count": 70,
+  "file_count": 72,
   "files": [
     ".gitattributes",
     ".github/dependabot.yml",
@@ -85,6 +88,8 @@
     "10-examples/synthetic-ai-agent-assurance/generated/ASSURANCE_PASSPORT.md",
     "10-examples/synthetic-ai-agent-assurance/generated/DECISION_RECEIPT.md",
     "10-examples/synthetic-ai-agent-assurance/generated/EXECUTIVE_SUMMARY.md",
+    "10-examples/synthetic-cryptographic-assurance-case/README.md",
+    "10-examples/synthetic-cryptographic-assurance-case/assurance-case.json",
     "10-examples/synthetic-cryptographic-withdrawal/README.md",
     "10-examples/synthetic-supplier-assurance/README.md",
     "10-examples/synthetic-supplier-assurance/completed-evidence-manifest.md",
