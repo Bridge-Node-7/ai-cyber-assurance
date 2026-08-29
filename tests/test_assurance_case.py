@@ -136,6 +136,17 @@ class AssuranceCaseTests(unittest.TestCase):
                     self.assertIn(data["case"]["id"], one)
                     self.assertIn(data["decisions"][0]["disposition"], one)
 
+    def test_committed_ai_outputs_match_renderer(self) -> None:
+        data = load_fixture(AI_CASE_PATH)
+        with tempfile.TemporaryDirectory() as temp:
+            renderer.render_all(data, Path(temp))
+            committed = AI_CASE_PATH.parent / "generated"
+            for name in ("DECISION_RECEIPT.md", "ASSURANCE_PASSPORT.md", "EXECUTIVE_SUMMARY.md"):
+                self.assertEqual(
+                    (Path(temp) / name).read_text(encoding="utf-8"),
+                    (committed / name).read_text(encoding="utf-8"),
+                )
+
     def test_crypto_executive_summary_has_no_ai_supplier_invention(self) -> None:
         text = renderer.render_executive_summary(load_fixture(CRYPTO_CASE_PATH))
         self.assertNotIn("AI agent", text)
