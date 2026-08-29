@@ -1,6 +1,6 @@
 # Decision Receipt — DEC-001
 
-> **Artifact type:** COMPLETED SYNTHETIC GENERATED VIEW  
+> **Artifact type:** GENERATED VIEW  
 > **Operational authority:** None  
 > **Source of truth:** `CASE-AI-001` canonical Assurance Case
 
@@ -34,7 +34,7 @@ Fictional AI agent access to synthetic supplier-information records and associat
 
 - No production evidence exists because the example is entirely synthetic.
 
-## Decision
+## Human decision
 
 **Disposition:** Proceed with bounded authority after successful retest
 
@@ -44,11 +44,19 @@ Fictional AI agent access to synthetic supplier-information records and associat
 
 **Confidence basis:** Synthetic Observed and Tested records support the bounded fictional disposition while limitations remain explicit.
 
-## Conditions and corrective actions
+## Conditions
 
-- CA-001
-- CA-002
-- CA-003
+- Read-only scope
+- Bounded credential lifetime
+- Revocation path
+- Audit logging
+- Successful retest
+
+## Corrective actions
+
+- CA-001: Remove write authority and retain only read access required by the stated purpose.
+- CA-002: Replace the persistent credential with a bounded-lifetime credential and preserve revocation capability.
+- CA-003: Enable required synthetic audit events and verify their generation.
 
 ## Reversal trigger
 
@@ -59,4 +67,4 @@ Unauthorized action, material scope change, failed future retest, or loss of req
 - Review date: 2026-08-28
 - Expiration: 2026-11-26
 
-This synthetic receipt demonstrates repository behavior. It does not certify, authorize, or establish the security of a real system.
+This receipt communicates the bounded human decision recorded in the canonical case. It does not independently certify, authorize, or establish the security of a real system.
