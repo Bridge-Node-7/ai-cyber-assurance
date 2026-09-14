@@ -37,6 +37,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Initialize required CodeQL
+        if: matrix.os == 'ubuntu-latest'
+        uses: github/codeql-action/init@5595ccaf912efad79be6eef63a5619ff05969be3 # v4.37.6
+        with:
+          languages: python
+
       - name: Report validation workflow hash
         shell: bash
         run: sha256sum .github/workflows/validate.yml
@@ -58,6 +64,13 @@ jobs:
             --json-output validation-report.json
           sha256sum -c MANIFEST.sha256
           git diff --check
+
+      - name: Run required CodeQL analysis
+        if: matrix.os == 'ubuntu-latest'
+        uses: github/codeql-action/analyze@5595ccaf912efad79be6eef63a5619ff05969be3 # v4.37.6
+        with:
+          upload: never
+          output: codeql-required-results
 
       - name: Upload validation report
         if: always()
