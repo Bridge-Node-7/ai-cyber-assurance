@@ -101,6 +101,17 @@ class VersionTests(unittest.TestCase):
             write(root / "VERSION", "9.8.7\n")
             self.assertEqual(validator.read_version(root), "9.8.7")
 
+    def test_release_requires_explicit_main_dispatch(self) -> None:
+        workflow = (REPO_ROOT / ".github" / "workflows" / "validate.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(
+            "if: github.event_name == 'workflow_dispatch' && "
+            "github.ref == 'refs/heads/main'",
+            workflow,
+        )
+        self.assertNotIn("if: github.event_name == 'push' &&", workflow)
+
     def test_manifest_comparison_uses_version_file(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
