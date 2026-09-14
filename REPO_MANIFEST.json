@@ -74,10 +74,11 @@
     "12": "Cryptographic Change Assurance",
     "13": "Assurance Intelligence"
   },
-  "file_count": 73,
+  "file_count": 74,
   "files": [
     ".gitattributes",
     ".github/dependabot.yml",
+    ".github/workflows/codeql.yml",
     ".github/workflows/validate.yml",
     ".gitignore",
     "01-ai-agent-security/ai-agent-security-checklist.md",
