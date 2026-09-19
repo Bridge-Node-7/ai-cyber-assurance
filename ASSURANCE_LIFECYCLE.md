@@ -10,7 +10,7 @@ This file is the navigator for a full AI Cyber Assurance review. It explains the
 
 Use the full lifecycle when a system is high-impact, operational, multi-party, dependent on external services, able to change external state, or expected to support consequential decisions.
 
-Begin with [Start Here](START_HERE.md) and create the [Review Package Index](02-evidence-manifests/review-package-index-template.md). For a focused review, use the Quick Review path. AI assistants should also follow [AGENTS.md](AGENTS.md).
+Begin with [Start Here](START_HERE.md) and create the [Review Package Index](02-evidence-manifests/review-package-index-template.md). For a focused review, use the Quick Review path. AI assistants should also follow [AI_REVIEW_GUIDE.md](AI_REVIEW_GUIDE.md).
 
 ## Lifecycle
 
