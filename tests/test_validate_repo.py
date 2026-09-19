@@ -30,7 +30,7 @@ def minimal_guidance(root: Path) -> None:
         """# AI Cyber Assurance
 
 [Start here](START_HERE.md)
-[AI Review Guide](AI_REVIEW_GUIDE.md)
+[Automated Review Guide](AUTOMATED_REVIEW_GUIDE.md)
 Create a private or access-controlled working package.
 The final assurance decision remains human.
 """,
@@ -39,7 +39,7 @@ The final assurance decision remains human.
         root / "START_HERE.md",
         """# Start Here
 
-[Agents](AI_REVIEW_GUIDE.md)
+[Automated review](AUTOMATED_REVIEW_GUIDE.md)
 [Package](02-evidence-manifests/review-package-index-template.md)
 [Evidence](02-evidence-manifests/evidence-manifest-template.md)
 [Lifecycle](ASSURANCE_LIFECYCLE.md)
@@ -56,15 +56,15 @@ The validator does not prove review truth.
 """,
     )
     write(
-        root / "AI_REVIEW_GUIDE.md",
+        root / "AUTOMATED_REVIEW_GUIDE.md",
         """# AI Assistance Instructions
 
 ## Scope
 ## Human Authority
 ## Evidence Classes
-## Agent May
-## Agent Must
-## Agent Must Not
+## Automated Assistance May
+## Automated Assistance Must
+## Automated Assistance Must Not
 ## Required Output
 ## Stop Conditions
 ## Validation Boundary
@@ -157,10 +157,10 @@ class GuidanceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             minimal_guidance(root)
-            (root / "AI_REVIEW_GUIDE.md").unlink()
+            (root / "AUTOMATED_REVIEW_GUIDE.md").unlink()
             result = validator.check_onboarding_and_agent_guidance(root)
             self.assertFalse(result.passed)
-            self.assertTrue(any("AI_REVIEW_GUIDE.md" in item for item in result.details))
+            self.assertTrue(any("AUTOMATED_REVIEW_GUIDE.md" in item for item in result.details))
 
     def test_missing_readme_start_link_is_reported(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -170,7 +170,7 @@ class GuidanceTests(unittest.TestCase):
                 root / "README.md",
                 """# AI Cyber Assurance
 
-[Agents](AI_REVIEW_GUIDE.md)
+[Automated review](AUTOMATED_REVIEW_GUIDE.md)
 Create a private or access-controlled working package.
 The final assurance decision remains human.
 """,
@@ -188,7 +188,7 @@ The final assurance decision remains human.
                 """# AI Cyber Assurance
 
 [Start here](START_HERE.md)
-[Agents](AI_REVIEW_GUIDE.md)
+[Automated review](AUTOMATED_REVIEW_GUIDE.md)
 The final assurance decision remains human.
 """,
             )

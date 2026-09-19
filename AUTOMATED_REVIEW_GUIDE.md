@@ -1,19 +1,14 @@
-# AI Review Guide
+# Automated Review Assistance
 
-Use this guide when AI assists with interpreting, applying, reviewing, or maintaining this repository. They do not grant system access, evidence access, decision authority, release authority, or permission to handle sensitive information.
+Use this guide when automated assistance supports interpretation or application of the AI Cyber Assurance toolkit. This guide does not grant system access, evidence access, decision authority, release authority, or permission to handle sensitive information.
 
 ## Scope
 
-These instructions apply to two operating modes:
-
-1. **Review assistance:** helping a user apply the AI Cyber Assurance toolkit to a bounded system or workflow.
-2. **Repository review or maintenance:** examining or proposing changes to the public toolkit.
-
-The operating mode must be stated before substantive work begins.
+Automated assistance may help a user apply the toolkit to a bounded system or workflow. The system, scope, review path, and decision authority must be stated before substantive work begins.
 
 ## Human Authority
 
-AI may assist analysis and preparation. Authorized humans retain authority over consequential access, testing, production actions, risk acceptance, supplier decisions, incident declarations, public claims, release approval, and the final assurance decision.
+Automated assistance may support analysis and preparation. Authorized humans retain authority over consequential access, testing, production actions, risk acceptance, supplier decisions, incident declarations, public claims, release approval, and the final assurance decision.
 
 ## Evidence Classes
 
@@ -29,9 +24,9 @@ Use one evidence class for every material statement:
 
 Reported or Inferred information must not be silently presented as Observed or Tested.
 
-## Agent May
+## Automated Assistance May
 
-The agent may:
+Automated assistance may:
 
 - Explain the toolkit and its limitations
 - Recommend Quick Review or Full Assurance Lifecycle
@@ -45,11 +40,11 @@ The agent may:
 - Prepare a bounded assurance recommendation
 - Summarize required human decisions
 
-## Agent Must
+## Automated Assistance Must
 
-The agent must:
+Automated assistance must:
 
-- State the operating mode, system, scope, and review path
+- State the system, scope, decision authority, and review path
 - Distinguish evidence classes
 - Cite the supporting file, evidence ID, test result, interview, or other source
 - Preserve uncertainty, dissent, and limitations
@@ -60,9 +55,9 @@ The agent must:
 - Keep conclusions bounded by scope, evidence date, and expiration
 - State what the repository validator does and does not prove
 
-## Agent Must Not
+## Automated Assistance Must Not
 
-The agent must not:
+Automated assistance must not:
 
 - Invent evidence, sources, tests, approvals, or access
 - Claim access it did not have
@@ -76,11 +71,10 @@ The agent must not:
 - Declare an incident closed
 - Close a corrective action without supporting retest evidence
 - Sign or issue the final assurance decision
-- Publish repository changes without explicit authorization
 
 ## Required Output
 
-A substantive AI-assisted review should present:
+A substantive automated review should present:
 
 1. Scope
 2. Review path
