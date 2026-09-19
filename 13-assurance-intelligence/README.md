@@ -103,7 +103,7 @@ Public examples in this repository are synthetic and fictional.
 
 For real work, use the environment approved for the review evidence. Keep authoritative evidence at its source when practical and use stable references in the Assurance Case rather than copying source material unnecessarily.
 
-Start with [Partner Start Here](partner-kit/START_HERE.md), read the [Evidence Handling guide](partner-kit/confidentiality-boundary.md), then use the [Assurance Case Intake Template](partner-kit/intake-template.md).
+Start with [Partner Start Here](partner-kit/START_HERE.md), read the [Evidence Handling guide](partner-kit/evidence-handling.md), then use the [Assurance Case Intake Template](partner-kit/intake-template.md).
 
 ## Commands
 
