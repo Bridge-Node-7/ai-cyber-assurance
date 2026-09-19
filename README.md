@@ -9,7 +9,7 @@
 - **AI may help with:** organizing, drafting, mapping, questioning, summarizing, checking, and validating structure.
 - **Humans remain responsible for:** evidence access, fact validation, consequential actions, risk acceptance, and the final assurance decision.
 
-> **Start with a working copy:** Use the repository as a reference and copy the applicable templates into the environment where your review evidence is authorized to be handled.
+> **Start with a controlled working package:** Create a private or access-controlled working package in the environment authorized for your review evidence. Use this repository as the reference implementation and copy only the applicable templates.
 
 AI assistants and coding agents should read [`AGENTS.md`](AGENTS.md) before applying or modifying this repository.
 
