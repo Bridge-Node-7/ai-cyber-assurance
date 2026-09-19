@@ -97,13 +97,13 @@ A validation pass does **not** establish that evidence is authentic or sufficien
 
 The JSON Schema documents the case envelope and material local field constraints. The standard-library Python validator is the executable authority for cross-object relational, chronology, and policy invariants, with regression tests checking schema/validator parity for the material contract.
 
-## Public and private boundary
+## Workspace guidance
 
 Public examples in this repository are synthetic and fictional.
 
-For real work, create a private or access-controlled partner package outside this public repository. Keep real architecture, evidence, telemetry, supplier information, vulnerabilities, regulated data, credentials, and proprietary material in that controlled location.
+For real work, use the environment approved for the review evidence. Keep authoritative evidence at its source when practical and use stable references in the Assurance Case rather than copying source material unnecessarily.
 
-Start with [Partner Start Here](partner-kit/START_HERE.md), read the [Confidentiality Boundary](partner-kit/confidentiality-boundary.md), then use the [Assurance Case Intake Template](partner-kit/intake-template.md).
+Start with [Partner Start Here](partner-kit/START_HERE.md), read the [Evidence Handling guide](partner-kit/confidentiality-boundary.md), then use the [Assurance Case Intake Template](partner-kit/intake-template.md).
 
 ## Commands
 
