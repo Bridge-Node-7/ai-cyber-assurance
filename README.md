@@ -9,7 +9,7 @@
 - **AI may help with:** organizing, drafting, mapping, questioning, summarizing, checking, and validating structure.
 - **Humans remain responsible for:** evidence access, fact validation, consequential actions, risk acceptance, and the final assurance decision.
 
-> **Start safely:** Create a private or access-controlled working package outside this public repository before adding real evidence. Publish only material deliberately approved for unrestricted release.
+> **Start with a working copy:** Use the repository as a reference and copy the applicable templates into the environment where your review evidence is authorized to be handled.
 
 AI assistants and coding agents should read [`AGENTS.md`](AGENTS.md) before applying or modifying this repository.
 
@@ -88,7 +88,7 @@ This repository does **not**:
 This is an orientation, not a completion-time estimate.
 
 1. Open [`START_HERE.md`](START_HERE.md).
-2. Create a private or access-controlled working package.
+2. Create a working package in the environment where the review evidence is authorized to be handled.
 3. Copy the [Review Package Index](02-evidence-manifests/review-package-index-template.md).
 4. Choose Quick Review or Full Assurance Lifecycle.
 5. Copy only the applicable records.
@@ -257,9 +257,9 @@ Validate the synthetic Assurance Case directly:
 python scripts/validate_assurance_case.py 10-examples/synthetic-ai-agent-assurance/assurance-case.json
 ```
 
-The repository validator checks the structural manifest, hashes, internal links, current identity, required template fields, onboarding and AI-assistance guidance, synthetic-example labels, common secret patterns, and public-safety declarations.
+The repository validator checks the structural manifest, hashes, internal links, current identity, required template fields, onboarding and AI-assistance guidance, synthetic-example labels, common secret patterns, and release-surface declarations.
 
-Assurance Case validation checks structural consistency and bounded assurance invariants. Neither validator proves that a private completed review is factually correct, that evidence is sufficient, that a control works in a real environment, or that a system is authorized.
+Assurance Case validation checks structural consistency and bounded assurance invariants. Neither validator proves that a completed review is factually correct, that evidence is sufficient, that a control works in a real environment, or that a system is authorized.
 
 ## Scope and limitations
 
@@ -269,9 +269,9 @@ Quick Review is designed for self-guided use. Full Assurance Lifecycle remains e
 
 See [RELEASE_REVIEW.md](RELEASE_REVIEW.md) for release-specific validation scope and remaining conditions.
 
-## Public-safety boundary
+## Defensive-use scope
 
-Contributions must be appropriate for public defensive use. Do not post sensitive security details publicly.
+Contributions must remain defensive and appropriate for open evaluation. Do not post sensitive vulnerability details publicly.
 
 High-level defensive analysis may be included when necessary for prevention, detection, investigation, response, recovery, or assurance.
 
