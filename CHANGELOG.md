@@ -134,7 +134,7 @@
 ### Added
 
 - A single `START_HERE.md` navigator for safe package creation and review-path selection.
-- An `AGENTS.md` operating contract for evidence classification, AI-assistance boundaries, stop conditions, and required outputs.
+- An AI review guide for evidence classification, AI-assistance boundaries, stop conditions, and required outputs.
 - A Review Package Index for applicability, status, blockers, recommendation, and final-decision control.
 - Standard-library regression tests for the UX contract and version authority.
 - Ubuntu and Windows hosted validation.
