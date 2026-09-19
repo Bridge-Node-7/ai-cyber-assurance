@@ -11,7 +11,7 @@
 
 > **Start with a controlled working package:** Create a private or access-controlled working package in the environment authorized for your review evidence. Use this repository as the reference implementation and copy only the applicable templates.
 
-AI assistants and coding agents should read [`AGENTS.md`](AGENTS.md) before applying or modifying this repository.
+AI assistants and coding agents should read [`AI_REVIEW_GUIDE.md`](AI_REVIEW_GUIDE.md) before applying or modifying this repository.
 
 ## What this is
 
@@ -278,7 +278,7 @@ High-level defensive analysis may be included when necessary for prevention, det
 ## Contributing and security
 
 - Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes.
-- Read [AGENTS.md](AGENTS.md) before using an AI assistant or coding agent.
+- Read [AI_REVIEW_GUIDE.md](AI_REVIEW_GUIDE.md) before using an AI assistant or coding agent.
 - Report vulnerabilities through the private reporting process in [SECURITY.md](SECURITY.md).
 - Use [DECISION_RUBRIC.md](DECISION_RUBRIC.md) for consistent Green, Amber, Red, and More Evidence Required decisions.
 
