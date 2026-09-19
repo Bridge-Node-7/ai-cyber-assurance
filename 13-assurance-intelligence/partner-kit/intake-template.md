@@ -4,7 +4,7 @@
 > **Completion status:** Blank for reuse  
 > **Required for:** Optional structured Assurance Case intake
 
-Read the [Evidence Handling guide](confidentiality-boundary.md) before recording review evidence. Use the environment approved for that review.
+Read the [Evidence Handling guide](evidence-handling.md) before recording review evidence. Use the environment approved for that review.
 
 ## Decision
 
@@ -86,6 +86,6 @@ Keep authoritative evidence at its approved source when practical. Use stable re
 ## Navigation
 
 - Previous: [Partner Start Here](START_HERE.md)
-- Evidence handling: [Evidence Handling](confidentiality-boundary.md)
+- Evidence handling: [Evidence Handling](evidence-handling.md)
 - Build/validate: [Assurance Intelligence](../README.md)
 - Back to toolkit: [START_HERE.md](../../START_HERE.md)
