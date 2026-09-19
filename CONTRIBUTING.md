@@ -80,7 +80,7 @@ A pull request should include:
 Contributors should use focused changes and preserve:
 
 - The `START_HERE.md` navigation path
-- The `AGENTS.md` evidence classes and authority boundaries
+- The `AI_REVIEW_GUIDE.md` evidence classes and authority boundaries
 - The Review Package Index applicability and status values
 - The distinction between module assessment, assurance recommendation, and final assurance decision
 - The repository's Quick Review and Full Assurance Lifecycle paths
