@@ -6,7 +6,7 @@
 
 Start with the decision that needs to be made, not with the repository structure.
 
-Before recording any real evidence, read the [Confidentiality Boundary](confidentiality-boundary.md). Then use the [Assurance Case Intake Template](intake-template.md) to scope one bounded decision.
+Before recording evidence, read the [Evidence Handling guide](confidentiality-boundary.md). Then use the [Assurance Case Intake Template](intake-template.md) to scope one bounded decision.
 
 ## Pilot fit gate
 
@@ -29,13 +29,13 @@ Record:
 - the review path: Quick Review or Full Assurance Lifecycle;
 - the evidence cutoff date and review expiration.
 
-Use the [intake template](intake-template.md) to capture this without putting real sensitive material into the public repository.
+Use the [intake template](intake-template.md) to capture the review scope in the approved working environment.
 
-## 2. Create a controlled workspace
+## 2. Create the working package
 
-Create a private or access-controlled working package outside this public repository.
+Create the working package in the environment approved for the review evidence.
 
-Keep real evidence and sensitive context there. Reference controlled evidence by stable IDs rather than copying it into the public toolkit. Follow the [confidentiality boundary](confidentiality-boundary.md) before collecting or sharing material.
+Reference authoritative evidence by stable IDs when practical rather than copying source material into a reusable case. Follow the [Evidence Handling guide](confidentiality-boundary.md) before collecting or sharing material.
 
 ## 3. Build the case
 
@@ -111,6 +111,6 @@ A partner case is ready for bounded review when the decision question is clear, 
 ## Navigation
 
 - Previous: [Assurance Intelligence](../README.md)
-- Supporting boundary: [Confidentiality Boundary](confidentiality-boundary.md)
+- Evidence handling: [Evidence Handling](confidentiality-boundary.md)
 - Next: [Assurance Case Intake Template](intake-template.md)
 - Back to toolkit: [START_HERE.md](../../START_HERE.md)

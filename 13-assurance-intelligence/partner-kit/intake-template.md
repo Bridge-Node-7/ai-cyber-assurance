@@ -4,7 +4,7 @@
 > **Completion status:** Blank for reuse  
 > **Required for:** Optional structured Assurance Case intake
 
-Read the [Confidentiality Boundary](confidentiality-boundary.md) before recording real partner context. Keep sensitive details in the private or access-controlled workspace.
+Read the [Evidence Handling guide](confidentiality-boundary.md) before recording review evidence. Use the environment approved for that review.
 
 ## Decision
 
@@ -79,13 +79,13 @@ Record options considered, decision status, disposition, human authority, condit
 
 The final human decision remains outside AI authority.
 
-## Private-data boundary
+## Evidence handling
 
-Do not place real sensitive evidence, credentials, proprietary architecture, vulnerabilities, regulated data, or private partner information in the public repository.
+Keep authoritative evidence at its approved source when practical. Use stable references and bounded metadata in the case, and publish case material only when it is approved for unrestricted release.
 
 ## Navigation
 
 - Previous: [Partner Start Here](START_HERE.md)
-- Boundary: [Confidentiality Boundary](confidentiality-boundary.md)
+- Evidence handling: [Evidence Handling](confidentiality-boundary.md)
 - Build/validate: [Assurance Intelligence](../README.md)
 - Back to toolkit: [START_HERE.md](../../START_HERE.md)
