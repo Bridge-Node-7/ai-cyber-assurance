@@ -86,7 +86,7 @@ Document the reason for every **Not Applicable** decision.
 
 Record facts, sources, owners, dates, integrity methods, limitations, and evidence gaps.
 
-When AI assists, use the evidence classes and operating rules in [AGENTS.md](AGENTS.md):
+When AI assists, use the evidence classes and operating rules in [AI_REVIEW_GUIDE.md](AI_REVIEW_GUIDE.md):
 
 - Observed
 - Tested
