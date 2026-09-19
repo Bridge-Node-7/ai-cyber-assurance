@@ -1,43 +1,28 @@
-# Confidentiality Boundary
+# Evidence Handling
 
 > **Artifact type:** PARTNER GUIDE  
 > **Completion status:** Reference document  
 > **Operational authority:** None
 
-AI Cyber Assurance is a public defensive toolkit. Real partner assurance work should use a separate private or access-controlled workspace.
+Use this guide before recording evidence in an Assurance Case.
 
-Read this boundary **before** completing the [Assurance Case Intake Template](intake-template.md) or recording real evidence.
+AI Cyber Assurance is a public reference toolkit. Perform real review work in
+the environment and access context approved for that review.
 
-## Appropriate for the public repository
+## Working rule
 
-- methodology;
-- schemas;
-- validation logic;
-- rendering logic;
-- blank templates;
-- fictional synthetic examples;
-- public references.
-
-## Keep in the private partner workspace
-
-- real system architecture;
-- customer or partner identities;
-- private supplier information;
-- bills of materials;
-- private telemetry or logs;
-- vulnerabilities not approved for disclosure;
-- credentials or secrets;
-- regulated or personal data;
-- proprietary evidence;
-- real decision records unless deliberately approved for public release.
+- Keep the public repository limited to reusable methods, templates, validators,
+  synthetic examples, and public references.
+- Keep authoritative review evidence at its approved source when practical.
+- Use stable identifiers and bounded metadata to connect a reusable case to
+  external evidence without copying source material unnecessarily.
+- Publish completed case material only when it is explicitly approved for
+  unrestricted release.
 
 ## Reference pattern
 
-A public or reusable case structure may reference controlled evidence by stable identifier and bounded metadata, but should not copy the sensitive evidence itself.
-
-## Publication gate
-
-Publication is a consequential action. Material must be explicitly approved for unrestricted release before it enters this repository.
+A reusable case can carry the identifiers and metadata needed for review while
+leaving authoritative evidence in the system that owns it.
 
 ## Navigation
 
