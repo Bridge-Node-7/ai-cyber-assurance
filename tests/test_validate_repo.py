@@ -62,9 +62,9 @@ The validator does not prove review truth.
 ## Scope
 ## Human Authority
 ## Evidence Classes
-## Agent May
-## Agent Must
-## Agent Must Not
+## Automated Assistance May
+## Automated Assistance Must
+## Automated Assistance Must Not
 ## Required Output
 ## Stop Conditions
 ## Validation Boundary
