@@ -6,7 +6,7 @@
 
 Start with the decision that needs to be made, not with the repository structure.
 
-Before recording evidence, read the [Evidence Handling guide](confidentiality-boundary.md). Then use the [Assurance Case Intake Template](intake-template.md) to scope one bounded decision.
+Before recording evidence, read the [Evidence Handling guide](evidence-handling.md). Then use the [Assurance Case Intake Template](intake-template.md) to scope one bounded decision.
 
 ## Pilot fit gate
 
@@ -35,7 +35,7 @@ Use the [intake template](intake-template.md) to capture the review scope in the
 
 Create the working package in the environment approved for the review evidence.
 
-Reference authoritative evidence by stable IDs when practical rather than copying source material into a reusable case. Follow the [Evidence Handling guide](confidentiality-boundary.md) before collecting or sharing material.
+Reference authoritative evidence by stable IDs when practical rather than copying source material into a reusable case. Follow the [Evidence Handling guide](evidence-handling.md) before collecting or sharing material.
 
 ## 3. Build the case
 
@@ -111,6 +111,6 @@ A partner case is ready for bounded review when the decision question is clear, 
 ## Navigation
 
 - Previous: [Assurance Intelligence](../README.md)
-- Evidence handling: [Evidence Handling](confidentiality-boundary.md)
+- Evidence handling: [Evidence Handling](evidence-handling.md)
 - Next: [Assurance Case Intake Template](intake-template.md)
 - Back to toolkit: [START_HERE.md](../../START_HERE.md)

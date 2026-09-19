@@ -62,7 +62,7 @@ The Assurance Case is a representation of the bounded review. It does not create
 
 For a structured case, the working package may include `assurance-case.json` and generated views. Keep authoritative evidence at its approved source when practical.
 
-For a partner-facing case, begin with [Partner Start Here](13-assurance-intelligence/partner-kit/START_HERE.md) and read the [Evidence Handling guide](13-assurance-intelligence/partner-kit/confidentiality-boundary.md) before collecting evidence.
+For a partner-facing case, begin with [Partner Start Here](13-assurance-intelligence/partner-kit/START_HERE.md) and read the [Evidence Handling guide](13-assurance-intelligence/partner-kit/evidence-handling.md) before collecting evidence.
 
 ## 3. Select Applicable Records
 
@@ -86,7 +86,7 @@ Document the reason for every **Not Applicable** decision.
 
 Record facts, sources, owners, dates, integrity methods, limitations, and evidence gaps.
 
-When AI assists, use the evidence classes and operating rules in [AGENTS.md](AGENTS.md):
+When AI assists, use the evidence classes and operating rules in [AI_REVIEW_GUIDE.md](AI_REVIEW_GUIDE.md):
 
 - Observed
 - Tested

@@ -4,7 +4,7 @@
   "organization": "Bridge-Node-7",
   "target_url": "https://github.com/Bridge-Node-7/ai-cyber-assurance",
   "version": "v0.6.1",
-  "release_title": "AI Cyber Assurance Schema Authoring Parity Closeout",
+  "release_title": "AI Cyber Assurance Reference Toolkit",
   "generated_date": "2026-08-28",
   "release_policy": {
     "channel": "validation-gated-public",
@@ -48,7 +48,6 @@
     "assurance_intelligence": {
       "start": "13-assurance-intelligence/README.md",
       "partner_start": "13-assurance-intelligence/partner-kit/START_HERE.md",
-      "confidentiality_boundary": "13-assurance-intelligence/partner-kit/confidentiality-boundary.md",
       "intake": "13-assurance-intelligence/partner-kit/intake-template.md",
       "schema": "13-assurance-intelligence/schemas/assurance-case.schema.json",
       "examples": [
@@ -56,10 +55,15 @@
         "10-examples/synthetic-cryptographic-assurance-case/"
       ],
       "validate": "scripts/validate_assurance_case.py",
-      "render": "scripts/render_assurance_outputs.py"
+      "render": "scripts/render_assurance_outputs.py",
+      "evidence_handling": "13-assurance-intelligence/partner-kit/evidence-handling.md"
     }
   },
   "modules": {
+    "10": "Synthetic examples",
+    "11": "Assurance lifecycle records",
+    "12": "Cryptographic Change Assurance",
+    "13": "Assurance Intelligence",
     "01": "AI agent security and human approval",
     "02": "Evidence manifests and review decisions",
     "03": "Zero Trust readiness",
@@ -68,11 +72,7 @@
     "06": "Software and AI supply chain readiness",
     "07": "Cyber survivability",
     "08": "High-impact system readiness",
-    "09": "Incident and near-miss review",
-    "10": "Synthetic examples",
-    "11": "Assurance lifecycle records",
-    "12": "Cryptographic Change Assurance",
-    "13": "Assurance Intelligence"
+    "09": "Incident and near-miss review"
   },
   "file_count": 74,
   "files": [
@@ -123,10 +123,10 @@
     "13-assurance-intelligence/outputs/decision-receipt-template.md",
     "13-assurance-intelligence/outputs/executive-summary-template.md",
     "13-assurance-intelligence/partner-kit/START_HERE.md",
-    "13-assurance-intelligence/partner-kit/confidentiality-boundary.md",
+    "13-assurance-intelligence/partner-kit/evidence-handling.md",
     "13-assurance-intelligence/partner-kit/intake-template.md",
     "13-assurance-intelligence/schemas/assurance-case.schema.json",
-    "AGENTS.md",
+    "AI_REVIEW_GUIDE.md",
     "ASSURANCE_LIFECYCLE.md",
     "CHANGELOG.md",
     "CODE_OF_CONDUCT.md",

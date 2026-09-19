@@ -18,7 +18,7 @@ ACTIONABLE_RECORDS = (
     "11-assurance-lifecycle/recovery-assurance-record.md",
     "13-assurance-intelligence/partner-kit/START_HERE.md",
     "13-assurance-intelligence/partner-kit/intake-template.md",
-    "13-assurance-intelligence/partner-kit/confidentiality-boundary.md",
+    "13-assurance-intelligence/partner-kit/evidence-handling.md",
 )
 
 
@@ -32,14 +32,14 @@ class NavigationTests(unittest.TestCase):
 
     def test_partner_start_links_intake_and_evidence_handling_first(self) -> None:
         text = (REPO_ROOT / "13-assurance-intelligence/partner-kit/START_HERE.md").read_text(encoding="utf-8")
-        self.assertIn("[Evidence Handling guide](confidentiality-boundary.md)", text)
+        self.assertIn("[Evidence Handling guide](evidence-handling.md)", text)
         self.assertIn("[Assurance Case Intake Template](intake-template.md)", text)
-        self.assertLess(text.index("confidentiality-boundary.md"), text.index("## Pilot fit gate"))
+        self.assertLess(text.index("evidence-handling.md"), text.index("## Pilot fit gate"))
 
     def test_partner_documents_cross_link(self) -> None:
         intake = (REPO_ROOT / "13-assurance-intelligence/partner-kit/intake-template.md").read_text(encoding="utf-8")
-        boundary = (REPO_ROOT / "13-assurance-intelligence/partner-kit/confidentiality-boundary.md").read_text(encoding="utf-8")
-        self.assertIn("confidentiality-boundary.md", intake)
+        boundary = (REPO_ROOT / "13-assurance-intelligence/partner-kit/evidence-handling.md").read_text(encoding="utf-8")
+        self.assertIn("evidence-handling.md", intake)
         self.assertIn("intake-template.md", boundary)
 
 

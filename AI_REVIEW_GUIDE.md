@@ -1,6 +1,6 @@
-# AI Assistance Instructions
+# AI Review Guide
 
-These instructions govern AI assistance when interpreting, applying, reviewing, or maintaining this repository. They do not grant system access, evidence access, decision authority, release authority, or permission to handle sensitive information.
+Use this guide when AI assists with interpreting, applying, reviewing, or maintaining this repository. They do not grant system access, evidence access, decision authority, release authority, or permission to handle sensitive information.
 
 ## Scope
 
