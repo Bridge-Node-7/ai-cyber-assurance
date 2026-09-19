@@ -30,9 +30,9 @@ class NavigationTests(unittest.TestCase):
                 self.assertIn("## Navigation", text)
                 self.assertIn("START_HERE.md", text)
 
-    def test_partner_start_links_intake_and_confidentiality_first(self) -> None:
+    def test_partner_start_links_intake_and_evidence_handling_first(self) -> None:
         text = (REPO_ROOT / "13-assurance-intelligence/partner-kit/START_HERE.md").read_text(encoding="utf-8")
-        self.assertIn("[Confidentiality Boundary](confidentiality-boundary.md)", text)
+        self.assertIn("[Evidence Handling guide](confidentiality-boundary.md)", text)
         self.assertIn("[Assurance Case Intake Template](intake-template.md)", text)
         self.assertLess(text.index("confidentiality-boundary.md"), text.index("## Pilot fit gate"))
 
