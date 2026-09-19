@@ -70,15 +70,15 @@ Release validation covers:
 - deterministic metadata, manifest, SHA-256 integrity, links, public-safety declarations, and repository identity;
 - hosted Ubuntu and Windows GitHub Actions.
 
-## Public/private boundary
+## Evidence handling
 
-The repository contains reusable public methodology, validation logic, templates, and synthetic examples only.
+The repository contains reusable methodology, validation logic, templates, and synthetic examples intended for unrestricted review.
 
-Real partner architecture, evidence, telemetry, supplier information, credentials, vulnerabilities, regulated data, proprietary material, and decision records belong in private or access-controlled workspaces unless deliberately approved for unrestricted release.
+For operational use, keep authoritative evidence in the environment approved to hold it and bring only the bounded references or review artifacts needed for the assurance case.
 
 ## Security reports
 
-Security concerns should use the private reporting path described in [`SECURITY.md`](SECURITY.md). Do not place sensitive vulnerability details, credentials, private evidence, or partner information in public issues, pull requests, or repository files.
+Security concerns should use the reporting path described in [`SECURITY.md`](SECURITY.md). Do not place sensitive report content in public issues, pull requests, or repository files.
 
 ## Release-state semantics
 
@@ -96,7 +96,7 @@ v0.6.1 is complete only after:
 
 The repository incorporates adversarial simulated UAT and deterministic regression tests. It does not claim that representative partner users have been observed completing real cases, that assistive-technology testing has been completed, or that real partner outcomes have been established.
 
-Those are evidence to collect during controlled private pilots, not unfinished public-repository engineering claims.
+Those remain future evaluation evidence and are not claimed by the repository in advance.
 
 ## Limitations
 
