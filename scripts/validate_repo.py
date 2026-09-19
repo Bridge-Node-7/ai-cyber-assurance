@@ -459,12 +459,12 @@ def check_onboarding_and_agent_guidance(root: Path) -> CheckResult:
     requirements: dict[str, list[str]] = {
         "README.md": [
             "(START_HERE.md)",
-            "(AI_REVIEW_GUIDE.md)",
+            "(AUTOMATED_REVIEW_GUIDE.md)",
             "private or access-controlled working package",
             "final assurance decision",
         ],
         "START_HERE.md": [
-            "(AI_REVIEW_GUIDE.md)",
+            "(AUTOMATED_REVIEW_GUIDE.md)",
             "review-package-index-template.md",
             "evidence-manifest-template.md",
             "(ASSURANCE_LIFECYCLE.md)",
@@ -478,7 +478,7 @@ def check_onboarding_and_agent_guidance(root: Path) -> CheckResult:
             "Final assurance decision",
             "does not prove",
         ],
-        "AI_REVIEW_GUIDE.md": [
+        "AUTOMATED_REVIEW_GUIDE.md": [
             "## Scope",
             "## Human Authority",
             "## Evidence Classes",
