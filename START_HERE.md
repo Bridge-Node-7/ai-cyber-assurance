@@ -6,7 +6,7 @@
 
 AI Cyber Assurance helps teams organize evidence and make accountable human decisions about AI-enabled and high-impact systems.
 
-> **Safety boundary:** Create a private or access-controlled working package outside this public repository before adding real evidence. Do not place secrets, customer information, private infrastructure, vulnerabilities, regulated data, proprietary material, or sensitive operational evidence in this repository or a public fork.
+> **Evidence handling:** Create the review working package in the environment approved for its evidence. Use this repository as the reusable reference implementation and add only material intended for public release.
 
 ## What You Will Produce
 
@@ -52,17 +52,17 @@ The Markdown templates are sufficient for many bounded reviews. After selecting 
 
 The Assurance Case is a representation of the bounded review. It does not create a separate decision hierarchy.
 
-## 2. Create the Private Package
+## 2. Create the Review Package
 
-1. Create a private or access-controlled folder outside this repository.
+1. Create a working folder in the environment approved for the review evidence.
 2. Copy the Review Package Index into that folder.
 3. Assign a package ID.
 4. Record the system, scope, owners, decision authority, review date, expiration, and sensitivity.
-5. Reference sensitive evidence by controlled location or evidence ID. Do not copy sensitive evidence into the public toolkit.
+5. Reference authoritative evidence by approved location or stable evidence ID when practical.
 
-For a structured case, the private package may include `assurance-case.json` and generated views. Keep the real underlying evidence in the approved controlled location.
+For a structured case, the working package may include `assurance-case.json` and generated views. Keep authoritative evidence at its approved source when practical.
 
-For a partner-facing case, begin with [Partner Start Here](13-assurance-intelligence/partner-kit/START_HERE.md) and read the [Confidentiality Boundary](13-assurance-intelligence/partner-kit/confidentiality-boundary.md) before collecting real evidence.
+For a partner-facing case, begin with [Partner Start Here](13-assurance-intelligence/partner-kit/START_HERE.md) and read the [Evidence Handling guide](13-assurance-intelligence/partner-kit/confidentiality-boundary.md) before collecting evidence.
 
 ## 3. Select Applicable Records
 
@@ -190,4 +190,4 @@ A package is complete only when:
 - The final assurance decision is recorded with scope, conditions, owner, date, expiration, and limitations.
 - If an Assurance Case is used, it passes structural validation, its currency is understood for the intended decision date, and its generated views remain consistent with the canonical record.
 
-Preserve the completed package and supporting evidence in the approved private location.
+Preserve the completed package and supporting evidence in the approved review environment.
