@@ -43,7 +43,7 @@
 - Expanded CLI help for both Assurance Case validation and rendering.
 - Clarified that historical cases may remain structurally valid after expiry while a current decision can require current review status explicitly.
 - Clarified that Markdown templates remain sufficient for many reviews and Assurance Intelligence is an optional structured layer.
-- Replaced time-sensitive manifest release-candidate state with durable validation-gated release-policy metadata; GitHub Releases and tags are the publication source of truth.
+- Aligned release-policy metadata with durable validation requirements; GitHub Releases and tags remain the publication source of truth.
 
 ### Limitations
 
@@ -90,9 +90,9 @@
 - A standard-library assurance-case validator with fail-closed relationship and closure checks.
 - Deterministic Decision Receipt, Assurance Passport, and Executive Summary rendering from one canonical case.
 - A completed synthetic AI-agent assurance case demonstrating excessive initial authority, human decision ownership, corrective action, retest, and structural closure.
-- A minimal partner starter kit with explicit public/private evidence boundaries.
+- A minimal external-review starter kit with explicit evidence-handling guidance.
 - Regression tests covering valid cases, duplicate IDs, dangling references, invalid evidence classes, missing human authority, invalid closure, Unknown evidence misuse, and output determinism.
-- Validated-main GitHub Release publication after required hosted checks succeed.
+- Release publication requires the declared hosted validation checks to succeed.
 
 ### Improved
 
