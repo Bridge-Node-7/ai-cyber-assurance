@@ -1,6 +1,6 @@
 # Release Validation: AI Cyber Assurance v0.6.1
 
-AI Cyber Assurance v0.6.1 is the final schema-authoring-parity patch over the v0.6.0 output-integrity hardening release.
+AI Cyber Assurance v0.6.1 aligns schema authoring requirements with executable validation and rendering behavior.
 
 ## Scope carried forward from v0.6.0
 
@@ -18,13 +18,13 @@ The current release retains all v0.6.0 controls and UX corrections:
 - Markdown/HTML output escaping and Unicode-control rejection;
 - output-fidelity checks against forged `Human decision` sections;
 - no generated-output overwrite without explicit `--force`;
-- partner confidentiality/intake routing;
+- confidential intake routing;
 - workflow navigation and narrow-screen authoring guidance;
 - adversarial regression coverage.
 
-## v0.6.1 closure additions
+## v0.6.1 changes
 
-This patch closes the final verification gaps found during post-release audit:
+This release includes the following validation improvements:
 
 1. **Schema authoring parity.** Local conditional requirements are now encoded in the JSON Schema for:
    - nonhuman identity accountability;
@@ -52,8 +52,8 @@ These checks do not establish:
 - real-world control effectiveness;
 - certification or compliance;
 - deployment or operational authorization;
-- independent validation of a real partner system;
-- successful partner outcomes.
+- independent validation of a real external system;
+- successful real-world outcomes.
 
 ## Repository validation
 
@@ -84,19 +84,15 @@ Security concerns should use the reporting path described in [`SECURITY.md`](SEC
 
 `REPO_MANIFEST.json` describes a validation-gated public release channel. The authoritative evidence that a specific version was actually published is the corresponding GitHub Release and tag.
 
-## Release gate
+## Release identity
 
-v0.6.1 is complete only after:
-
-1. the human-authorized pull request is merged through protected `main`;
-2. required Ubuntu and Windows validation passes on the merged commit; and
-3. the versioned GitHub Release is published for that exact commit.
+The published v0.6.1 release is identified by its matching versioned GitHub tag and Release record together with successful hosted validation.
 
 ## Human UAT boundary
 
-The repository incorporates adversarial simulated UAT and deterministic regression tests. It does not claim that representative partner users have been observed completing real cases, that assistive-technology testing has been completed, or that real partner outcomes have been established.
+The repository incorporates adversarial simulated UAT and deterministic regression tests. It does not claim that representative users have been observed completing real cases, that assistive-technology testing has been completed, or that real-world outcomes have been established.
 
-Those remain future evaluation evidence and are not claimed by the repository in advance.
+Those forms of evaluation evidence are not claimed by the repository.
 
 ## Limitations
 
