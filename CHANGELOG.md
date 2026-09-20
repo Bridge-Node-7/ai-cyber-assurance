@@ -48,7 +48,7 @@
 ### Limitations
 
 - Structural and presentation-integrity validation still does not establish evidence authenticity or sufficiency, real-world control effectiveness, certification, compliance, deployment approval, operational authorization, or partner outcomes.
-- Private cases created against Assurance Case schema v0.2 or earlier require migration before validation under schema v0.3.
+- Cases created against Assurance Case schema v0.2 or earlier require migration before validation under schema v0.3.
 - Human usability and accessibility in real partner environments require observation during controlled pilots; the public repository does not claim those outcomes in advance.
 
 ## [0.5.0] - 2026-08-28
@@ -79,7 +79,7 @@
 ### Limitations
 
 - Structural validation still does not establish evidence authenticity or sufficiency, real-world control effectiveness, certification, compliance, deployment approval, or operational authorization.
-- The v0.2 Assurance Case contract is stricter than v0.1; private cases created against v0.1 require migration before validation under this release.
+- The v0.2 Assurance Case contract is stricter than v0.1; cases created against v0.1 require migration before validation under this release.
 
 ## [0.4.0] - 2026-08-28
 
