@@ -41,11 +41,9 @@ Do not contribute:
 - Credential-theft workflows
 - Unauthorized-access techniques
 - Destructive or intrusive testing instructions
-- Secrets, tokens, passwords, private keys, or production credentials
-- Private infrastructure, customer, employer, government, or mission data
-- Real vulnerabilities or sensitive operational findings
-- Proprietary third-party material without permission
-- Unauthorized third-party instructional, assessment, institutional, or proprietary material
+- Credentials, secret material, or sensitive security-report content
+- Nonpublic or otherwise unauthorized operational information
+- Third-party material you do not have the right to redistribute
 - Claims of certification, authorization, independent validation, or production maturity without supporting evidence
 
 High-level defensive analysis of malicious behavior may be included when necessary for prevention, detection, investigation, response, recovery, or assurance.
@@ -60,7 +58,7 @@ Every contribution should answer:
 4. What decision does it support?
 5. What human authority remains required?
 6. Does it duplicate an existing record?
-7. Does it preserve public safety and private boundaries?
+7. Does it preserve the repository's public-safe release scope?
 8. Are limitations and unproven claims visible?
 9. Do internal links, manifests, and validation checks pass?
 
