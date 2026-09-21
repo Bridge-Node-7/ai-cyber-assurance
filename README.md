@@ -261,6 +261,13 @@ The repository validator checks the structural manifest, hashes, internal links,
 
 Assurance Case validation checks structural consistency and bounded assurance invariants. Neither validator proves that a completed review is factually correct, that evidence is sufficient, that a control works in a real environment, or that a system is authorized.
 
+## Release status
+
+`main` is the current reviewed source. GitHub Releases and tag refs are explicit
+distribution milestones and may intentionally lag reviewed maintenance on
+`main`. A source version ahead of the latest published GitHub Release remains
+unreleased until a release is published.
+
 ## Scope and limitations
 
 The repository provides reusable documentation, examples, and validation tooling. It does not demonstrate control effectiveness in a real system, production deployment, certification, formal authorization, or independent assessment.
