@@ -111,6 +111,13 @@ class VersionTests(unittest.TestCase):
             workflow,
         )
         self.assertNotIn("if: github.event_name == 'push' &&", workflow)
+        self.assertIn("Require immutable-release protection before publication", workflow)
+        self.assertIn('immutable-releases', workflow)
+        self.assertIn("--jq '.enabled'", workflow)
+        self.assertLess(
+            workflow.index("Require immutable-release protection before publication"),
+            workflow.index("Publish versioned release if absent"),
+        )
 
     def test_manifest_comparison_uses_version_file(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
