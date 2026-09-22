@@ -11,6 +11,10 @@
 
 > **Start with a controlled working package:** Create a private or access-controlled working package in the environment authorized for your review evidence. Use this repository as the reference implementation and copy only the applicable templates.
 
+## Bridge Node 7 system role
+
+AI Cyber Assurance is the **AI and cybersecurity domain-assurance implementation** within Bridge Node 7's Frontier Assurance architecture. Its Assurance Case and generated views organize bounded domain evidence; they do not replace Frontier Mission Assurance core semantics, certification processes, or accountable human authority.
+
 Automated review assistance must follow [`AUTOMATED_REVIEW_GUIDE.md`](AUTOMATED_REVIEW_GUIDE.md) when applying this toolkit.
 
 ## What this is
