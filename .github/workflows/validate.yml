@@ -96,6 +96,18 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Require immutable-release protection before publication
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          ENABLED="$(gh api "repos/$GITHUB_REPOSITORY/immutable-releases" --jq '.enabled')"
+          if [[ "$ENABLED" != "true" ]]; then
+            echo "::error::Immutable-release protection must be enabled before publishing a stable release."
+            exit 1
+          fi
+
       - name: Publish versioned release if absent
         shell: bash
         env:
