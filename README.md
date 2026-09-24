@@ -295,6 +295,6 @@ High-level defensive analysis may be included when necessary for prevention, det
 
 ## License
 
-MIT License. Use, adapt, and improve the templates responsibly.
+MIT License. Use, adapt, and improve the templates responsibly. Preserve the copyright and permission notice as required by [LICENSE](LICENSE). See [NOTICE](NOTICE) for authoritative-origin and brand boundaries, and [CITATION.cff](CITATION.cff) for citation metadata.
 
 Maintained by Bridge Node 7.
