@@ -11,7 +11,7 @@ f85c95997cc31dacad42a06da0682cc7ac6ef6bb4bc116c6f8ad21362232ae58  01-ai-agent-se
 3f1486b46d23b74bcda3837238ac053c64bb1f4878a1dfe16d80e3f3bd39b713  03-zero-trust/zero-trust-readiness-map.md
 89d2add3852f5f71bcb3a64d6e63f79a86d1026bed73caed9de6cbbfa7c65657  04-llm-risk/llm-risk-register.md
 218dc4a128332de440d0aa1a89a6906aa1fdec170ea23ec04fa73d0c9ed68a64  05-secure-by-design/secure-by-design-product-review.md
-0de03d86950d9904573ef770b95cc6f0614ca79766cbf2ade89efc292b2fba7e  06-software-supply-chain/sbom-readiness.md
+bc2c758e7bf19e5bb02c02ebe97a39a8ade3ec61d0df440db9f26272090075b4  06-software-supply-chain/sbom-readiness.md
 7730e527b443ec20e0eceaf72e6f6a22f8e964846ea8e46425f5137438966347  07-cyber-survivability/cyber-survivability-review.md
 7e93636e907f1c34b88e7041e1761a55d0d7f7c256c82221d73d46a75834a77f  08-high-impact-systems/high-impact-system-readiness.md
 39fa5030308f203d15575f839388faa184b7c855ae76c8fc0658a5f8442ce981  09-incident-review/incident-review-template.md
