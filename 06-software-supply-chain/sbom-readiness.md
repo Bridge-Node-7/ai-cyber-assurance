@@ -99,7 +99,7 @@ Review:
 ## 6. Release Integrity
 
 - [ ] Release-controlled files are enumerated.
-- [ ] Release hashes are generated after content freeze.
+- [ ] Release hashes are generated after release content is finalized.
 - [ ] The manifest can be verified from a clean checkout.
 - [ ] Release notes distinguish implemented, tested, and unproven claims.
 - [ ] Rollback artifacts and ownership are documented.
