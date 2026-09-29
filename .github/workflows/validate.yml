@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
 
 jobs:
   validate:
@@ -115,7 +115,7 @@ jobs:
           SOURCE_SHA="${GITHUB_SHA}"
           ARCHIVE="ai-cyber-assurance-${TAG}.zip"
 
-          if [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?$ ]]; then
+          if [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][A-Za-z0-9.-]+)?$ ]]; then
             echo "::error::VERSION is not a supported stable release identity."
             exit 1
           fi

@@ -753,8 +753,8 @@ def check_workflow_safety(root: Path) -> CheckResult:
         findings.append("Workflow must run direct GNU checksum verification.")
     if "python scripts/refresh_release_metadata.py" not in text or "--check" not in text:
         findings.append("Workflow must check deterministic release metadata.")
-    if "cancel-in-progress: true" not in text or "github.workflow }}-${{ github.head_ref || github.ref_name" not in text:
-        findings.append("Workflow must cancel superseded validation for the same branch.")
+    if "cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}" not in text or "github.workflow }}-${{ github.head_ref || github.ref_name" not in text:
+        findings.append("Workflow must cancel superseded branch validation without canceling a stable release dispatch.")
 
     prepare_marker = "\n  prepare-release:\n"
     publish_marker = "\n  publish-release:\n"
