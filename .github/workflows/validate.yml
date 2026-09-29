@@ -241,7 +241,7 @@ jobs:
       SOURCE_SHA: ${{ needs.prepare-release.outputs.source_sha }}
       ARCHIVE: ${{ needs.prepare-release.outputs.archive }}
     steps:
-      - name: Require immutable-release protection
+      - name: Require immutable-release protection before publication
         shell: bash
         run: |
           set -euo pipefail
@@ -302,7 +302,7 @@ jobs:
             exit 1
           fi
 
-      - name: Publish immutable release
+      - name: Publish versioned release if absent
         shell: bash
         run: |
           set -euo pipefail
