@@ -755,10 +755,65 @@ def check_workflow_safety(root: Path) -> CheckResult:
         findings.append("Workflow must check deterministic release metadata.")
     if "cancel-in-progress: true" not in text or "github.workflow }}-${{ github.head_ref || github.ref_name" not in text:
         findings.append("Workflow must cancel superseded validation for the same branch.")
+
+    prepare_marker = "\n  prepare-release:\n"
+    publish_marker = "\n  publish-release:\n"
+    verify_marker = "\n  verify-published:\n"
+    if prepare_marker not in text or publish_marker not in text or verify_marker not in text:
+        findings.append("Workflow must separate release preparation, publication, and hosted verification.")
+    else:
+        prepare_text = text[text.index(prepare_marker):text.index(publish_marker)]
+        publish_text = text[text.index(publish_marker):text.index(verify_marker)]
+        verify_text = text[text.index(verify_marker):]
+
+        if "permissions:\n      contents: read" not in prepare_text:
+            findings.append("Release preparation must remain read-only.")
+        for marker in (
+            "git archive",
+            "RELEASE_CANDIDATE_SHA256SUMS",
+            "commit.verification.verified",
+            "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+        ):
+            if marker not in prepare_text:
+                findings.append(f"Release preparation missing required marker: {marker}")
+
+        if "actions: read" not in publish_text or "contents: write" not in publish_text:
+            findings.append("Release publisher must use minimal Actions-read and contents-write authority.")
+        for forbidden in (
+            "actions/checkout@",
+            "actions/setup-python@",
+            "git archive",
+            "python scripts/",
+            "pip install",
+        ):
+            if forbidden in publish_text:
+                findings.append(f"Release publisher must not execute build/source machinery: {forbidden}")
+        for marker in (
+            "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+            "sha256sum -c RELEASE_CANDIDATE_SHA256SUMS",
+            "commit.verification.verified",
+            "git/tags",
+            "git/refs",
+            "gh release create",
+            "--verify-tag",
+            ".immutable",
+        ):
+            if marker not in publish_text:
+                findings.append(f"Release publisher missing required marker: {marker}")
+
+        if "permissions:\n      contents: read" not in verify_text:
+            findings.append("Hosted release verification must remain read-only.")
+        for marker in ("gh release download", "sha256sum -c", ".immutable"):
+            if marker not in verify_text:
+                findings.append(f"Hosted release verification missing required marker: {marker}")
+
+    if text.count("contents: write") != 1:
+        findings.append("Exactly one release job may hold contents write authority.")
+
     return CheckResult(
         "workflow_safety",
         not findings,
-        findings or ["Validation workflow uses the expected read-only baseline."],
+        findings or ["Validation and release workflows preserve read-only preparation and minimal publication authority."],
     )
 
 
