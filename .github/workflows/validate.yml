@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
 
 jobs:
   validate:
@@ -81,53 +81,86 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-  release:
-    name: Publish validated release
+  prepare-release:
+    name: Prepare stable release
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: write
-
+      contents: read
+    outputs:
+      release_eligible: ${{ steps.identity.outputs.release_eligible }}
+      version: ${{ steps.identity.outputs.version }}
+      tag: ${{ steps.identity.outputs.tag }}
+      source_sha: ${{ steps.identity.outputs.source_sha }}
+      archive: ${{ steps.identity.outputs.archive }}
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Check out validated main
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
 
-      - name: Require immutable-release protection before publication
+      - name: Resolve release identity
+        id: identity
         shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          ENABLED="$(gh api "repos/$GITHUB_REPOSITORY/immutable-releases" --jq '.enabled')"
-          if [[ "$ENABLED" != "true" ]]; then
-            echo "::error::Immutable-release protection must be enabled before publishing a stable release."
-            exit 1
-          fi
-
-      - name: Publish versioned release if absent
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          command -v gh
-          command -v sha256sum
 
           VERSION="$(tr -d '\r\n' < VERSION)"
           TAG="v${VERSION}"
+          SOURCE_SHA="${GITHUB_SHA}"
+          ARCHIVE="ai-cyber-assurance-${TAG}.zip"
 
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "Release $TAG already exists; no publication required."
-            exit 0
+          if [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][A-Za-z0-9.-]+)?$ ]]; then
+            echo "::error::VERSION is not a supported stable release identity."
+            exit 1
           fi
 
-          NOTES="release-notes.md"
-          python - "$VERSION" "$NOTES" <<'PY'
+          REMOTE_MAIN="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/main" --jq '.object.sha')"
+          [[ "${REMOTE_MAIN}" == "${SOURCE_SHA}" ]]
+
+          VERIFIED="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${SOURCE_SHA}" --jq '.commit.verification.verified and (.commit.verification.reason == "valid")')"
+          [[ "${VERIFIED}" == "true" ]]
+
+          release_exists=0
+          tag_exists=0
+          gh release view "${TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1 && release_exists=1
+          gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1 && tag_exists=1
+
+          if [[ "${release_exists}" == "1" && "${tag_exists}" == "1" ]]; then
+            echo "release_eligible=0" >> "${GITHUB_OUTPUT}"
+            exit 0
+          fi
+          if [[ "${release_exists}" != "${tag_exists}" ]]; then
+            echo "::error::Release/tag state is inconsistent for ${TAG}."
+            exit 1
+          fi
+
+          echo "release_eligible=1" >> "${GITHUB_OUTPUT}"
+          echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
+          echo "tag=${TAG}" >> "${GITHUB_OUTPUT}"
+          echo "source_sha=${SOURCE_SHA}" >> "${GITHUB_OUTPUT}"
+          echo "archive=${ARCHIVE}" >> "${GITHUB_OUTPUT}"
+
+      - name: Build sealed release candidate
+        if: steps.identity.outputs.release_eligible == '1'
+        shell: bash
+        env:
+          VERSION: ${{ steps.identity.outputs.version }}
+          TAG: ${{ steps.identity.outputs.tag }}
+          SOURCE_SHA: ${{ steps.identity.outputs.source_sha }}
+          ARCHIVE: ${{ steps.identity.outputs.archive }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-candidate
+          NOTES="release-candidate/release-notes.md"
+
+          python - "${VERSION}" "${NOTES}" <<'PY'
           from pathlib import Path
           import re
           import sys
@@ -149,17 +182,191 @@ jobs:
           )
           PY
 
-          ARCHIVE="ai-cyber-assurance-${TAG}.zip"
-          git archive \
-            --format=zip \
-            --prefix="ai-cyber-assurance-${TAG}/" \
-            HEAD \
-            -o "$ARCHIVE"
-          sha256sum "$ARCHIVE" > "${ARCHIVE}.sha256"
+          git archive             --format=zip             --prefix="ai-cyber-assurance-${TAG}/"             "${SOURCE_SHA}"             -o "release-candidate/${ARCHIVE}"
 
-          gh release create "$TAG" \
-            "$ARCHIVE" \
-            "${ARCHIVE}.sha256" \
-            --target "$GITHUB_SHA" \
-            --title "AI Cyber Assurance ${TAG}" \
-            --notes-file "$NOTES"
+          (
+            cd release-candidate
+            sha256sum "${ARCHIVE}" > "${ARCHIVE}.sha256"
+          )
+
+          ARCHIVE_SHA256="$(sha256sum "release-candidate/${ARCHIVE}" | awk '{print $1}')"
+          python - "${VERSION}" "${TAG}" "${SOURCE_SHA}" "${ARCHIVE}" "${ARCHIVE_SHA256}" <<'PY'
+          from pathlib import Path
+          import json
+          import sys
+
+          version, tag, source_sha, archive, archive_sha256 = sys.argv[1:]
+          receipt = {
+              "version": version,
+              "tag": tag,
+              "source_sha": source_sha,
+              "archive": archive,
+              "archive_sha256": archive_sha256,
+          }
+          Path("release-candidate/RELEASE_CANDIDATE.json").write_text(
+              json.dumps(receipt, indent=2) + "\n",
+              encoding="utf-8",
+              newline="\n",
+          )
+          PY
+
+          (
+            cd release-candidate
+            sha256sum               "${ARCHIVE}"               "${ARCHIVE}.sha256"               "release-notes.md"               "RELEASE_CANDIDATE.json"               > "RELEASE_CANDIDATE_SHA256SUMS"
+            sha256sum -c "RELEASE_CANDIDATE_SHA256SUMS"
+          )
+
+      - name: Upload sealed release candidate
+        if: steps.identity.outputs.release_eligible == '1'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ai-cyber-assurance-stable-release-candidate
+          path: release-candidate/
+          if-no-files-found: error
+          retention-days: 1
+
+  publish-release:
+    name: Publish stable release
+    needs: prepare-release
+    if: needs.prepare-release.outputs.release_eligible == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: ${{ needs.prepare-release.outputs.version }}
+      TAG: ${{ needs.prepare-release.outputs.tag }}
+      SOURCE_SHA: ${{ needs.prepare-release.outputs.source_sha }}
+      ARCHIVE: ${{ needs.prepare-release.outputs.archive }}
+    steps:
+      - name: Require immutable-release protection before publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENABLED="$(gh api "repos/${GITHUB_REPOSITORY}/immutable-releases" --jq '.enabled')"
+          [[ "${ENABLED}" == "true" ]]
+
+      - name: Download sealed release candidate
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ai-cyber-assurance-stable-release-candidate
+          path: release-candidate
+
+      - name: Verify sealed candidate and release identity
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          (
+            cd release-candidate
+            sha256sum -c RELEASE_CANDIDATE_SHA256SUMS
+          )
+
+          python - "${VERSION}" "${TAG}" "${SOURCE_SHA}" "${ARCHIVE}" <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+          import sys
+
+          version, tag, source_sha, archive = sys.argv[1:]
+          root = Path("release-candidate")
+          receipt = json.loads((root / "RELEASE_CANDIDATE.json").read_text(encoding="utf-8"))
+          expected = {
+              "version": version,
+              "tag": tag,
+              "source_sha": source_sha,
+              "archive": archive,
+          }
+          for key, value in expected.items():
+              if receipt.get(key) != value:
+                  raise SystemExit(f"Release candidate {key} mismatch.")
+          observed = hashlib.sha256((root / archive).read_bytes()).hexdigest()
+          if receipt.get("archive_sha256") != observed:
+              raise SystemExit("Release candidate archive digest mismatch.")
+          PY
+
+          REMOTE_MAIN="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/main" --jq '.object.sha')"
+          [[ "${REMOTE_MAIN}" == "${SOURCE_SHA}" ]]
+
+          VERIFIED="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${SOURCE_SHA}" --jq '.commit.verification.verified and (.commit.verification.reason == "valid")')"
+          [[ "${VERIFIED}" == "true" ]]
+
+          if gh release view "${TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "::error::Release ${TAG} appeared after preparation; refusing to overwrite."
+            exit 1
+          fi
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1; then
+            echo "::error::Tag ${TAG} appeared after preparation; refusing to overwrite."
+            exit 1
+          fi
+
+      - name: Publish versioned release if absent
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TAG_OBJECT_SHA="$(
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/git/tags"               -f tag="${TAG}"               -f message="AI Cyber Assurance ${TAG}"               -f object="${SOURCE_SHA}"               -f type="commit"               --jq '.sha'
+          )"
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/git/refs"             -f ref="refs/tags/${TAG}"             -f sha="${TAG_OBJECT_SHA}"             >/dev/null
+
+          REF_SHA="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --jq '.object.sha')"
+          REF_TYPE="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --jq '.object.type')"
+          TARGET_SHA="$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${TAG_OBJECT_SHA}" --jq '.object.sha')"
+          [[ "${REF_TYPE}" == "tag" ]]
+          [[ "${REF_SHA}" == "${TAG_OBJECT_SHA}" ]]
+          [[ "${TARGET_SHA}" == "${SOURCE_SHA}" ]]
+
+          gh release create "${TAG}"             "release-candidate/${ARCHIVE}"             "release-candidate/${ARCHIVE}.sha256"             --repo "${GITHUB_REPOSITORY}"             --verify-tag             --title "AI Cyber Assurance ${TAG}"             --notes-file "release-candidate/release-notes.md"
+
+          mapfile -t ASSETS < <(
+            gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}"               --jq '.assets[].name' | LC_ALL=C sort
+          )
+          EXPECTED=("${ARCHIVE}" "${ARCHIVE}.sha256")
+          mapfile -t EXPECTED_SORTED < <(printf '%s\n' "${EXPECTED[@]}" | LC_ALL=C sort)
+          diff -u             <(printf '%s\n' "${EXPECTED_SORTED[@]}")             <(printf '%s\n' "${ASSETS[@]}")
+
+          immutable="false"
+          for _ in {1..30}; do
+            immutable="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq '.immutable')"
+            [[ "${immutable}" == "true" ]] && break
+            sleep 2
+          done
+          [[ "${immutable}" == "true" ]]
+
+  verify-published:
+    name: Verify published stable release
+    needs: [prepare-release, publish-release]
+    if: needs.prepare-release.outputs.release_eligible == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ needs.prepare-release.outputs.tag }}
+      SOURCE_SHA: ${{ needs.prepare-release.outputs.source_sha }}
+      ARCHIVE: ${{ needs.prepare-release.outputs.archive }}
+    steps:
+      - name: Verify hosted release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p hosted
+          cd hosted
+
+          gh release download "${TAG}"             --repo "${GITHUB_REPOSITORY}"             --pattern "${ARCHIVE}"             --pattern "${ARCHIVE}.sha256"
+
+          sha256sum -c "${ARCHIVE}.sha256"
+          unzip -t "${ARCHIVE}" >/dev/null
+
+          REF_SHA="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --jq '.object.sha')"
+          REF_TYPE="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --jq '.object.type')"
+          [[ "${REF_TYPE}" == "tag" ]]
+          TARGET_SHA="$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${REF_SHA}" --jq '.object.sha')"
+          [[ "${TARGET_SHA}" == "${SOURCE_SHA}" ]]
+
+          IMMUTABLE="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq '.immutable')"
+          [[ "${IMMUTABLE}" == "true" ]]
