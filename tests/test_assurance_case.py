@@ -95,6 +95,44 @@ class AssuranceCaseTests(unittest.TestCase):
         data = load_fixture(); data["retests"][0]["finding_ref"] = "FIND-002"
         self.assertTrue(any("must reference the same finding" in x for x in validator.validate_case(data)))
 
+    def assert_case_rejected_before_rendering(self, data: dict[str, object], labels: tuple[str, ...]) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            case_path = Path(temp) / "assurance-case.json"
+            case_path.write_text(json.dumps(data), encoding="utf-8")
+            output_dir = Path(temp) / "generated"
+            for command in (
+                [sys.executable, str(VALIDATOR_PATH), str(case_path), "--as-of", AS_OF.isoformat()],
+                [sys.executable, str(RENDERER_PATH), str(case_path), "--output-dir", str(output_dir), "--as-of", AS_OF.isoformat()],
+            ):
+                result = subprocess.run(command, capture_output=True, text=True, check=False)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                for label in labels:
+                    self.assertIn(label, result.stdout)
+                self.assertFalse(output_dir.exists())
+
+    def test_retest_requires_nonempty_typed_finding_and_action_links(self) -> None:
+        values: tuple[object, ...] = (None, "", " ", 42, [], {})
+        for field in ("finding_ref", "corrective_action_ref"):
+            with self.subTest(field=field, missing=True):
+                data = load_fixture(); del data["retests"][0][field]
+                self.assert_case_rejected_before_rendering(data, (f"RETEST-001.{field} is required",))
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    data = load_fixture(); data["retests"][0][field] = value
+                    self.assert_case_rejected_before_rendering(data, (f"RETEST-001.{field} is required",))
+
+    def test_retest_corrective_action_must_belong_to_its_finding(self) -> None:
+        data = load_fixture(); data["retests"][0]["corrective_action_ref"] = "CA-002"
+        self.assert_case_rejected_before_rendering(data, ("RETEST-001", "CA-002", "FIND-001", "FIND-002"))
+
+    def test_closed_finding_records_the_retested_corrective_action(self) -> None:
+        data = load_fixture()
+        data["corrective_actions"].append(dict(data["corrective_actions"][0], id="CA-004"))
+        data["retests"][0]["corrective_action_ref"] = "CA-004"
+        self.assert_case_rejected_before_rendering(data, ("FIND-001", "RETEST-001", "CA-004", "corrective_action_refs"))
+        data["findings"][0]["corrective_action_refs"].append("CA-004")
+        self.assertEqual(validator.validate_case(data), [])
+
     def test_unknown_cannot_support_closure(self) -> None:
         data = load_fixture(); data["findings"][0]["closure_evidence_refs"] = ["EVID-003"]
         self.assertTrue(any("uses Unknown evidence" in x for x in validator.validate_case(data)))
