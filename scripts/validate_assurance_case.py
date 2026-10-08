@@ -366,16 +366,23 @@ def validate_case(data: dict[str, Any]) -> list[str]:
 
     retest_dates: dict[str, date] = {}
     for rid, retest in retest_by_id.items():
-        for field in ("tester", "method"):
+        for field in ("finding_ref", "corrective_action_ref", "tester", "method"):
             if not _nonempty(retest.get(field)):
                 errors.append(f"{rid}.{field} is required.")
+        ca_ref: object = retest.get("corrective_action_ref")
+        finding_ref: object = retest.get("finding_ref")
+        ca: dict[str, object] | None = ca_by_id.get(ca_ref) if isinstance(ca_ref, str) else None
+        if ca and ca.get("finding_ref") != finding_ref:
+            errors.append(
+                f"{rid} corrective action {ca_ref} must reference retest finding "
+                f"{finding_ref!r}, not {ca.get('finding_ref')!r}."
+            )
         tested = _parse_date(retest.get("tested_at"), f"{rid}.tested_at", errors)
         if tested:
             retest_dates[rid] = tested
             if reviewed and tested > reviewed:
                 errors.append(f"{rid}.tested_at must not be after case.reviewed_at.")
-            ca_ref = retest.get("corrective_action_ref")
-            created, completed = ca_dates.get(ca_ref, (None, None))
+            created, completed = ca_dates.get(ca_ref, (None, None)) if isinstance(ca_ref, str) else (None, None)
             threshold = completed or created
             if threshold and tested < threshold:
                 errors.append(f"{rid}.tested_at must not precede corrective action {ca_ref} completion/creation.")
@@ -412,6 +419,11 @@ def validate_case(data: dict[str, Any]) -> list[str]:
             errors.append(f"{fid} is closed but retest {retest_ref} did not pass.")
         if retest and retest.get("finding_ref") != fid:
             errors.append(f"{fid} retest {retest_ref} must reference the same finding.")
+        if retest and isinstance(ca_refs, list) and retest.get("corrective_action_ref") not in ca_refs:
+            errors.append(
+                f"{fid} retest {retest_ref} corrective action {retest.get('corrective_action_ref')!r} "
+                "must be recorded in corrective_action_refs."
+            )
         closed_at = finding_closed_dates.get(fid)
         tested_at = retest_dates.get(retest_ref) if isinstance(retest_ref, str) else None
         if closed_at and tested_at and closed_at < tested_at:
