@@ -12,4 +12,4 @@ assert.equal(A.assess(r,{...w,authorized:false}).status,"SAFE STOP");
 assert.equal(A.assess(r,{...w,steps:w.steps.map((s,i)=>i===0?{...s,evidenceClass:"Reported"}:s)}).status,"WAIT");
 assert.equal(A.assess(r,{...w,steps:w.steps.map((s,i)=>i===0?{...s,reference:""}:s)}).status,"WAIT");
 assert.equal(A.assess(r,{...w,reviewer:""}).status,"WAIT");
-console.log("Operator Atlas engine: 11 deterministic assertions passed (logic only, not field effectiveness).");
+console.log("Operator Atlas engine: 12 deterministic assertions passed (logic only, not field effectiveness).");
