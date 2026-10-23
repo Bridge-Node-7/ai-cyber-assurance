@@ -1,0 +1,15 @@
+const assert=require("node:assert/strict"); const A=require("../engine.js");
+assert.equal(A.recipes.length,3);
+assert.equal(A.searchRecipes("contractor SSO",A.recipes)[0].id,"offboarding");
+assert.equal(A.searchRecipes("CVE package",A.recipes)[0].id,"dependency");
+assert.equal(A.searchRecipes("AI agent tool",A.recipes)[0].id,"agent");
+assert.equal(A.searchRecipes("nonsensexyz",A.recipes).length,0);
+assert.equal(A.freshnessOf("2025-01-01","2026-10-23"),"REVIEW DUE");
+assert.equal(A.freshnessOf("2027-01-01","2026-10-23"),"UNKNOWN");
+const r=A.recipes[0]; const w={authorized:true,scope:"Synthetic scope",owner:"Owner",reviewer:"Reviewer",steps:r.steps.map(()=>({state:"checked",evidenceClass:"Observed",reference:"SIM-001",observedAt:"2026-10-23"}))};
+assert.equal(A.assess(r,w).status,"READY FOR HUMAN REVIEW");
+assert.equal(A.assess(r,{...w,authorized:false}).status,"SAFE STOP");
+assert.equal(A.assess(r,{...w,steps:w.steps.map((s,i)=>i===0?{...s,evidenceClass:"Reported"}:s)}).status,"WAIT");
+assert.equal(A.assess(r,{...w,steps:w.steps.map((s,i)=>i===0?{...s,reference:""}:s)}).status,"WAIT");
+assert.equal(A.assess(r,{...w,reviewer:""}).status,"WAIT");
+console.log("Operator Atlas engine: 11 deterministic assertions passed (logic only, not field effectiveness).");
