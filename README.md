@@ -2,6 +2,8 @@
 
 **AI Cyber Assurance helps teams organize evidence and make accountable human decisions about AI-enabled and high-impact systems.**
 
+Stable public release — see the latest [GitHub Release](https://github.com/Bridge-Node-7/ai-cyber-assurance/releases/latest). Quickstart: [START_HERE.md](START_HERE.md).
+
 [Start here](START_HERE.md) to choose a review path, create a safe working package, and identify the records that apply.
 
 - **Use it when:** reviewing a workflow, pilot, release, supplier, incident, AI agent, or high-impact system.
