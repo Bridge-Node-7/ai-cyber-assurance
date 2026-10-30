@@ -1,5 +1,49 @@
 # Changelog
 
+## [0.6.2](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.1...v0.6.2) (2026-10-30)
+
+
+### Bug Fixes
+
+* enforce ACA finding–action–retest closure integrity (F03) ([6783342](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/67833423fe137ae41431b56098d7c09b2abe1d9f))
+* require explicit release dispatch ([#17](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/17)) ([5d4de2d](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/5d4de2d35ee652ffed239c5c1f9e35815e534a18))
+
+
+### Security
+
+* make CodeQL authoritative in required validation ([#15](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/15)) ([f87edd7](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/f87edd7a325d06300f4a670a65948bedece0b513))
+* pin reviewed public metadata policy ([#41](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/41)) ([98c2c7a](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/98c2c7a646faf2af51090f82ac6e387794933e5c))
+* repin reviewed privacy policy ([74db8a3](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/74db8a3ca11f95554e475d89499c2f015a46db81))
+
+
+### Documentation
+
+* align case history language ([#24](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/24)) ([9c2b80a](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/9c2b80aa47f51d3b671dca26933d7f0690cf35f9))
+* align changelog language ([#27](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/27)) ([70e0bf1](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/70e0bf1cda627ca61acc4f08e3c87c984c8f0fc8))
+* clarify evidence-handling guidance ([#18](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/18)) ([4987872](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/498787285d33d73b6586037af33c7bcb07841971))
+* clarify public README scope ([#40](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/40)) ([29b21ca](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/29b21ca2e0d86999b5516d91923277629eb48ba5))
+* clarify release validation ([#25](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/25)) ([88562ff](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/88562ffcb57e8946e833b72818f4f3ed3f3f1454))
+* clarify role in Frontier Assurance architecture ([#30](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/30)) ([40cb01b](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/40cb01ba42c59a415854c6507df8feb36620a635))
+* clarify source and release status ([bb9207e](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/bb9207e8d02442a1ea17fcb399e361f838ef8aed))
+* make AI assistance guidance user-facing ([#21](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/21)) ([6163398](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/61633987adafc2ad7e3d428a135d11a65b550422))
+* replace sensitivity inventories with evidence-handling UX ([#19](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/19)) ([528c3d9](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/528c3d99f32852277f317978516f4a1def4508df))
+* simplify public contribution guidance ([#26](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/26)) ([d878111](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/d878111ed74c38d710cf2f8128ea2bc59bd6c2cc))
+* simplify public evidence-handling language ([#20](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/20)) ([09aa6a6](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/09aa6a6be9f430da09084ecf96f2cf3552ea6786))
+
+
+### CI
+
+* add release-please and repository quality gates ([324006e](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/324006e8ecd80fe93132ddb9f35c41746ab6d8ed))
+* add validated privacy preflight ([ed9fc62](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/ed9fc627955735d60bd4cd00df3dccd096474527))
+* check privacy on public PR metadata edits ([9317a24](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/9317a2486d5b1a6cba825078d771b9e468e9ef50))
+* pin privacy preflight ([cf60815](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/cf608158c262e77b654636de1ce9a5f5bd82abf3))
+* require immutable protection before stable releases ([#29](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/29)) ([0f73139](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/0f731396d50ecb8fe08c51efc3554564a69c1c05))
+
+
+### Miscellaneous
+
+* **deps:** bump the github-actions group with 2 updates ([#34](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/34)) ([9033bf7](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/9033bf73bbd3923c5de0a9c6fb9959b4c140de64))
+
 ## [0.6.1] - 2026-08-28
 
 ### Improved
