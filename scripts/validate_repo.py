@@ -542,12 +542,16 @@ def check_secrets_and_placeholders(root: Path, files: list[Path]) -> CheckResult
 
 def check_personal_information(root: Path, files: list[Path]) -> CheckResult:
     findings: list[str] = []
+    action_sha = re.compile(r"@[0-9a-f]{40}\b")
     for rel in text_files(files):
         if rel.as_posix() in VALIDATOR_EXEMPT_FILES:
             continue
         text = read_text(root, rel)
+        sha_spans = [m.span() for m in action_sha.finditer(text)]
         for label, pattern in PERSONAL_INFO_PATTERNS.items():
-            if pattern.search(text):
+            for match in pattern.finditer(text):
+                if any(start <= match.start() and match.end() <= end for start, end in sha_spans):
+                    continue
                 findings.append(f"{rel.as_posix()}: possible {label}")
     return CheckResult(
         "personal_information",
