@@ -1,6 +1,18 @@
 # AI Cyber Assurance
 
+[![Release](https://img.shields.io/github/v/release/Bridge-Node-7/ai-cyber-assurance?display_name=tag)](https://github.com/Bridge-Node-7/ai-cyber-assurance/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/Bridge-Node-7/ai-cyber-assurance/validate.yml?branch=main&label=CI)](https://github.com/Bridge-Node-7/ai-cyber-assurance/actions/workflows/validate.yml)
+
 **AI Cyber Assurance helps teams organize evidence and make accountable human decisions about AI-enabled and high-impact systems.**
+
+| | |
+|---|---|
+| **What** | Reference methods and templates for evidence-organized assurance reviews of AI-enabled and high-impact systems |
+| **Status** | Stable public release — latest [GitHub Release](https://github.com/Bridge-Node-7/ai-cyber-assurance/releases/latest) |
+| **Quickstart** | [START_HERE.md](START_HERE.md) · `python -m unittest discover -s tests -p 'test_*.py'` |
+| **Architecture** | [Frontier Assurance Architecture](https://github.com/Bridge-Node-7/Bridge-Node-7/blob/main/docs/FRONTIER_ASSURANCE_ARCHITECTURE.md) |
+| **Collaboration** | [Issues](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues) · [Innovation Partnerships](https://bridgenode7.com/partner/) |
 
 [Start here](START_HERE.md) to choose a review path, create a safe working package, and identify the records that apply.
 
