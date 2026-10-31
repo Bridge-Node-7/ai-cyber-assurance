@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.3] (2026-10-31)
+
+
+### Bug Fixes
+
+* **release:** set version-file to VERSION ([#47](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/47)) ([d2c9b92](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/d2c9b92f6756eaa7a18ff164abe45ec60c75ade4))
+* **release:** use generic extra-file type for VERSION ([#45](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/45)) ([c27350b](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/c27350b097e1ab157f17428ddce82249d7a8275e))
+
+
+### Documentation
+
+* add layout note and python3 validation path ([#49](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/49)) ([03575e2](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/03575e20dfac01a1e15317ca8d5090e1e3f619fc))
+* partner-ready front door, citation, coverage summary ([#48](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/48)) ([bf9e45b](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/bf9e45b3434198cdf30c276352481772edb53887))
+
 ## [0.6.2](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.1...v0.6.2) (2026-10-30)
 
 
