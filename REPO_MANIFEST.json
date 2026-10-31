@@ -74,7 +74,7 @@
     "08": "High-impact system readiness",
     "09": "Incident and near-miss review"
   },
-  "file_count": 81,
+  "file_count": 82,
   "files": [
     ".gitattributes",
     ".github/dependabot.yml",
@@ -150,6 +150,7 @@
     "scripts/check_version_consistency.py",
     "scripts/refresh_release_metadata.py",
     "scripts/render_assurance_outputs.py",
+    "scripts/sync_release_candidate_manifests.py",
     "scripts/validate_assurance_case.py",
     "scripts/validate_repo.py",
     "tests/test_assurance_case.py",
