@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.4](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.3...v0.6.4) (2026-10-31)
+
+
+### CI
+
+* restore concurrency group expression ([#50](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/50)) ([8795fff](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/8795fff6d3677af9dc1df9cfa96d0bc494657617))
+
 ## [0.6.3] (2026-10-31)
 
 
