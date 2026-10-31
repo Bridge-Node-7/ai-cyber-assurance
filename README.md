@@ -13,6 +13,10 @@ Stable public release — see the latest [GitHub Release](https://github.com/Bri
 
 > **Start with a controlled working package:** Create a private or access-controlled working package in the environment authorized for your review evidence. Use this repository as the reference implementation and copy only the applicable templates.
 
+## Repository layout
+
+Numbered directories (`01-` … `13-`) are specialist modules and examples. Start with [`START_HERE.md`](START_HERE.md) to pick Quick Review or Full Assurance Lifecycle, then copy only the templates you need into a private working package. `scripts/` and `tests/` provide standard-library validators; they do not prove real-world control effectiveness.
+
 ## Scope and limitations
 
 Use the Assurance Case and generated views to organize bounded review evidence and identify unanswered questions. They do not replace technical validation, formal certification or an accountable human decision.
@@ -250,10 +254,12 @@ The repository includes standard-library-only validators, a regression suite, an
 
 Run locally:
 
+Use `python3` (3.11+). An out-of-tree virtualenv is fine; validators are standard-library-only for the core gate.
+
 ```bash
-python -m unittest discover -s tests -p "test_*.py"
-python scripts/refresh_release_metadata.py --root . --check
-python scripts/validate_repo.py --root .
+python3 -m unittest discover -s tests -p "test_*.py"
+python3 scripts/refresh_release_metadata.py --root . --check
+python3 scripts/validate_repo.py --root .
 sha256sum -c MANIFEST.sha256
 ```
 
