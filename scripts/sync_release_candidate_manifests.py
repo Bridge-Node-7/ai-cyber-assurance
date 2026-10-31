@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Align VERSION, strip pre-tag CHANGELOG compare URLs, refresh release metadata."""
 from __future__ import annotations
 import json, re, sys
