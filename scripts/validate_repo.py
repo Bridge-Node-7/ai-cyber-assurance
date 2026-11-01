@@ -776,7 +776,7 @@ def check_workflow_safety(root: Path) -> CheckResult:
             "git archive",
             "RELEASE_CANDIDATE_SHA256SUMS",
             "commit.verification.verified",
-            "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+            "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
         ):
             if marker not in prepare_text:
                 findings.append(f"Release preparation missing required marker: {marker}")
@@ -793,7 +793,7 @@ def check_workflow_safety(root: Path) -> CheckResult:
             if forbidden in publish_text:
                 findings.append(f"Release publisher must not execute build/source machinery: {forbidden}")
         for marker in (
-            "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+            "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
             "sha256sum -c RELEASE_CANDIDATE_SHA256SUMS",
             "commit.verification.verified",
             "git/tags",
