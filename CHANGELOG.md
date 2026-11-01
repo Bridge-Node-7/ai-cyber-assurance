@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.5](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.4...v0.6.5) (2026-11-01)
+
+
+### Miscellaneous
+
+* **deps:** bump the github-actions group with 7 updates ([#52](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/52)) ([fe2b632](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/fe2b632cc33731866220f3a9aed322c40124fbb3))
+
 ## [0.6.4] (2026-10-31)
 
 
