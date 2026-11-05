@@ -138,6 +138,22 @@ python scripts/validate_assurance_case.py 10-examples/synthetic-ai-agent-assuran
 
 Use `python3` (3.11+). Validators are standard-library-only for the core gate.
 
+
+## What this does not do
+
+This repository does **not** certify a system, authorize deployment or operation, replace legal or engineering review, or prove control effectiveness without supporting evidence. It does not provide offensive exploit instructions.
+
+## Expected effort
+
+Effort depends on scope and evidence availability:
+
+- **Quick Review:** one bounded workflow, product change, pilot, supplier decision, incident, or release
+- **Specialist Module:** one control family or risk area
+- **Full Assurance Lifecycle:** a multi-stakeholder review across the system lifecycle
+- **Structured Assurance Case:** an optional machine-readable representation of a bounded review
+
+These are relative effort bands, not measured completion-time promises.
+
 ## Assurance boundary
 
 Use the Assurance Case and generated views to organize bounded review evidence and identify unanswered questions. Automated review assistance must follow [`AUTOMATED_REVIEW_GUIDE.md`](AUTOMATED_REVIEW_GUIDE.md).
