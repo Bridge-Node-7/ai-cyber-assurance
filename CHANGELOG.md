@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.5] (2026-11-01)
+
+
+### Miscellaneous
+
+* **deps:** bump the github-actions group with 7 updates ([#52](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/52)) ([fe2b632](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/fe2b632cc33731866220f3a9aed322c40124fbb3))
+
 ## [0.6.4] (2026-10-31)
 
 
@@ -21,7 +28,7 @@
 * add layout note and python3 validation path ([#49](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/49)) ([03575e2](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/03575e20dfac01a1e15317ca8d5090e1e3f619fc))
 * partner-ready front door, citation, coverage summary ([#48](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/48)) ([bf9e45b](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/bf9e45b3434198cdf30c276352481772edb53887))
 
-## [0.6.2](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.1...v0.6.2) (2026-10-30)
+## [0.6.2] (2026-10-30)
 
 
 ### Bug Fixes
