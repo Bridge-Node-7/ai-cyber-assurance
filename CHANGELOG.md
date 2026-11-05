@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.6](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.5...v0.6.6) (2026-11-05)
+
+
+### Documentation
+
+* refine public README for clarity and confidence ([#54](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/54)) ([76c7977](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/76c7977586b308aea1d76019a6b2783afc3da518))
+
 ## [0.6.5] (2026-11-01)
 
 
