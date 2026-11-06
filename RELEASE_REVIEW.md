@@ -1,10 +1,12 @@
 # Release Validation: AI Cyber Assurance v0.6.1
 
+> Historical review record for v0.6.1. This is not current publication status; see [GitHub Releases](https://github.com/Bridge-Node-7/ai-cyber-assurance/releases/latest) for published distribution identity and hosted release evidence.
+
 AI Cyber Assurance v0.6.1 aligns schema authoring requirements with executable validation and rendering behavior.
 
 ## Scope carried forward from v0.6.0
 
-The current release retains all v0.6.0 controls and UX corrections:
+v0.6.1 retains all v0.6.0 controls and UX corrections:
 
 - Assurance Case schema version `0.3`;
 - exactly one bounded human decision;
