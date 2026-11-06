@@ -18,3 +18,9 @@ validation-report.json
 *.log
 dist/
 build/
+
+# Coverage outputs
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml

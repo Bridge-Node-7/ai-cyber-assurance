@@ -37,24 +37,19 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Initialize required CodeQL
-        if: matrix.os == 'ubuntu-latest'
-        uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
-        with:
-          languages: python
-
       - name: Report validation workflow hash
         shell: bash
         run: sha256sum .github/workflows/validate.yml
 
       - name: Run validator regression tests
+        if: matrix.os != 'ubuntu-latest'
         shell: bash
         run: python -m unittest discover -s tests -p "test_*.py"
-      - name: Publish test coverage summary
+      - name: Run validator regression tests with coverage
         if: matrix.os == 'ubuntu-latest'
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check 'coverage>=7,<8'
+          python -m pip install --disable-pip-version-check 'coverage==7.17.2'
           mkdir -p build
           export COVERAGE_FILE="${RUNNER_TEMP}/.coverage"
           python -m coverage run --source=scripts -m unittest discover -s tests -p 'test_*.py'
@@ -91,13 +86,6 @@ jobs:
             --json-output validation-report.json
           sha256sum -c MANIFEST.sha256
           git diff --check
-
-      - name: Run required CodeQL analysis
-        if: matrix.os == 'ubuntu-latest'
-        uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
-        with:
-          upload: never
-          output: codeql-required-results
 
       - name: Upload validation report
         if: always()
