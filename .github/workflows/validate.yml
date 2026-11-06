@@ -76,7 +76,7 @@ jobs:
             build/coverage-report.txt
             build/coverage.xml
           if-no-files-found: ignore
-          retention-days: 14
+          retention-days: 7
 
       - name: Check deterministic release metadata
         shell: bash
@@ -106,7 +106,7 @@ jobs:
           name: ai-cyber-assurance-validation-${{ matrix.os }}
           path: validation-report.json
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 7
 
   prepare-release:
     name: Prepare stable release
