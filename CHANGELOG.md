@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.7](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.6...v0.6.7) (2026-11-06)
+
+
+### CI
+
+* skip documentation-only release automation ([745e862](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/745e86297aa7ca3f4963c42b009ec94efa94f9a8))
+
+
+### Miscellaneous
+
+* skip docs-only commits in release-please ([#57](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/57)) ([4c50e4e](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/4c50e4ecb19b645dc545904968fb1c900d227ec0))
+
 ## [0.6.6] (2026-11-05)
 
 
