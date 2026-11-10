@@ -807,7 +807,7 @@ def check_workflow_safety(root: Path) -> CheckResult:
 
         if "permissions:\n      contents: read" not in verify_text:
             findings.append("Hosted release verification must remain read-only.")
-        for marker in ("gh release download", "sha256sum -c", ".immutable"):
+        for marker in ("gh release download", "sha256sum -c", ".immutable", "gh release verify ", "gh release verify-asset"):
             if marker not in verify_text:
                 findings.append(f"Hosted release verification missing required marker: {marker}")
 
