@@ -113,7 +113,8 @@ class VersionTests(unittest.TestCase):
         self.assertNotIn("if: github.event_name == 'push' &&", workflow)
         self.assertIn("Require immutable-release protection before publication", workflow)
         self.assertIn('immutable-releases', workflow)
-        self.assertIn("--jq '.enabled'", workflow)
+        self.assertIn("jq -r '.enabled'", workflow)
+        self.assertIn('[[ "${immutable}" == "true" ]]', workflow)
         self.assertLess(
             workflow.index("Require immutable-release protection before publication"),
             workflow.index("Publish versioned release if absent"),

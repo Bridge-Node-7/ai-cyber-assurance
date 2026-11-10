@@ -260,8 +260,23 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ENABLED="$(gh api "repos/${GITHUB_REPOSITORY}/immutable-releases" --jq '.enabled')"
-          [[ "${ENABLED}" == "true" ]]
+          # The workflow token has no administration scope, so this settings read
+          # can return 403 even when immutable releases are enabled. A readable
+          # setting must be enabled; a denied read defers to the post-publish
+          # release.immutable check, which fails closed.
+          set +e
+          settings="$(gh api "repos/${GITHUB_REPOSITORY}/immutable-releases" 2>immutable-settings.err)"
+          rc=$?
+          set -e
+          if [ "${rc}" -eq 0 ]; then
+            test "$(printf '%s' "${settings}" | jq -r '.enabled')" = "true"
+          elif grep -Eqi 'HTTP 403|Resource not accessible' immutable-settings.err; then
+            echo "Immutable-release setting not readable with the workflow token; publication requires release.immutable=true."
+          else
+            cat immutable-settings.err >&2
+            exit 1
+          fi
+          rm -f immutable-settings.err
 
       - name: Download sealed release candidate
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
