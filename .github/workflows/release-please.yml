@@ -20,6 +20,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -32,12 +33,39 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Checkout main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      # Publication runs through the sealed release path in validate.yml so the
+      # release is validated, packaged and checksummed before it becomes immutable.
+      - name: Start packaged release for a merged version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          TAG="v$(jq -r '."."' .release-please-manifest.json)"
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1; then
+            echo "${TAG} already published."
+            exit 0
+          fi
+          if ! git diff --name-only "${RELEASE_COMMIT}^" "${RELEASE_COMMIT}" | grep -qx '.release-please-manifest.json'; then
+            echo "No version change in ${RELEASE_COMMIT}."
+            exit 0
+          fi
+          gh workflow run validate.yml --repo "${GITHUB_REPOSITORY}" --ref main
+          echo "Started packaged release ${TAG} for ${RELEASE_COMMIT}."
+
       - name: Run release-please
         id: release
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+          skip-github-release: true
 
       - name: Sync release-candidate manifests on open release PR
         if: ${{ steps.release.outputs.pr != '' }}
