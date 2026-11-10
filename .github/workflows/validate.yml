@@ -400,3 +400,15 @@ jobs:
 
           IMMUTABLE="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq '.immutable')"
           [[ "${IMMUTABLE}" == "true" ]]
+
+          verified="false"
+          for _ in {1..6}; do
+            if gh release verify "${TAG}" --repo "${GITHUB_REPOSITORY}"; then
+              verified="true"
+              break
+            fi
+            sleep 5
+          done
+          [[ "${verified}" == "true" ]]
+          gh release verify-asset "${TAG}" "${ARCHIVE}" --repo "${GITHUB_REPOSITORY}"
+          gh release verify-asset "${TAG}" "${ARCHIVE}.sha256" --repo "${GITHUB_REPOSITORY}"
