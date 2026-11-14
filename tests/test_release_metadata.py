@@ -73,6 +73,12 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn("refresh_release_metadata.py --root . --check", text)
         self.assertIn("git diff --check", text)
 
+    def test_validate_workflow_rejects_incomplete_existing_release(self) -> None:
+        text = (REPO_ROOT / ".github/workflows/validate.yml").read_text(encoding="utf-8")
+        self.assertIn("Existing release ${TAG} is incomplete", text)
+        self.assertIn("releases/tags/${TAG}", text)
+        self.assertIn('EXPECTED=("${ARCHIVE}" "${ARCHIVE}.sha256")', text)
+
     def test_write_preserves_human_semantic_fields(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
