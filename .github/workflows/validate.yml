@@ -147,6 +147,15 @@ jobs:
           gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1 && tag_exists=1
 
           if [[ "${release_exists}" == "1" && "${tag_exists}" == "1" ]]; then
+            mapfile -t ASSETS < <(
+              gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq '.assets[].name' | LC_ALL=C sort
+            )
+            EXPECTED=("${ARCHIVE}" "${ARCHIVE}.sha256")
+            mapfile -t EXPECTED_SORTED < <(printf '%s\n' "${EXPECTED[@]}" | LC_ALL=C sort)
+            if ! diff -u <(printf '%s\n' "${EXPECTED_SORTED[@]}") <(printf '%s\n' "${ASSETS[@]}"); then
+              echo "::error::Existing release ${TAG} is incomplete; required stable-release assets are missing or unexpected."
+              exit 1
+            fi
             echo "release_eligible=0" >> "${GITHUB_OUTPUT}"
             exit 0
           fi
