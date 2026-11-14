@@ -1,5 +1,75 @@
 # Changelog
 
+## [0.7.0] (2026-11-14)
+
+
+### Features
+
+* add Assurance Intelligence kernel v0.4.0 ([#9](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/9)) ([16adfee](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/16adfee6dbdabdb395e31943288cf66901607d4a))
+* add cryptographic change assurance ([#5](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/5)) ([b78d7b7](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/b78d7b7fc62d096c238bfd657251a4348528eb12))
+* clarify guided assurance review ([f431415](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/f431415ca8d3e65b900398a1d105249be4b7a953))
+* clarify guided assurance review ([da40b20](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/da40b20e973c03142f8b890b4aae301a81f5809a))
+
+
+### Bug Fixes
+
+* close Assurance Intelligence output-integrity findings v0.6.0 ([#12](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/12)) ([761eefb](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/761eefb08dc3503c972aa4aff7efc7d26e96c927))
+* close schema authoring parity v0.6.1 ([#13](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/13)) ([0924773](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/0924773a6cd29c957cc4d0122f9620f8323cb676))
+* encode local conditional rules in Assurance Case schema ([a8aefbe](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/a8aefbe56fd6f1511998b94fa71096542e87dc1b))
+* enforce ACA finding–action–retest closure integrity (F03) ([6783342](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/67833423fe137ae41431b56098d7c09b2abe1d9f))
+* enforce complete stable release artifacts ([#71](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/71)) ([a8edcae](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/a8edcaefb273d8746abdfcf0a1086951cd0d2a56))
+* enforce portable checksum manifests ([ac11f6f](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/ac11f6f9ed31e554f35c91b6e3eac661f332e053))
+* enforce portable checksum verification ([d5d869a](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/d5d869aacd6b6b6c41f1466d0f27ed0bca365e81))
+* harden Assurance Intelligence for generic partner use v0.5.0 ([#11](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/11)) ([131eba8](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/131eba8d93028222326eac15bb8a05941e7e8d62))
+* **release:** set version-file to VERSION ([#47](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/47)) ([d2c9b92](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/d2c9b92f6756eaa7a18ff164abe45ec60c75ade4))
+* **release:** use generic extra-file type for VERSION ([#45](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/45)) ([c27350b](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/c27350b097e1ab157f17428ddce82249d7a8275e))
+* require explicit release dispatch ([#17](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/17)) ([5d4de2d](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/5d4de2d35ee652ffed239c5c1f9e35815e534a18))
+
+
+### Security
+
+* make CodeQL authoritative in required validation ([#15](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/15)) ([f87edd7](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/f87edd7a325d06300f4a670a65948bedece0b513))
+* pin reviewed public metadata policy ([#41](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/41)) ([98c2c7a](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/98c2c7a646faf2af51090f82ac6e387794933e5c))
+* repin reviewed privacy policy ([74db8a3](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/74db8a3ca11f95554e475d89499c2f015a46db81))
+
+
+### CI
+
+* add release-please and repository quality gates ([324006e](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/324006e8ecd80fe93132ddb9f35c41746ab6d8ed))
+* add validated privacy preflight ([ed9fc62](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/ed9fc627955735d60bd4cd00df3dccd096474527))
+* cancel superseded runs and streamline schedules ([#63](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/63)) ([ac222b0](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/ac222b0067f3eb271de2630102f27e7f408e55af))
+* check privacy on public PR metadata edits ([9317a24](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/9317a2486d5b1a6cba825078d771b9e468e9ef50))
+* harden dependency and checkout maintenance ([#7](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/7)) ([7ad3add](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/7ad3addb5a24802c12b3d197ede7f7a6cc5e9b48))
+* pass workflow data through environment variables ([#62](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/62)) ([20ea0ff](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/20ea0ffd322ebf395d7e749c5c96de5ff6fd1d3b))
+* pin privacy preflight ([cf60815](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/cf608158c262e77b654636de1ce9a5f5bd82abf3))
+* publish releases through the packaged release path ([#66](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/66)) ([12bf779](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/12bf779e00bf5578299eaf35305c165b7ad6b485))
+* require immutable protection before stable releases ([#29](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/29)) ([0f73139](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/0f731396d50ecb8fe08c51efc3554564a69c1c05))
+* restore concurrency group expression ([#50](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/50)) ([8795fff](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/8795fff6d3677af9dc1df9cfa96d0bc494657617))
+* skip documentation-only release automation ([745e862](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/745e86297aa7ca3f4963c42b009ec94efa94f9a8))
+* streamline validation and tighten version checks ([#64](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/64)) ([75008d8](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/75008d8ab6d49cf75284b6f6358876d41622d38e))
+* tolerate unreadable immutable-release setting before publish ([#67](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/67)) ([c1b29e4](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/c1b29e427876f642dff7a3df2e40f6dba4b09ca6))
+* verify release attestation after publish ([#69](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/69)) ([82fbd9e](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/82fbd9e5b5f2fe23a1e654bb555eb97b0be5033a))
+
+
+### Miscellaneous
+
+* **deps:** bump the github-actions group with 2 updates ([#34](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/34)) ([9033bf7](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/9033bf73bbd3923c5de0a9c6fb9959b4c140de64))
+* **deps:** bump the github-actions group with 7 updates ([#52](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/52)) ([fe2b632](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/fe2b632cc33731866220f3a9aed322c40124fbb3))
+* **main:** release 0.6.2 ([#44](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/44)) ([eb21511](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/eb21511f58331dd4831d416994c651b986da4c7e))
+* **main:** release 0.6.3 ([#46](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/46)) ([e9aac60](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/e9aac6045e671ba9a754b2d071ef2e0cec011090))
+* **main:** release 0.6.4 ([#51](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/51)) ([851df53](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/851df535a31140579b5eb509a1ed46ecaccfed6f))
+* **main:** release 0.6.5 ([#53](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/53)) ([fbc4bb7](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/fbc4bb7cab3eee097d442f0b0452f19dfef309fb))
+* **main:** release 0.6.6 ([#56](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/56)) ([07a31fe](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/07a31fe518cfda95498d359b37f757549cf5042b))
+* **main:** release 0.6.7 ([#73](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/73)) ([c78b8b0](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/c78b8b0f97f12c5755e7ce9796754c5c2be8588a))
+* refresh SHA-256 manifest for v0.6.1 ([404dfa1](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/404dfa1d8abea85e28d834aa3e1198261fa8d2a6))
+* refresh v0.6.1 checksum after release-review fix ([e28af06](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/e28af0696db74b4b3943c2dc3c4e455043070109))
+* skip docs-only commits in release-please ([#57](https://github.com/Bridge-Node-7/ai-cyber-assurance/issues/57)) ([4c50e4e](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/4c50e4ecb19b645dc545904968fb1c900d227ec0))
+
+
+### Tests
+
+* restore committed-output parity and conditional-schema checks ([da7ae85](https://github.com/Bridge-Node-7/ai-cyber-assurance/commit/da7ae859f8fc3cc7399270f15c595c11b24d2ecc))
+
 ## [0.6.7] (2026-11-14)
 
 
