@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.7.0](https://github.com/Bridge-Node-7/ai-cyber-assurance/compare/v0.6.7...v0.7.0) (2026-11-14)
+## [0.7.0] (2026-11-14)
 
 
 ### Features
